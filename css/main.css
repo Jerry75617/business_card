@@ -1,0 +1,184 @@
+<style>
+@charset "utf-8";
+/***********************************************/
+/* HTML tag styles                             */
+/***********************************************/
+
+
+body{
+	background-color:#424242;
+	margin:0;
+	font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+html{
+	font-family: sans-serif;	
+}
+input{
+	height:25px;
+	border-radius:5px;
+	border:1px solid #aaaaaa;
+}
+
+input[type=text]{
+	border-width:0px;
+	border-bottom:1px #AAAAAA solid;
+	outline-style: none ;
+	border-radius:0px;
+	background-color:transparent;
+}
+input[readonly]{ 
+    background-color: #CDEDFF;    
+}
+textarea{
+	border-radius:5px;
+	border:1px solid #aaaaaa;
+}
+select{
+	height:30px;
+	border-radius:5px;
+	border:1px solid #aaaaaa;
+}
+#showLoginDiv{
+	position: absolute;
+	width:400px;
+	height:300px;
+	top:0;
+	right:0;
+	bottom:0;
+    left:0;
+    margin:auto;
+	border-radius:10px;
+	border: 1px #65a0cd solid;
+	background-color:rgba(255,255,255,0.4);
+}
+.orange{
+	color:orange;
+}
+.blue{
+	color:#0066ff;
+}
+.red{
+	color:red;
+}
+.red_d{
+	color:#dd0000;
+}
+/*start 字體大小*/
+.f12{
+	font-size:12px;
+}
+.f13{
+	font-size:13px;
+}
+.f14{
+	font-size:14px;
+}
+.f15{
+	font-size:15px;
+}
+.f16{
+	font-size:16px;
+}
+.f17{
+	font-size:17px;
+}
+.f18{
+	font-size:18px;
+}
+.f20{
+	font-size:20px;
+}
+/*end 字體大小*/
+/*strat 按鈕樣式*/
+.btn_pink{
+	background-color:#ffdfe1;
+	border:1px #ff9399 solid;
+	color:#ff424e;
+	border-radius:3px;
+	font-size:15px;
+	height:30px;
+	cursor:pointer;
+}
+.btn_pink:hover{
+	background-color:#ff6973;
+	color:#ffffff;
+}
+.btn_green{
+	background-color:#c7ffca;
+	border:1px #00b30c solid;
+	color:#00b30c;
+	border-radius:3px;
+	font-size:15px;
+	height:30px;
+	cursor:pointer;
+}
+.btn_green:hover{
+	background-color:#009f0b;
+	color:#ffffff;
+}
+.btn_qty_pink{
+	background-color:#ffffff;
+	border:1px #ff9399 solid;
+	color:#ff424e;
+	border-radius:3px;
+	font-size:15px;
+	height:30px;
+	width:30px;
+	cursor:pointer;
+}
+.btn_qty_pink:hover{
+	background-color:#ff6973;
+	color:#ffffff;
+}
+.btn_blue{
+	background-color:#ACD6FF;
+	border:1px #46A3FF solid;
+	color:#46A3FF;
+	border-radius:3px;
+	font-size:15px;
+	height:30px;
+	cursor:pointer;
+}
+.btn_blue:hover{
+	background-color:#0080FF;
+	color:#ffffff;
+}
+/*end 按鈕樣式*/
+
+.menuList{
+	color:#999999;
+}
+.menuList:hover{
+	font-weight:bold;
+	color:#ffffff;
+}
+/*start 表格樣式*/
+.tableShowMore{
+	border-top:1px #cccccc solid;
+	border-left:1px #cccccc solid;
+	background-color:#FFFFFF;
+}
+.tableShowMore thead{
+	background-color:#DDDDDD;
+	color:#666666;	
+}
+.tableShowMore td{
+	border-bottom:1px #cccccc solid;
+	border-right:1px #cccccc solid;
+}
+.tableShowOne{
+	border-top:1px #cccccc solid;
+	border-left:1px #cccccc solid;
+	background-color:#FFFFFF;
+}
+.tableShowOne thead{
+	background-color:#8e8e8e;
+	color:#ffffff;
+}
+.tableShowOne td{
+	border-bottom:1px #cccccc solid;
+	border-right:1px #cccccc solid;
+}
+/*end 表格樣式*/
+</style>
