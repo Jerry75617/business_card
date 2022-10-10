@@ -212,61 +212,118 @@ class classMember extends classMain
         echo "</select>";
         echo "&nbsp;<a href=\"javascript:cancelClick('" .$member_id. "')\">取消</a>";
     }//end assignDesigner_showOne
-    function showNameCardShowOne($mypk,$divName=''){
+    
+    function showNameCardShowOne($mypk,$divName=''){//編輯名片
         
         $mystr="select * from work_file where work_file_id='" .$mypk. "'";
         $myresult=mysqli_query($this->link,$mystr);
         $myarr=mysqli_fetch_array($myresult,1);
         
-        $mystr="select *from work_file_list where work_file_id='" .$mypk. "' order by update_datetime limit 1";
+        $mystr="select * from work_file_list where work_file_id='" .$mypk. "' order by work_file_list_id";
         $list_result=mysqli_query($this->link,$mystr);
+        $list_num=mysqli_num_rows($list_result);
         $list_arr=mysqli_fetch_array($list_result,1);
+        mysqli_data_seek($list_result,0);
+        
+        $member_id=$myarr["member_id"];
+        $mystr="select * from member where member_id='" .$member_id. "' and member_id > 0";
+        $member_result=mysqli_query($this->link,$mystr);
+        $member_arr=mysqli_fetch_array($member_result);
+        
         
         echo $divName;
         echo "<form id='frmmain' name='frmmain' style='height:100%'>";
         echo "<table width=100% height=100% border=0 cellpadding=5 cellspacing=0 class='black f13'>";
         echo "<tr height=8%><td>";
+        if((int)$member_id <= 0){
+            echo "會員帳號 : <input type='text' name='member_account' onchange=\"selectMember()\"><a href=\"javascript:selectMember()\">查詢</a>";
+        }
         echo "<td width=12% align=center>";
         echo "<input type='button' class='btn_blue' value='關閉' onclick=\"closePicDivlick()\">";
         echo "<tr><td colspan=2 style='pading:0' valign=top>";
+        if((int)$member_id > 0){
             echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13'>";
-            echo "<thead><tr height=8%><td colspan=2 align=center class='f15'>會員電子名片</thead>";
-            echo "<tr height=8%><td wdith=20% align=right>名片標題 : <td><input type='text' name='display_name' value='" .$myarr["display_name"]. "' style='width:200px;' maxlength=10>";
-            echo "<tr height=8%><td wdith=20% align=right>修改日期 : <td><input type='text' name='update_datetime' value='" .$myarr["update_datetime"]. "' disabled style='width:200px;'>";
-            echo "<tr height=8%><td colspan=2>";
-            echo "<input type='button' value='建立名片' >";
-            echo " &emsp; <input type='file' name='file_name'>";
-            echo "<tr height=6%><td colspan=2 id='showPage' style='background-color:#00b30c;color:#ffffff;'>";
-            $this->showPage($mypk);
-            echo "<tr><td colspan=2 id='showContentList'>";
-            $this->showContentList($list_arr["work_file_list_id"]);
+            echo "<thead><tr height=8%><td colspan=2 align=center class='f15'>" .$member_arr["member_name"]. " &nbsp;會員電子名片</thead>";
+            echo "<tr height=7%><td width=20% align=right>名片標題 : <td><input type='text' name='display_name' value='" .$myarr["display_name"]. "' style='width:200px;' maxlength=10>";
+            echo "<tr height=7%><td width=20% align=right>修改日期 : <td><input type='text' name='update_datetime' value='" .$myarr["update_datetime"]. "' disabled style='width:200px;'>";
+            echo "<tr height=7%><td colspan=2>";
+            echo "<input type='button' value='建立名片'  onclick=\"addClick('" .$mypk. "')\">";
+            //             echo " &emsp; <input type='file' name='file_name'>";
+            echo "<tr height=5%><td colspan=2 id='showPage' valign=top style='background-color:#00b30c;color:#ffffff;padding:0'>";
+            $this->showPage($mypk,$list_arr["work_file_list_id"]);
+            
+            echo "<tr><td colspan=2 valign=top>";
+            
+            for($i=0;$i<$list_num;$i++){
+                $list_arr=mysqli_fetch_array($list_result,1);
+                $displayStr="display:none;";
+                if($i==0){ $displayStr=""; }
+                echo "<div class='showContentList' id='showContentList_" . $list_arr["work_file_list_id"] . "' style='height:100%;" .$displayStr. "'>";
+                $this->showContentList($list_arr["work_file_list_id"]);
+                echo "</div>";
+            }
+            
+            
             echo "</table>";
+        }
         echo "</table>";
+        echo "<input type='hidden' name='work_file_id' value='" .$mypk. "'>";
         echo "</form>";
     }
-    function showPage($mypk,$divName=''){
+    function showPage($work_file_id,$work_file_list_id,$divName=''){
         
-        $mystr="select *from work_file_list where work_file_id='" .$mypk. "' order by update_datetime";
+        $mystr="select *from work_file_list where work_file_id='" .$work_file_id. "' order by update_datetime";
         $myresult=mysqli_query($this->link,$mystr);
         $mynum=mysqli_num_rows($myresult);
         
         echo $divName;
-        
         for($i=0;$i<$mynum;$i++){
             $myarr=mysqli_fetch_array($myresult,1);
-            echo "<div style='float:left;height:30px;line-height:30px;padding:0% 1%;'>第&nbsp;" . ($i+1) . "&nbsp;頁</div>";
+            $styleStr="";
+            if($work_file_list_id == $myarr["work_file_list_id"]){
+                $styleStr="background-color:#ffffff;color:#000000;";
+            }
+            echo "<span style='float:left;height:30px;line-height:30px;padding:0% 1%;cursor:pointer;" .$styleStr. "' onclick=\"changeTitlePageClick('" .$work_file_id. "','" .$myarr["work_file_list_id"]. "')\">第&nbsp;" . ($i+1) . "&nbsp;頁</span>";
         }
-        
     }
     function showContentList($mypk,$divName=''){
      
+        
         $mystr="select *from work_file_list where work_file_list_id='" .$mypk. "'";
         $myresult=mysqli_query($this->link,$mystr);
         $myarr=mysqli_fetch_array($myresult,1);
+        
         echo $divName;
-        echo "<table width=100% height=100% border=1 cellpadding=3 cellspacing=0>";
-        echo "<tr><td width=70%><img src='..\\businessCard_img\\" .$myarr["file_name"]. "' style='width:100px;'>";
-        echo "<td>";
+        echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0>";
+        echo "<tr><td width=60% align=center valign=top style='padding:0;'>";
+        echo "<table width=100% cellpaddin=0 cellspacing=0>";
+        
+        if($myarr["file_name"] <> ""){
+            echo "<tr><td align=center style='border-width:0px;'>";
+            echo "<div style='border:1px #CC0000 solid;margin:5px;width:100px;height:25px;line-height:25px;font-size:1.15em;vertical-align:middle;background-color:#F50000;color:#ffffff;border-radius:5px;cursor:pointer;' onclick=\"delete_img('".$mypk. "')\">";
+            echo "<span class='material-symbols-outlined' style='vertical-align:middle;font-size:20px;'>delete</span>&nbsp;刪 &nbsp; 除";
+            echo "</div>";
+            echo "<tr><td align=center colspan=4 style='border-width:0px;'>";
+            echo "<img src='..\\businessCard_img\\" .$myarr["file_name"]. "' style='width:85%'>";
+        }else{
+            echo "<tr><td align=center>";
+            echo "<div style='border:1px #0080FF solid;margin:5px;width:100px;height:25px;line-height:25px;font-size:1.15em;vertical-align:middle;background-color:#46A3FF;color:#ffffff;border-radius:5px;cursor:pointer;' onclick=\"uploadPicClick('".$mypk. "')\">";
+            echo "<span class='material-symbols-outlined' style='vertical-align:middle;font-size:20px;'>add_photo_alternate</span>上 傳 圖 片";
+            echo "</div>";
+            echo "<div id='uploadDiv_" .$mypk. "'></div>";
+        }
+        echo "</table>";
+        echo "<td valign=top>";
+//         echo "<div style='float:left;border:1px #ccc solid;background-color:#EFEFEF;padding:3px 30px;cursor:pointer;' onclick=\"addButtonClick()\">增加按鈕</div>";
+//         echo "<div style='clear:both;padding:5% 0%;'></div>";
+        echo "<div id='buttonContent'>";
+        echo "<span style='font-size:1.2em;font-weight:bold;'>按鈕</span><br>";
+//         echo "<span>圖片 : <input type='file' name='file_name' value='" .$myarr["file_name"]. "'></span><br>";
+        echo "<span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn_name"]. "'></span>";
+	    echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></span><br>";
+        echo "</div>";
+        echo "<input type='hidden' name='work_file_list_id[]' value='" .$mypk. "'>";
+        echo "<div style='margin-top:10px;text-align:center;'><input type='button' class='btn_pink' value='資料存檔' onclick=\"saveBtnClick()\"></div>";
         echo "</table>";
     }
 }

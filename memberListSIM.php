@@ -156,8 +156,80 @@ switch($_POST["dataFlag"]){
         
         echo "[!@#]designer_".$_POST["member_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$myarr["designer_id"]. "')\"\">" .$designer_name. "</a>";
         break;
-    case "show_pic":
+    case "show_pic"://編輯名片
         $obj->showNameCardShowOne($_POST["mypk"],"[!@#]showPicDiv");
+        break;
+    case "changeTitlePage":
+        $obj->showPage($_POST["work_file_id"],$_POST["work_file_list_id"],"[!@#]showPage");
+        break;
+    case "save_btn":
+        $updateArr=array();
+        $updateArr["work_file_id"]=$_POST["work_file_id"];
+        $updateArr["display_name"]=$_POST["display_name"];
+        $updateArr["update_datetime"]=date("Y-m-d H:i:s");
+        
+        $obj->updateDB($updateArr,"work_file_id",$_POST["work_file_id"],"work_file","*");
+        
+        
+        for($i=0;$i<count($_POST["work_file_list_id"]);$i++){
+            $listArr=array();
+            $listArr["btn_name"]=$_POST["btn_name"][$i];
+            $listArr["url"]=$_POST["url"][$i];
+            $listArr["work_file_list_id"]=$_POST["work_file_list_id"][$i];
+            if($listArr["btn_name"] == "" && $listArr["url"] == ""){
+                $mystr="select * from work_file_list where work_file_list_id='" .$listArr["work_file_list_id"]. "' and file_name=''";
+                $check_result=mysqli_query($obj->link,$mystr);
+                if(mysqli_num_rows($check_result) > 0){
+                    $obj->deleteData_table("work_file_list","work_file_list_id",$listArr["work_file_list_id"],'');
+                }
+            }else{
+                $obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
+            }
+        }
+        $obj->showNameCardShowOne($_POST["work_file_id"],"[!@#]showPicDiv");
+        break;
+    case "addNewCard"://新增卡片
+        $insertArr=array();
+        $insertArr["work_file_id"]=$_POST["work_file_id"];
+        $newPk=$obj->insertDB($insertArr,"work_file_list","*");
+        
+        $obj->showNameCardShowOne($_POST["work_file_id"],"[!@#]showPicDiv");
+        break;
+    case "refresh_pic"://刷新圖片
+        $obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
+        break;
+    case "delete_pic":
+        $mystr="select * from work_file_list where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
+        $myresult=mysqli_query($obj->link,$mystr);
+        if(mysqli_num_rows($myresult) > 0){
+            $myarr=mysqli_fetch_array($myresult,1);
+            $mystr="update work_file_list set file_name='' where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
+            mysqli_query($obj->link,$mystr);
+            if(file_exists("../businessCard_img/".$myarr["file_name"])){
+                unlink("../businessCard_img/".$myarr["file_name"]);//將檔案刪除
+            }
+        }
+        $obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
+        break;
+    case "select_member":
+        $mystr="select * from member where member_account = '" .$_POST["member_account"]. "'";
+        $myresult=mysqli_query($obj->link,$mystr);
+        if(mysqli_num_rows($myresult) > 0){
+            $myarr=mysqli_fetch_array($myresult,1);
+            $insertArr=array(); $listArr=array();
+            $insertArr["create_datetime"]=date("Y-m-d H:i:s");
+            $insertArr["member_id"]=$myarr["member_id"];
+            $insertArr["designer_id"]=$myarr["designer_id"];
+            $insertArr["category"]="名片";
+            $newPk=$obj->insertDB($insertArr,"work_file","*");
+            
+            $listArr["work_file_id"]=$newPk;
+            $listArr["create_datetime"]=date("Y-m-d H:i:s");
+            $listArr["designer_id"]=$myarr["designer_id"];
+            $obj->insertDB($listArr,"work_file_list","*");
+           
+            $obj->showNameCardShowOne($newPk,"[!@#]showPicDiv");
+        }
         break;
 }
 ?>

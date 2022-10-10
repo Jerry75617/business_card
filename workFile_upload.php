@@ -3,20 +3,13 @@ session_start();
 include("class/classMain.php");
 $obj= new classMain();
 $obj->openBody("","#ffffff");
+if(!isset($_GET["mypk"])){ $_GET["mypk"]=0; }
+
 ?>
 <script>
-
-function changeFileName(){
-	var aaobj=document.getElementById("nowFile");
-	var bbobj=document.getElementById("showFileName");
-	var fileNameArr=aaobj.value.split("\\");
-	bbobj.innerHTML=fileNameArr[fileNameArr.length-1];
-}
+var mypk="<?php echo $_GET["mypk"]?>";
 function closeDiv(){
-	parent.document.getElementById('uploadDiv').style.display="none";
-}
-window.onload=function(){
-	check_timeoutAjax();
+	parent.document.getElementById('uploadDiv_' + mypk).style.display="none";
 }
 </script>
 <style>
@@ -148,8 +141,8 @@ input[type=file]:active::before {
 }
 </style>
 <?php
-$btn=" &nbsp <input type='button' value='返回' class='btn_close' onClick='history.back();'>";//關閉視窗
-if(!isset($_POST["uploadFlag"]) && !isset($_GET["actor_id"])){//此判斷是保證首次進入頁面不會進此判斷
+$btn=" &nbsp <input type='button' value='返回' class='btn_close' onClick=\"closeDiv()\">";//關閉視窗
+if(!isset($_POST["uploadFlag"]) && !isset($_GET["mypk"])){//此判斷是保證首次進入頁面不會進此判斷
     if(!isset($_POST["uploadFlag"]) || !isset($_POST["myfile"])){ //檔案太大會造成傳送失敗
         echo "<font style='color:#990000'>!!錯誤!! &nbsp &nbsp 檔案大小超出限制(檔案大小最多為  2M)</font><br><br>".$btn;
         exit ;
@@ -171,36 +164,34 @@ if($_REQUEST["uploadFlag"] == "Y"){
         $datetime=date("YmdHis");
         $type=substr(strrchr($_FILES['photo']['name'],"."),1);
         $filename=$datetime.".".$type;
-        if(file_exists("../upload/actor".$filename)){
+        if(file_exists("../businessCard_img/".$filename)){
             echo "檔案已經存在，請勿重覆上傳相同檔案";
             exit;
         }
-        move_uploaded_file($_FILES['photo']['tmp_name'],"../upload/actor/".$filename);
-        $photo="../upload/actor/" . $filename;
+        move_uploaded_file($_FILES['photo']['tmp_name'],"../businessCard_img/".$filename);
+        $photo="../businessCard_img/" . $filename;
         
-        $mystr="insert into actor_pic set dirName='upload/actor/',fileName='" .$filename. "',actor_id='".$_REQUEST["actor_id"]."'";
-        mysqli_query($obj->link,$mystr);
-        $mystr="update actor set photo='".$photo."' where actor_id='" .$_REQUEST["actor_id"]. "'";
+        $mystr="update work_file_list set file_name='".$filename."' where work_file_list_id='" .$_REQUEST["mypk"]. "'";
         mysqli_query($obj->link,$mystr);
         ?>
         <script>
-        var actor_id="<?php echo $_REQUEST["actor_id"];?>";
-        closeDiv();
-        parent.refresh(actor_id);
+        var mypk="<?php echo $_REQUEST["mypk"];?>";
+        parent.refresh_img(mypk);
+//         closeDiv();
         </script>
         <?php
     }
 }
-echo "<div style='text-align:right;padding:2px;'><span onclick=\"closeDiv()\" style='cursor:pointer;'>X close</span></div>";
+// echo "<div style='text-align:right;padding:2px;'><span onclick=\"closeDiv()\" style='cursor:pointer;'>X close</span></div>";
 echo "<div style='color:#FFFFFF'>";
-echo "<form name='frm_upload' method='post' enctype='multipart/form-data' action='actor_picFRM.php'>";
-        echo "<table width=90% border=0 cellpadding=3 cellspacing=0 align=center style='background-color:#FFFFFF;font-size:1.5em;color:#666666;'>";
-        echo "<tr><th colspan=2>".$_REQUEST["actor_id"];
+echo "<form name='frm_upload' method='post' enctype='multipart/form-data' action='workFile_upload.php'>";
+        echo "<table width=96% height=50px border=0 cellpadding=3 cellspacing=0 align=center style='background-color:#FFFFFF;font-size:13px;color:#666666;'>";
         echo "<tr><td width=25% align=right style='background-color:#EFEFEF;'>照片上傳 : <td>";
-        echo "<label class='file'>選擇檔案<input type='file' name='photo' id='nowFile'  accept='image/*' onchange='changeFileName()'></label>";
+        echo "<label class='file'>選擇檔案<input type='file' name='photo' id='nowFile'  accept='image/*'></label>";
         echo "<tr><td colspan=2 align=center>";
-            echo "<input type='button' class='btn_pink_l' value='送出檔案' onclick=\"frm_upload.submit()\">";
-            echo "<input type='hidden' name='actor_id' value='" .$_REQUEST["actor_id"]. "'>";
+            echo "<input type='button' class='btn_pink' value='送出檔案' onclick=\"frm_upload.submit()\">";
+            echo " &nbsp; <input type='button' class='btn_blue' value='返回' onclick=\"closeDiv()\">";
+            echo "<input type='hidden' name='mypk' value='" .$_REQUEST["mypk"]. "'>";
             echo "<input type='hidden' name='uploadFlag' value='Y'>";
         echo "</table>";
  echo "</form>";

@@ -37,6 +37,10 @@ class classMain extends classLink
             echo "<link rel='shortcut icon' href='./img/logo.jpg'>";
             echo "<link rel='image_src' href='' type='image/png'>";
             echo "<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0' />";
+            echo "<link rel='preconnect' href='https://fonts.googleapis.com'>";
+            echo "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>";
+            echo "<link href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap' rel='stylesheet'>";
+            echo "<link href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500&family=Noto+Serif+TC:wght@200&display=swap' rel='stylesheet'>";
             echo "<link href='css/main.css?" .date("YmdHis"). "' rel='stylesheet' type='text/css' />";
             echo "<title>(" .$this->sessionGetValue("session_name"). ")電子名片管理</title>";
             echo "</head>";
