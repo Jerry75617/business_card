@@ -229,6 +229,8 @@ switch($_POST["dataFlag"]){
             $obj->insertDB($listArr,"work_file_list","*");
            
             $obj->showNameCardShowOne($newPk,"[!@#]showPicDiv");
+        }else{
+            echo "[!@#]showMsg<span>查無此會員資料</span>";
         }
         break;
 }

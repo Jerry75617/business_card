@@ -575,4 +575,28 @@ function logoutClick(){
 function changePageClick($url,showKind){
 	document.location.href=$url+"?showKind=" + showKind;
 }
+function changePassword(){
+	var aaobj=document.getElementById("changePwdDiv");
+	if(aaobj){
+		aaobj.style.display="block";
+		var send_str="dataFlag=change_pwd&timestamp="+ new Date().getTime();
+		X_FORM_Str(send_str,"mainSIM.php","");
+	}
+}
+function closePwdDiv(){
+	var aaobj=document.getElementById("changePwdDiv");
+	if(aaobj){
+		aaobj.style.display="none";
+		aaobj.innerHTML="";
+	}
+}
+function savePwdClick(){
+	var send_str="dataFlag=update_pwd&" + X_FORM("frm_pwd");
+	X_FORM_Str(send_str,"mainSIM.php","savePwdClickReturn");	
+}
+function savePwdClickReturn(){
+	if(document.getElementById("checkFlag") && document.getElementById("checkFlag").value == "Y"){
+		closePwdDiv();
+	}
+}
 </script>

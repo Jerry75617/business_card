@@ -81,7 +81,7 @@ class classMember extends classMain
             
             echo "<tr><td align=center valign=middle id='edit_" .$mypk. "' rowspan='" .$rowSpanQty. "'><span class='material-symbols-outlined' onclick=\"openButtonClick('" .$mypk. "')\" style='cursor:pointer;font-size:20px'>edit</span>";//<input type='button' class='btn_qty_pink' value='".$button_text."' onclick=\"openButtonClick('" .$mypk. "')\">";
             echo "<td align=center id='item_" .$mypk. "' rowspan='" .$rowSpanQty. "' valign=middle>".$button_text;
-            echo "<td id='member_name_" .$mypk. "' rowspan='" .$rowSpanQty. "' valign=middle>".$myarr["member_name"];
+            echo "<td id='member_name_" .$mypk. "' rowspan='" .$rowSpanQty. "' valign=middle>".$myarr["member_name"]."(" .$myarr["member_account"]. ")";
             
             
             
@@ -98,11 +98,17 @@ class classMember extends classMain
                     
                     if($j>0){ echo "<tr>"; }
                     echo "<td align=center><span class='material-symbols-outlined' onclick=\"openPicButtonClick('" .$work_arr["work_file_id"]. "')\" style='cursor:pointer;'>edit_square</span>";
-                    echo "<td align=center><img src='..\\businessCard_img\\" .$work_arr["file_name"]. "' style='width:100px;'>";
+                    echo "<td align=center>";
+                    if($work_arr["file_name"] <>""){
+                        echo "<img src='../businessCard_img/" .$work_arr["file_name"]. "' style='width:100px;'>";
+                    }
                     echo "<td>".$work_arr["display_name"];
-                    echo "<div style='width:160px;font-size:13px;border-radius:5px;background-color:#999999;color:#ffffff;text-align:center;line-height:15px;padding:1% 0.5%;margin-top:5%;vertical-align:bottom;'>";
-                    echo "<span class='material-symbols-outlined' style='font-size:15px;vertical-align:bottom;'>calendar_month</span>";
-                    echo " 建檔日期 " .date("Y-m-d",strtotime($work_arr["update_datetime"])). "</div>";
+                    if($work_arr["create_datetime"] <> ""){
+                        echo "<div style='width:160px;font-size:13px;border-radius:5px;background-color:#999999;color:#ffffff;text-align:center;line-height:15px;padding:1% 0.5%;margin-top:5%;vertical-align:bottom;'>";
+                        echo "<span class='material-symbols-outlined' style='font-size:15px;vertical-align:bottom;'>calendar_month</span>";
+                        echo " 建檔日期 " .date("Y-m-d",strtotime($work_arr["create_datetime"]));
+                        echo "</div>";
+                    }
                     echo "<td >".$work_arr["url"];
                     echo "<td id='designer_" .$mypk. "' valign=middle>";
                     
@@ -179,7 +185,7 @@ class classMember extends classMain
             echo "[!@#]edit_" .$mypk. "<span></span>";
             echo "[!@#]item_" .$mypk. "<span>刪除</span>";
         }
-        echo "[!@#]member_name_" .$mypk. "<span>".$myarr["member_name"]."</span>";
+        echo "[!@#]member_name_" .$mypk. "<span>".$myarr["member_name"]."(" .$myarr["member_account"]. ")</span>";
         echo "[!@#]works_" .$mypk. "<span></span>";
         echo "[!@#]designer_".$mypk."<span></span>";
         
@@ -238,6 +244,7 @@ class classMember extends classMain
         if((int)$member_id <= 0){
             echo "會員帳號 : <input type='text' name='member_account' onchange=\"selectMember()\"><a href=\"javascript:selectMember()\">查詢</a>";
         }
+        echo " &nbsp; <spna class='red_d' id='showMsg'></span>";
         echo "<td width=12% align=center>";
         echo "<input type='button' class='btn_blue' value='關閉' onclick=\"closePicDivlick()\">";
         echo "<tr><td colspan=2 style='pading:0' valign=top>";
@@ -247,7 +254,7 @@ class classMember extends classMain
             echo "<tr height=7%><td width=20% align=right>名片標題 : <td><input type='text' name='display_name' value='" .$myarr["display_name"]. "' style='width:200px;' maxlength=10>";
             echo "<tr height=7%><td width=20% align=right>修改日期 : <td><input type='text' name='update_datetime' value='" .$myarr["update_datetime"]. "' disabled style='width:200px;'>";
             echo "<tr height=7%><td colspan=2>";
-            echo "<input type='button' value='建立名片'  onclick=\"addClick('" .$mypk. "')\">";
+            echo "<input type='button' value='建立名片'  class='btn_blue' onclick=\"addClick('" .$mypk. "')\">";
             //             echo " &emsp; <input type='file' name='file_name'>";
             echo "<tr height=5%><td colspan=2 id='showPage' valign=top style='background-color:#00b30c;color:#ffffff;padding:0'>";
             $this->showPage($mypk,$list_arr["work_file_list_id"]);
@@ -304,7 +311,7 @@ class classMember extends classMain
             echo "<span class='material-symbols-outlined' style='vertical-align:middle;font-size:20px;'>delete</span>&nbsp;刪 &nbsp; 除";
             echo "</div>";
             echo "<tr><td align=center colspan=4 style='border-width:0px;'>";
-            echo "<img src='..\\businessCard_img\\" .$myarr["file_name"]. "' style='width:85%'>";
+            echo "<img src='../businessCard_img/" .$myarr["file_name"]. "' style='width:85%'>";
         }else{
             echo "<tr><td align=center>";
             echo "<div style='border:1px #0080FF solid;margin:5px;width:100px;height:25px;line-height:25px;font-size:1.15em;vertical-align:middle;background-color:#46A3FF;color:#ffffff;border-radius:5px;cursor:pointer;' onclick=\"uploadPicClick('".$mypk. "')\">";

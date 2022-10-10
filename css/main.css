@@ -93,58 +93,48 @@ select{
 /*end 字體大小*/
 /*strat 按鈕樣式*/
 .btn_pink{
-	background-color:#ffdfe1;
+	background-color:#ff6973;
 	border:1px #ff9399 solid;
-	color:#ff424e;
+	color:#ffffff;
 	border-radius:3px;
 	font-size:15px;
 	height:30px;
 	cursor:pointer;
-}
-.btn_pink:hover{
-	background-color:#ff6973;
-	color:#ffffff;
+	padding:0px 10px;
 }
 .btn_green{
-	background-color:#c7ffca;
+	background-color:#009f0b;
 	border:1px #00b30c solid;
-	color:#00b30c;
+	color:#ffffff;
 	border-radius:3px;
 	font-size:15px;
 	height:30px;
 	cursor:pointer;
-}
-.btn_green:hover{
-	background-color:#009f0b;
-	color:#ffffff;
+	padding:0px 10px;
 }
 .btn_qty_pink{
-	background-color:#ffffff;
+	background-color:#ff6973;
 	border:1px #ff9399 solid;
-	color:#ff424e;
+	color:#ffffff;
 	border-radius:3px;
 	font-size:15px;
 	height:30px;
 	width:30px;
 	cursor:pointer;
+	padding:0px 10px;
 }
-.btn_qty_pink:hover{
-	background-color:#ff6973;
-	color:#ffffff;
-}
+
 .btn_blue{
-	background-color:#ACD6FF;
+	background-color:#0080FF;
 	border:1px #46A3FF solid;
-	color:#46A3FF;
-	border-radius:3px;
+	color:#ffffff;
+	border-radius:5px;
 	font-size:15px;
 	height:30px;
 	cursor:pointer;
+	padding:0px 10px;
 }
-.btn_blue:hover{
-	background-color:#0080FF;
-	color:#ffffff;
-}
+
 /*end 按鈕樣式*/
 
 .menuList{

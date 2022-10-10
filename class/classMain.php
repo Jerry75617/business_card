@@ -3,6 +3,8 @@ include_once('classLink.php');
 class classMain extends classLink
 {
     var $menuArr=array("電子名片"=>array("designerList","memberList"),"電子喜帖"=>array("designerList2","memberList2"));
+    var $iconArr=array("電子名片"=>array("badge","background_replace"),"電子喜帖"=>array("badge","background_replace"));
+    var $titleImgArr=array("電子名片"=>"co_present","電子喜帖"=>"article");
     var $pagePowerArr=array("sysadmin"=>array("designerList","memberList","designerList2","memberList2"),"admin"=>array("designerList","memberList","designerList2","memberList2"),
                             "designer"=>array("memberList","memberList2"),"member"=>array("memberList","memberList2"));
     var $pageName=array("designerList"=>"設計師管理清單","memberList"=>"會員管理清單","designerList2"=>"設計師管理清單","memberList2"=>"會員管理清單");
@@ -56,6 +58,7 @@ class classMain extends classLink
         $this->menuShow($nowPage);
         echo "</div>";
         echo "<div style='width:87%;height:100%;float:left;'>";
+        echo "<div id='changePwdDiv' style='position:fixed;width:500px;height:350px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;z-index:999;display:none;'></div>";
         echo "<table width='100%' height='100%' border=0px cellpadding=0 cellspacing=0 class='main-table'>";
         echo "<tr height=5%><td style='background-color:#dfdfdf;' valign=middle>&emsp;<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>list_alt</span>&nbsp; ".$pageName;
         echo "<tr><td valign=top style='padding:1%;'>";
@@ -76,8 +79,10 @@ class classMain extends classLink
         $checkArr=array();
         echo $divName;
         echo "<table width=100% border=0 height=100% cellpadding=5 cellspacing=0 style='color:#ffffff;'>";
-        echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#ffc107;'>電子名片管理";
-        echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #EFEFEF solid;border-bottom:1px #EFEFEF solid;'>".$this->sessionGetValue("session_name")." &emsp; <span style='cursor:pointer;' onclick=\"logoutClick()\">登出</span>";
+        echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#ffc107;'><span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> &nbsp;電子名片管理";
+        echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #EFEFEF solid;border-bottom:1px #EFEFEF solid;'>".$this->sessionGetValue("session_name");
+        echo "&emsp;<span style='cursor:pointer;' onclick=\"changePassword()\">修改密碼</span>";
+        echo "&emsp;<span style='cursor:pointer;' onclick=\"logoutClick()\">登出</span>";
         echo "<tr><td valign=top>";
         if(count($nowPageArr) > 0){
             foreach($this->menuArr as $key => $valeArr){
@@ -97,12 +102,13 @@ class classMain extends classLink
             echo "<div style='width:100%;'>";
             echo "<table width=100%  border=0 cellpadding=3 cellspacing=0>";
             echo "<tr><td width=10%>";
-            echo "<td>".$titleName;
+            echo "<td><span class='material-symbols-outlined' style='vertical-align:middle'>" .$this->titleImgArr[$titleName]. "</span> &nbsp;".$titleName;
             
             echo "</table>";
             for($i=0;$i<count($pageValue);$i++){
                 if(!isset($this->pageName[$pageValue[$i]])){ continue; }
                 $pageName=$this->pageName[$pageValue[$i]];
+                
                 $url=$pageValue[$i].".php";  $showKind="nameCard";  
                 switch($pageValue[$i]){
                     case "designerList2":
@@ -116,7 +122,7 @@ class classMain extends classLink
                 if($nowPageKind == $pageValue[$i]){ $iconStr="<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>arrow_right</span>"; $onclickStr=""; $styleStr="";}
                 echo "<table width=100% border=0 cellpadding=3 cellspacing=0>";
                 echo "<tr><td width=20% align=right>".$iconStr;
-                echo "<td><span $onclickStr $styleStr>".$pageName."</span>";
+                echo "<td><span class='material-symbols-outlined' style='vertical-align:middle'>" .$this->iconArr[$titleName][$i]. "</span> &nbsp; <span $onclickStr $styleStr>".$pageName."</span>";
                 echo "</table>";
             }
             
