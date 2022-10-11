@@ -22,7 +22,7 @@ switch($_POST["dataFlag"]){
         switch($_POST["account"]){
             case "sysAdmin"://系統管理者
                 if($_POST["password"] != "0919171962"){
-                    echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入...</span>";
+                    echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入</span>";
                     exit;
                 }
                 $name="系統管理者";
@@ -30,7 +30,7 @@ switch($_POST["dataFlag"]){
                 break;
             case "admin"://管理者
                 if($_POST["password"] != "admin"){
-                    echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入...</span>";
+                    echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入</span>";
                     exit;
                 }
                 $name="管理者";
@@ -41,10 +41,15 @@ switch($_POST["dataFlag"]){
                 $designer_result=mysqli_query($obj->link,$mystr);
                 if(mysqli_num_rows($designer_result) > 0){//登入者身分為設計師
                     $designer_arr=mysqli_fetch_array($designer_result,1);
-                    if($designer_arr["designer_password"] != $_POST["password"]){
-                        echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入...</span>";
+                    if($designer_arr["stop_datetime"] <> ""){
+                        echo "[!@#]errorMsg<span>帳號已停用</span>";
                         exit;
                     }
+                    if($designer_arr["designer_password"] != $_POST["password"]){
+                        echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入</span>";
+                        exit;
+                    }
+                    
                     $name=$designer_arr["designer_name"];
                     $login_kind="designer";
                     $designer_id=$designer_arr["designer_id"];
@@ -54,14 +59,14 @@ switch($_POST["dataFlag"]){
                     if(mysqli_num_rows($member_result) > 0){
                         $member_arr=mysqli_fetch_array($member_result,1);
                         if($member_arr["member_password"] != $_POST["password"]){
-                            echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入...</span>";
+                            echo "[!@#]errorMsg<span>密碼錯誤，請重新輸入</span>";
                             exit;
                         }
                         $name=$member_arr["member_name"];
                         $login_kind="member";
                         $member_id=$member_arr["member_id"];
                     }else{
-                        echo "[!@#]errorMsg<span>帳號密碼錯誤，請重新輸入...</span>";
+                        echo "[!@#]errorMsg<span>帳號密碼錯誤，請重新輸入</span>";
                         exit;
                     }
                 }

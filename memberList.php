@@ -83,7 +83,7 @@ function openPicButtonClick(mypk){
 	var aaobj=document.getElementById("showPicDiv");
 	if(aaobj){
 		aaobj.style.display="block";
-		var send_str="dataFlag=show_pic&mypk=" + mypk;
+		var send_str="dataFlag=show_pic&mypk=" + mypk + "&showKind=" +showKind;
 		X_FORM_Str(send_str,"memberListSIM.php","");
 	}		
 }
@@ -96,7 +96,7 @@ function closePicDivlick(){
 	}
 }
 function selectMember(){
-	var send_str="dataFlag=select_member&member_account="+document.frmmain.member_account.value;
+	var send_str="dataFlag=select_member&member_account="+document.frmmain.member_account.value + "&showKind=" + showKind;
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
 //--start 同一頁增加多筆按鈕-- **目前沒用到
@@ -129,7 +129,7 @@ function changeTitlePageClick(work_file_id,work_file_list_id){
 //存檔按鈕/url
 function saveBtnClick(){
 	var send_str="dataFlag=save_btn&" + X_FORM("frmmain");
-	X_FORM_Str(send_str,"memberListSIM.php","");	
+	X_FORM_Str(send_str,"memberListSIM.php","updateButtonClickReturn");	
 }
 //新增名片
 function addClick(work_file_id){
@@ -147,14 +147,33 @@ function uploadPicClick(mypk){
 //刷新圖片
 function refresh_img(work_file_list_id){
 	var send_str="dataFlag=refresh_pic&work_file_list_id=" + work_file_list_id;
-	X_FORM_Str(send_str,"memberListSIM.php","");
+	X_FORM_Str(send_str,"memberListSIM.php","updateButtonClickReturn");
 }
 //刪除圖片
 function delete_img(work_file_list_id){
 	if(confirm("是否確定刪除??") == false){ return; }
 	var send_str="dataFlag=delete_pic&work_file_list_id=" + work_file_list_id;
-	X_FORM_Str(send_str,"memberListSIM.php","");
+	X_FORM_Str(send_str,"memberListSIM.php","updateButtonClickReturn");
 }
+//移動順序
+function moveButtonClick(change_pk,now_pk,actionStr){
+	var send_str="dataFlag=move_pic&change_pk=" + change_pk +"&now_pk=" + now_pk +"&actionStr=" + actionStr;
+	X_FORM_Str(send_str,"memberListSIM.php","updateButtonClickReturn");
+}
+//-----start 展期功能 start-----
+function extendClick(work_file_id){
+	var aaobj=document.getElementById("showOneDiv");
+	if(aaobj){
+		aaobj.style.display="block";
+		var send_str="dataFlag=extend_card&work_file_id=" + work_file_id;
+		X_FORM_Str(send_str,"memberListSIM.php","");
+	}
+}
+function updateExtendClick(){
+	var send_str="dataFlag=update_extend&timestamp="+ new Date().getTime() + "&" + X_FORM("frm_extend")+ "&showKind=" + showKind;
+	X_FORM_Str(send_str,"memberListSIM.php","updateButtonClickReturn");
+}
+//-----end 展期功能 end-----
 window.onload=function(){
 	setTimeout("queryButtonClick()",100);
 }
@@ -167,19 +186,19 @@ echo "<form name='form_query' id='form_query' onsubmit='return false;'>";
 echo "<table border=0 width=100% class='f13'>";
 echo "<tr height=30px><td width='30%' align=left>關鍵字 : ";
 echo "<input type='text' name='query_text' placeholder='會員姓名、帳號'>";
-echo " &nbsp; <input type='button' class='btn_green' value='送出查詢' onclick=\"queryButtonClick()\">";
+echo "<span class='btn_green' onclick=\"queryButtonClick()\">送出查詢</span>";
 switch($obj->sessionGetValue("session_login_kind")){
     case "sysadmin":
     case "admin":
-        echo " &nbsp; <input type='button' class='btn_pink' value='新增會員資料' onclick=\"openButtonClick(0)\" >";
+        echo "<span class='btn_pink' onclick=\"openButtonClick(0)\">新增會員資料</span>";
         break;
 }
 switch($showKind){
     case "名片":
-        echo " &nbsp; <input type='button' class='btn_pink' value='新增電子名片' onclick=\"openPicButtonClick(0)\" >";
+        echo "<span class='btn_pink' onclick=\"openPicButtonClick(0)\">新增電子名片</span>";
         break;
     case "喜帖":
-        echo " &nbsp; <input type='button' class='btn_pink' value='新增電子喜帖' onclick=\"openButtonClick(0)\" >";
+        echo "<span class='btn_pink' onclick=\"openPicButtonClick(0)\">新增電子喜帖</span>";
         break;
 }
 

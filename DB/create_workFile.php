@@ -32,9 +32,13 @@ $mystr="create table work_file_list (work_file_list_id int AUTO_INCREMENT PRIMAR
     "create_datetime varchar(20) binary default'')";
 mysqli_query($link,$mystr);
 echo mysqli_error($link);
-$mystr="alter table work_file add index idx_work_file_id(work_file_id)";
+
+$mystr="alter table work_file_list add column sequence int default '0'";
+mysqli_query($link,$mystr);//順序
+
+$mystr="alter table work_file_list add index idx_work_file_id(work_file_id)";
 mysqli_query($link,$mystr);
-$mystr="alter table work_file add index idx_dateline(dateline)";
+$mystr="alter table work_file_list add index idx_dateline(dateline)";
 mysqli_query($link,$mystr);
 
 echo "<br>作品明細(電子名片、電子喜帖)完成...";

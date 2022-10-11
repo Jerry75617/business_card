@@ -58,6 +58,10 @@ function closeDivClick(){
 		aaobj.innerHTML="";
 	}
 }
+function stopButtonClick(mypk,flag){
+	var send_str="dataFlag=designer_stop&mypk=" + mypk + "&flag=" + flag;
+	X_FORM_Str(send_str,"designerListSIM.php","closeDivClick");
+}
 window.onload=function(){
 	setTimeout("queryButtonClick()",100);
 }
@@ -69,8 +73,8 @@ echo "<form name='form_query' id='form_query' onsubmit='return false;'>";
 echo "<table border=0 width=100% class='f13'>";
 echo "<tr height=30px><td width='30%' align=left>設計師姓名 : ";
 echo "<input type='text' name='query_text' >";
-echo " &nbsp; <input type='button' class='btn_green' value='送出查詢' onclick=\"queryButtonClick()\">";
-echo " &nbsp; <input type='button' class='btn_pink' value='新增資料' onclick=\"openButtonClick(0)\" >";
+echo "<span class='btn_green' onclick=\"queryButtonClick()\">送出查詢</span>";
+echo "<span class='btn_pink' onclick=\"openButtonClick(0)\">新增資料</span>";
 echo "</table>";
 echo "</form>";
 $hiddenArray=array("h_query_text");

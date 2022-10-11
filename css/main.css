@@ -93,48 +93,82 @@ select{
 /*end 字體大小*/
 /*strat 按鈕樣式*/
 .btn_pink{
-	background-color:#ff6973;
 	border:1px #ff9399 solid;
-	color:#ffffff;
-	border-radius:3px;
-	font-size:15px;
+	margin:5px;
+	width:100px;
 	height:30px;
+	line-height:30px;
+	font-size:1em;
+	vertical-align:middle;
+	background-color:#ff6973;
+	color:#ffffff;
+	border-radius:4px;
 	cursor:pointer;
-	padding:0px 10px;
+	padding:2px 10px;
+	letter-spacing:2px;
 }
 .btn_green{
-	background-color:#009f0b;
 	border:1px #00b30c solid;
-	color:#ffffff;
-	border-radius:3px;
-	font-size:15px;
+	margin:5px;
+	width:100px;
 	height:30px;
+	line-height:30px;
+	font-size:1em;
+	vertical-align:middle;
+	background-color:#009f0b;
+	color:#ffffff;
+	border-radius:4px;
 	cursor:pointer;
-	padding:0px 10px;
+	padding:2px 10px;
+	letter-spacing:2px;
+	
 }
-.btn_qty_pink{
-	background-color:#ff6973;
-	border:1px #ff9399 solid;
-	color:#ffffff;
-	border-radius:3px;
-	font-size:15px;
+.btn_purple_l{
+	border:1px #CA8EC2 solid;
+	margin:5px;
+	width:100px;
 	height:30px;
-	width:30px;
+	line-height:30px;
+	font-size:1em;
+	vertical-align:middle;
+	background-color:#DAB1D5;
+	color:#ffffff;
+	border-radius:4px;
 	cursor:pointer;
-	padding:0px 10px;
+	padding:2px 10px;
+	letter-spacing:2px;
 }
 
 .btn_blue{
-	background-color:#0080FF;
-	border:1px #46A3FF solid;
-	color:#ffffff;
-	border-radius:5px;
-	font-size:15px;
+	border:1px #0080FF solid;
+	margin:5px;
+	width:100px;
 	height:30px;
+	line-height:30px;
+	font-size:1em;
+	vertical-align:middle;
+	background-color:#46A3FF;
+	color:#ffffff;
+	border-radius:4px;
 	cursor:pointer;
-	padding:0px 10px;
+	padding:2px 10px;
+	letter-spacing:2px;
 }
-
+.btn_red{
+	border:1px #CC0000 solid;
+	margin:5px;
+	width:100px;
+	height:30px;
+	line-height:30px;
+	font-size:1em;
+	vertical-align:middle;
+	background-color:#F50000;
+	color:#ffffff;
+	border-radius:4px;
+	cursor:pointer;
+	padding:2px 10px;
+	letter-spacing:2px;
+}
 /*end 按鈕樣式*/
 
 .menuList{

@@ -94,5 +94,14 @@ switch($_POST["dataFlag"]){
         $hiddenArrValue=array("");
         $obj->new_showPageTable($hiddenArray,$hiddenArrValue,1,1,1);
         break;
+    case "designer_stop"://停用
+        $stop_datetime="";
+        if($_POST["flag"] == "stop"){
+            $stop_datetime=date("Y-m-d H:i:s");
+        }
+        $mystr="update designer set stop_datetime='" .$stop_datetime. "' where designer_id='" .$_POST["mypk"]. "'";
+        mysqli_query($obj->link,$mystr);
+        $obj->designer_showOneTR($_POST["mypk"]);
+        break;
 }
 ?>

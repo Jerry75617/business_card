@@ -37,8 +37,16 @@ class classDesigner extends classMain
         }
         echo "<tr height=30px><td $titleStr>異動時間 : <td>".$update_datetime;
         echo "<tr><td align=center colspan=2>";
-        echo "<input type='button' class='btn_pink' value='存檔並關閉'  onclick=\"updateButtonClick()\">";
-        echo " &nbsp; <input type='button' class='btn_blue' value='關閉' onclick=\"closeDivClick()\">";
+        echo "<span class='btn_pink' onclick=\"updateButtonClick()\">存檔並關閉</span>";
+        if((int)$mypk > 0){
+            if($myarr["stop_datetime"]<> ""){
+                echo "<span class='btn_red' onclick=\"stopButtonClick('" .$mypk. "','start')\">啟用</span>";
+            }else{
+                echo "<span class='btn_red' onclick=\"stopButtonClick('" .$mypk. "','stop')\">停用</span>";
+            }
+        }
+        echo "<span class='btn_blue' onclick=\"closeDivClick()\">關閉</span>";
+        
         echo "</table>";
         echo "<input type='hidden' name='designer_id' value='" .$mypk. "'>";
         echo "</form>";
@@ -70,10 +78,12 @@ class classDesigner extends classMain
         for($i=0;$i<$mynum;$i++){
             $myarr=mysqli_fetch_array($myresult,1);
             $mypk=$myarr["designer_id"];
+            $stopFlag="";
+            if($myarr["stop_datetime"] <> ""){  $stopFlag="(停用)";  }
             
             echo "<tr><td align=center valign=middle id='edit_" .$mypk. "' ><span class='material-symbols-outlined' onclick=\"openButtonClick('" .$mypk. "')\" style='cursor:pointer;font-size:20px'>edit</span>";//<input type='button' class='btn_qty_pink' value='".$button_text."' onclick=\"openButtonClick('" .$mypk. "')\">";
             echo "<td align=center id='item_" .$mypk. "' >".$button_text;
-            echo "<td id='designer_account_" .$mypk. "'>".$myarr["designer_account"];
+            echo "<td id='designer_account_" .$mypk. "'>".$myarr["designer_account"].$stopFlag;
             echo "<td id='designer_name_" .$mypk. "' >".$myarr["designer_name"];
             echo "<td id='designer_cellPhone_" .$mypk. "' >".$myarr["designer_cell_phone"];
             echo "<td width=12%>".$myarr["update_datetime"];
@@ -88,11 +98,14 @@ class classDesigner extends classMain
         $mystr="select * from designer where designer_id='" .$mypk. "'";
         $myresult=mysqli_query($this->link,$mystr);
         $myarr=mysqli_fetch_array($myresult,1);
+        
+        $stopFlag="";
+        if($myarr["stop_datetime"] <> ""){  $stopFlag="(停用)";  }
         if((int)$myarr["designer_id"] <= 0){
             echo "[!@#]edit_" .$mypk. "<span></span>";
             echo "[!@#]item_" .$mypk. "<span>刪除</span>";
         }
-        echo "[!@#]designer_account_" .$mypk. "<span>".$myarr["designer_account"]."</span>";
+        echo "[!@#]designer_account_" .$mypk. "<span>".$myarr["designer_account"].$stopFlag."</span>";
         echo "[!@#]designer_name_" .$mypk. "<span>".$myarr["designer_name"]."</span>";
         echo "[!@#]designer_cellPhone_" .$mypk. "<span>".$myarr["designer_cell_phone"]."</span>";
         

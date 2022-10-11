@@ -98,7 +98,7 @@ switch($_POST["dataFlag"]){
         echo "[!@#]checkFlagSpan<input type='hidden' id='checkFlag' value='yes'>";
         break;
     case "show_one_tr":
-        $obj->member_showOneTR($_POST["mypk"]);
+        $obj->member_showOneTR($_POST["mypk"],$_POST["showKind"]);
         break;
     case "insert_showMore":
         $whereStr="where create_datetime like '" .date("Y-m-d"). "%'";
@@ -157,7 +157,7 @@ switch($_POST["dataFlag"]){
         echo "[!@#]designer_".$_POST["member_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$myarr["designer_id"]. "')\"\">" .$designer_name. "</a>";
         break;
     case "show_pic"://編輯名片
-        $obj->showNameCardShowOne($_POST["mypk"],"[!@#]showPicDiv");
+        $obj->showNameCardShowOne($_POST["mypk"],$_POST["showKind"],"[!@#]showPicDiv");
         break;
     case "changeTitlePage":
         $obj->showPage($_POST["work_file_id"],$_POST["work_file_list_id"],"[!@#]showPage");
@@ -186,17 +186,28 @@ switch($_POST["dataFlag"]){
                 $obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
             }
         }
-        $obj->showNameCardShowOne($_POST["work_file_id"],"[!@#]showPicDiv");
+        echo "[!@#]checkFlagSpan<input type='hidden' id='checkFlag' value='yes'>";
+        $obj->showNameCardShowOne($_POST["work_file_id"],$_POST["showKind"],"[!@#]showPicDiv");
         break;
     case "addNewCard"://新增卡片
+        $mystr="select * from work_file_list where work_file_id='" .$_POST["work_file_id"]. "' order by sequence desc limit 1";
+        $myresult=mysqli_query($obj->link,$mystr);
+        $sequence=0;
+        if(mysqli_num_rows($myresult) > 0){
+            $myarr=mysqli_fetch_array($myresult,1);
+            $sequence=$myarr["sequence"];
+        }
+        $sequence++;
         $insertArr=array();
         $insertArr["work_file_id"]=$_POST["work_file_id"];
+        $insertArr["sequence"]=$sequence;
         $newPk=$obj->insertDB($insertArr,"work_file_list","*");
         
         $obj->showNameCardShowOne($_POST["work_file_id"],"[!@#]showPicDiv");
         break;
     case "refresh_pic"://刷新圖片
         $obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
+        echo "[!@#]checkFlagSpan<input type='hidden' id='checkFlag' value='yes'>";
         break;
     case "delete_pic":
         $mystr="select * from work_file_list where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
@@ -209,6 +220,7 @@ switch($_POST["dataFlag"]){
                 unlink("../businessCard_img/".$myarr["file_name"]);//將檔案刪除
             }
         }
+        echo "[!@#]checkFlagSpan<input type='hidden' id='checkFlag' value='yes'>";
         $obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
         break;
     case "select_member":
@@ -220,7 +232,7 @@ switch($_POST["dataFlag"]){
             $insertArr["create_datetime"]=date("Y-m-d H:i:s");
             $insertArr["member_id"]=$myarr["member_id"];
             $insertArr["designer_id"]=$myarr["designer_id"];
-            $insertArr["category"]="名片";
+            $insertArr["category"]=$_POST["showKind"];
             $newPk=$obj->insertDB($insertArr,"work_file","*");
             
             $listArr["work_file_id"]=$newPk;
@@ -228,10 +240,67 @@ switch($_POST["dataFlag"]){
             $listArr["designer_id"]=$myarr["designer_id"];
             $obj->insertDB($listArr,"work_file_list","*");
            
-            $obj->showNameCardShowOne($newPk,"[!@#]showPicDiv");
+            $obj->showNameCardShowOne($newPk,$_POST["showKind"],"[!@#]showPicDiv");
         }else{
             echo "[!@#]showMsg<span>查無此會員資料</span>";
         }
+        break;
+    case "move_pic":
+        $mystr="select * from work_file_list where work_file_list_id = '" .$_POST["now_pk"]. "'";
+        $now_result=mysqli_query($obj->link,$mystr);
+        $now_arr=mysqli_fetch_array($now_result,1);
+        
+        $mystr="select * from work_file_list where work_file_list_id = '" .$_POST["change_pk"]. "'";
+        $change_result=mysqli_query($obj->link,$mystr);
+        $change_arr=mysqli_fetch_array($change_result,1);
+        
+        $mystr="update work_file_list set sequence='" .$now_arr["sequence"]. "' where work_file_list_id='" .$change_arr["work_file_list_id"]. "'";
+        mysqli_query($obj->link,$mystr);
+        
+        $mystr="update work_file_list set sequence='" .$change_arr["sequence"]. "' where work_file_list_id='" .$now_arr["work_file_list_id"]. "'";
+        mysqli_query($obj->link,$mystr);
+        
+        //刷新
+        echo "[!@#]checkFlagSpan<input type='hidden' id='checkFlag' value='yes'>";
+        $obj->showPage($now_arr["work_file_id"],$now_arr["work_file_list_id"],"[!@#]showPage");
+        $mystr="select * from work_file_list where work_file_id = '" .$now_arr["work_file_id"]. "'";
+        $list_result=mysqli_query($obj->link,$mystr);
+        $list_num=mysqli_num_rows($list_result);
+        for($i=0;$i<$list_num;$i++){
+            $list_arr=mysqli_fetch_array($list_result,1);
+            $obj->showContentImg($list_arr["work_file_id"],$list_arr["work_file_list_id"],"[!@#]showContentImg_".$list_arr["work_file_list_id"]);
+        }
+        
+        break;
+    case "extend_card":
+        
+        $mystr="select * from work_file where work_file_id='" .$_POST["work_file_id"]. "'";
+        $myresult=mysqli_query($obj->link,$mystr);
+        $myarr=mysqli_fetch_array($myresult,1);
+        
+        $titleStr=" width=20% align=right";
+        echo "[!@#]showOneDiv";
+        echo "<br><form id='frm_extend' name='frm_extend' onsubmit='return false'>";
+        echo "<table width=96% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13' align=center>";
+        echo "<thead><tr><td align=center colspan=2 class='f15'>[" . $myarr["display_name"] . "]名片展期</thead>";
+        echo "<tr><td $titleStr>截止日期 : <td>&nbsp;<input type='date' name='dateline' value='" .$myarr["dateline"]. "'>";
+        
+        echo "<tr><td align=center colspan=2>";
+        echo "<span class='btn_pink' onclick=\"updateExtendClick()\">存檔並關閉</span>";
+        echo "<span class='btn_blue' onclick=\"closeDivClick()\">關閉</span>";
+        echo "</table>";
+        echo "<input type='hidden' name='work_file_id' value='" .$_POST["work_file_id"]. "'>";
+        echo "</form>";
+        break;
+    case "update_extend":
+        $mystr="select * from work_file where work_file_id='" .$_POST["work_file_id"]. "'";
+        $myresult=mysqli_query($obj->link,$mystr);
+        $myarr=mysqli_fetch_array($myresult);
+        
+        $mystr="update work_file set dateline='" .$_POST["dateline"]. "' where work_file_id='" .$_POST["work_file_id"]. "'";
+        mysqli_query($obj->link,$mystr);
+        
+        $obj->member_showOneTR($myarr["member_id"],$_POST["showKind"]);
         break;
 }
 ?>
