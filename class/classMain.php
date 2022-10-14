@@ -2,12 +2,12 @@
 include_once('classLink.php');
 class classMain extends classLink
 {
-    var $menuArr=array("電子名片"=>array("designerList","memberList"),"電子喜帖"=>array("designerList2","memberList2"));
+    var $menuArr=array("電子名片"=>array("designerList","memberList","memberList01"),"電子喜帖"=>array("designerList2","memberList2","memberList012"));
     var $iconArr=array("電子名片"=>array("badge","background_replace"),"電子喜帖"=>array("badge","background_replace"));
     var $titleImgArr=array("電子名片"=>"co_present","電子喜帖"=>"article");
     var $pagePowerArr=array("sysadmin"=>array("designerList","memberList","designerList2","memberList2"),"admin"=>array("designerList","memberList","designerList2","memberList2"),
-                            "designer"=>array("memberList","memberList2"),"member"=>array("memberList","memberList2"));
-    var $pageName=array("designerList"=>"設計師管理清單","memberList"=>"會員管理清單","designerList2"=>"設計師管理清單","memberList2"=>"會員管理清單");
+                            "designer"=>array("memberList","memberList2"),"member"=>array("memberList01","memberList012"));
+    var $pageName=array("designerList"=>"設計師管理清單","memberList"=>"會員管理清單","memberList01"=>"電子名片清單","designerList2"=>"設計師管理清單","memberList2"=>"會員管理清單","memberList012"=>"電子喜帖清單");
     function __construct(){
         
         $this->Connect();
@@ -113,6 +113,10 @@ class classMain extends classLink
                 switch($pageValue[$i]){
                     case "designerList2":
                     case "memberList2":
+                        $url=substr($pageValue[$i],0,-1).".php";
+                        $showKind="wedding";
+                        break;
+                    case "memberList012":
                         $url=substr($pageValue[$i],0,-1).".php";
                         $showKind="wedding";
                         break;

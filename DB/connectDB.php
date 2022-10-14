@@ -14,10 +14,11 @@ if(parse_ini_file($iniFile)){
     $db_in_name=$dbArr["db_in_name"];
     $web_name=$dbArr["web_name"];
     $login_file=$dbArr["login_file"];
-    
+    $db_account=$dbArr["db_account"];
+    $db_password=$dbArr["db_password"];
 }
 //連接資料庫
-$link=mysqli_connect('localhost','root','root0815')or die ("無法連接".mysql_error());
+$link=mysqli_connect($db_in_ip,$db_account,$db_password)or die ("無法連接".mysql_error());
 mysqli_select_db($link,$db_in_name);
 mysqli_set_charset($link,"utf8");
 

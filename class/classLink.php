@@ -39,10 +39,12 @@ class classLink{
 			$this->db_in_name=$dbArr["db_in_name"];
 			$this->web_name=$dbArr["web_name"];
 			$this->login_file=$dbArr["login_file"];
-			$this->exportDir=$dbArr["exportDir"];
+			$this->db_account=$dbArr["db_account"];
+			$this->db_password=$dbArr["db_password"];
+// 			$this->exportDir=$dbArr["exportDir"];
 		}
 		//連接資料庫
-		$this->link=mysqli_connect('localhost','root','root0815')or die ("無法連接".mysql_error());
+		$this->link=mysqli_connect($this->db_in_ip,$this->db_account,$this->db_password)or die ("無法連接".mysql_error());
 		mysqli_select_db($this->link,$this->db_in_name) or die ("無法選擇資料庫".mysql_error());
 		mysqli_set_charset($this->link,"utf8");
 		//找後端程式,存session	
