@@ -62,19 +62,19 @@ function closeDivClick(){
 }
 //----end 編輯會員資料----
 //----start 指派設計師----
-function assignDesignerClick(member_id,mypk){
-	var aaobj=document.getElementById("designer_" + member_id);
+function assignDesignerClick(member_id,mypk,work_file_id){
+	var aaobj=document.getElementById("designer_" + member_id + "_" + work_file_id);
 	if(aaobj){
-		var send_str="dataFlag=show_assign&mypk=" + mypk + "&member_id=" + member_id + "&timestamp="+ new Date().getTime();
+		var send_str="dataFlag=show_assign&mypk=" + mypk + "&member_id=" + member_id + "&work_file_id=" + work_file_id + "&timestamp="+ new Date().getTime();
 		X_FORM_Str(send_str,"memberListSIM.php","");
 	}
 }
-function saveDesignerClick(myValue,member_id){
-	var send_str="dataFlag=save_assign&myValue=" + myValue + "&member_id=" + member_id + "&timestamp="+ new Date().getTime();
+function saveDesignerClick(myValue,member_id,work_file_id){
+	var send_str="dataFlag=save_assign&myValue=" + myValue + "&member_id=" + member_id + "&work_file_id=" + work_file_id + "&timestamp="+ new Date().getTime();
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
-function cancelClick(member_id){
-	var send_str="dataFlag=cancel_assign&member_id=" + member_id + "&timestamp="+ new Date().getTime();
+function cancelClick(member_id,work_file_id){
+	var send_str="dataFlag=cancel_assign&member_id=" + member_id + "&work_file_id=" + work_file_id + "&timestamp="+ new Date().getTime();
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
 //----end 指派設計師----
@@ -133,7 +133,7 @@ function saveBtnClick(){
 }
 //新增名片
 function addClick(work_file_id){
-	var send_str="dataFlag=addNewCard&work_file_id=" + work_file_id;
+	var send_str="dataFlag=addNewCard&work_file_id=" + work_file_id + "&showKind=" + showKind;
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
 //上傳圖片

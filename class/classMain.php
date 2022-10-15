@@ -43,15 +43,15 @@ class classMain extends classLink
             echo "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>";
             echo "<link href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap' rel='stylesheet'>";
             echo "<link href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500&family=Noto+Serif+TC:wght@200&display=swap' rel='stylesheet'>";
-            echo "<link href='css/main.css?" .date("YmdHis"). "' rel='stylesheet' type='text/css' />";
+            echo "<link href='./css/main.css?" .date("YmdHis"). "' rel='stylesheet' type='text/css' />";
             echo "<title>(" .$this->sessionGetValue("session_name"). ")電子名片管理</title>";
             echo "</head>";
         }
     }//end head
     function body($nowPage,$leftMenu=''){
         $pageName=$this->pageName[str_replace(".php","",$nowPage)];
-        include_once("js/main.js");
-        include_once("js/script.js");
+        include_once("./js/main.js");
+        include_once("./js/script.js");
         
         echo "<body style='height:100%;background-color:#efefef;margin:0;'>";
         echo "<div style='width:13%;height:100%;float:left;background-color:#424242' id='menuDiv'>";
@@ -203,8 +203,8 @@ class classMain extends classLink
         echo "<link rel=stylesheet type='text/css' href='./css/main.css?" .date("is"). "'>";
         echo "<title>(".$this->sessionGetValue("c_name").")".$myTitle."</title>";
         echo "</head>";
-        include_once("/js/main.js");
-        include_once("/js/script.js");
+        include_once("./js/main.js");
+        include_once("./js/script.js");
         echo "<body style='background-color:" .$bgColor. ";'><center>";
         
         echo "<div id='showDiv' style='position:fixed;width:98%;margin:0% ;background-color:#ffffff;color:#666666;z-index:999;height:98%;display:none;overflow:auto;'></div>";
@@ -256,5 +256,29 @@ class classMain extends classLink
         }
         return $returnDate;
     }//checkInputDateStr
+    function getTableEmptyData($table_name){
+        $data_arr=array();
+        $mystr="desc ".$table_name;
+        $my_result=mysqli_query($this->link,$mystr);
+        $my_num=mysqli_num_rows($my_result);
+        for($ii=0;$ii<$my_num;$ii++){
+            $my_arr=mysqli_fetch_array($my_result);
+            switch(substr($my_arr["Type"],0,3)){
+                case "int":
+                    $data_arr[$my_arr["Field"]]=0;
+                    break;
+                case "dou"://double
+                    $data_arr[$my_arr["Field"]]=0;
+                    break;
+                case "flo"://float
+                    $data_arr[$my_arr["Field"]]=0;
+                    break;
+                default :
+                    $data_arr[$my_arr["Field"]]="";
+                    break;
+            }
+        }
+        return $data_arr;
+    }//getTableEmpptyData
 }
 ?>

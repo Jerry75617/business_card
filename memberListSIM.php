@@ -118,28 +118,29 @@ switch($_POST["dataFlag"]){
         $obj->new_showPageTable($hiddenArray,$hiddenArrValue,1,1,1);
         break;
     case "show_assign":
-        $obj->assignDesigner_showOne($_POST["mypk"],$_POST["member_id"],"[!@#]designer_".$_POST["member_id"]);
+        $obj->assignDesigner_showOne($_POST["mypk"],$_POST["member_id"],$_POST["work_file_id"],"[!@#]designer_".$_POST["member_id"]."_".$_POST["work_file_id"]);
         break;
     case"save_assign":
         if(!isset($_POST["myValue"])){ $_POST["myValue"]=""; }
-        $designer_name="尚未指派"; $designer_id=0;  $designer_account="";
-        if($_POST["myValue"] > 0){
-            $mystr="update member set designer_id='" .$_POST["myValue"]. "' where member_id='" .$_POST["member_id"]. "'";
+        $myValueArr=explode("/",$_POST["myValue"]);
+        
+        $designer_name="尚未指派"; $designer_id=(int)$_POST["myValue"];  $designer_account="";
+        
+        
+//         if($designer_id > 0){
+            $mystr="update member set designer_id='" .$designer_id. "' where member_id='" .$_POST["member_id"]. "'";
             mysqli_query($obj->link,$mystr);
             
-            $designer_id=$_POST["myValue"];
             
-            $mystr="select * from designer where designer_id='" . $_POST["myValue"] . "'";
+            $mystr="select * from designer where designer_id='" . $designer_id . "'";
             $designer_result=mysqli_query($obj->link,$mystr);
             if(mysqli_num_rows($designer_result) > 0){
                 $designer_arr=mysqli_fetch_array($designer_result,1);
                 $designer_name=$designer_arr["designer_name"];
                 $designer_account=$designer_arr["designer_account"];
             }
-        }
-        
-        echo "[!@#]designer_".$_POST["member_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$designer_id. "')\"\">" .$designer_name. "&nbsp;(" .$designer_account. ")</a>";
-        
+            echo "[!@#]designer_".$_POST["member_id"]."_".$_POST["work_file_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$designer_id. "','" .$_POST["work_file_id"]. "')\"\">" .$designer_name. "&nbsp;(" .$designer_account. ")</a>";
+//         }
         break;
     case "cancel_assign":
         $mystr="select * from member where member_id='" .$_POST["member_id"]. "'";
@@ -152,9 +153,10 @@ switch($_POST["dataFlag"]){
         if(mysqli_num_rows($designer_result) > 0){
             $designer_arr=mysqli_fetch_array($designer_result,1);
             $designer_name=$designer_arr["designer_name"];
+            $designer_account=$designer_arr["designer_account"];
         }
         
-        echo "[!@#]designer_".$_POST["member_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$myarr["designer_id"]. "')\"\">" .$designer_name. "</a>";
+        echo "[!@#]designer_".$_POST["member_id"]."_".$_POST["work_file_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$myarr["designer_id"]. "','" .$_POST["work_file_id"]. "')\"\">" .$designer_name. "&nbsp;(" .$designer_account. ")</a>";
         break;
     case "show_pic"://編輯名片
         $obj->showNameCardShowOne($_POST["mypk"],$_POST["showKind"],"[!@#]showPicDiv");
@@ -203,7 +205,7 @@ switch($_POST["dataFlag"]){
         $insertArr["sequence"]=$sequence;
         $newPk=$obj->insertDB($insertArr,"work_file_list","*");
         
-        $obj->showNameCardShowOne($_POST["work_file_id"],"[!@#]showPicDiv");
+        $obj->showNameCardShowOne($_POST["work_file_id"],$_POST["showKind"],"[!@#]showPicDiv");
         break;
     case "refresh_pic"://刷新圖片
         $obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);

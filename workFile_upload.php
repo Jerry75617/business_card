@@ -64,9 +64,13 @@ if($_REQUEST["uploadFlag"] == "Y"){
     #上傳檔案
     if($_FILES['photo']['error']>0){
         if($_FILES['photo']['name'] == ""){
-            echo "請選擇檔案...".$btn;
-            exit;
+            ?>
+            <script>alert("請選擇檔案...")</script>
+            <?php 
         }
+        echo "<font style='color:#990000'>!!錯誤!! &nbsp &nbsp 檔案大小超出限制(檔案大小最多為  2M)</font><br><br>".$btn;
+        exit ;
+        
     }else{
         $datetime=date("YmdHis");
         $type=substr(strrchr($_FILES['photo']['name'],"."),1);

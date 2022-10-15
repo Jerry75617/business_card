@@ -66,7 +66,7 @@ class classMember extends classMain
         echo "<td width=12%>設計師";
         echo "</thead>";
         if($mynum <= 0){
-            echo "<tr height=35px><td colspan=5 align=center class='red_d'>...查無資料...";
+            echo "<tr height=35px><td colspan=8 align=center class='red_d'>...查無資料...";
         }
         for($i=0;$i<$mynum;$i++){
             $myarr=mysqli_fetch_array($myresult,1);
@@ -123,7 +123,7 @@ class classMember extends classMain
                     switch($this->sessionGetValue("session_login_kind")){
                         case "sysadmin":
                         case "admin":
-                            echo "<a href=\"javascript:assignDesignerClick('" .$myarr["member_id"]. "','" .$myarr["designer_id"]. "')\">".$work_arr["designer_name"]."&nbsp;(" .$work_arr["designer_account"]. ")</a>";
+                            echo "<a href=\"javascript:assignDesignerClick('" .$myarr["member_id"]. "','" .$myarr["designer_id"]. "','" .$work_arr["work_file_id"]. "')\">".$work_arr["designer_name"]."&nbsp;(" .$work_arr["designer_account"]. ")</a>";
                             break;
                         default:
                             echo $work_arr["designer_name"]."&nbsp;(" .$work_arr["designer_account"]. ")";
@@ -150,8 +150,11 @@ class classMember extends classMain
             $mystr="select * from work_file_list where work_file_id='" .$myarr["work_file_id"]. "' order by sequence";
             $list_result=mysqli_query($this->link,$mystr);
             $list_num=mysqli_num_rows($list_result);
-            
-            $list_arr=mysqli_fetch_array($list_result,1);
+            if($list_num <= 0){
+                $list_arr=$this->getTableEmptyData("work_file_list");
+            }else{
+                $list_arr=mysqli_fetch_array($list_result,1);
+            }
             
             $designer_name="尚未指派";  $designer_bid=""; $update_datetime="";
             $mystr="select * from designer where designer_id='" . $myarr["designer_id"] . "'";
@@ -248,14 +251,14 @@ class classMember extends classMain
 //         }
         
     }//ed member_showOneTR
-    function assignDesigner_showOne($mypk,$member_id,$divName=''){
+    function assignDesigner_showOne($mypk,$member_id,$work_file_id,$divName=''){
         
         $mystr="select * from designer";
         $myresult=mysqli_query($this->link,$mystr);
         $mynum=mysqli_num_rows($myresult);
         
         echo $divName;
-        echo "<select name='designer_id' onchange=\"saveDesignerClick(this.value,'" .$member_id. "')\">";
+        echo "<select name='designer_id' onchange=\"saveDesignerClick(this.value,'" .$member_id. "','" .$work_file_id. "')\">";
         echo "<option value=''>請選擇</option>";
         for($i=0;$i<$mynum;$i++){
             $myarr=mysqli_fetch_array($myresult,1);
@@ -264,25 +267,43 @@ class classMember extends classMain
             echo "<option value='" .$myarr["designer_id"]. "' $sele>" .$myarr["designer_name"]. "</option>";
         }
         echo "</select>";
-        echo "&nbsp;<a href=\"javascript:cancelClick('" .$member_id. "')\">取消</a>";
+        echo "&nbsp;<a href=\"javascript:cancelClick('" .$member_id. "','" .$work_file_id. "')\">取消</a>";
     }//end assignDesigner_showOne
     
     function showNameCardShowOne($mypk,$showKind,$divName=''){//編輯名片
         
+        $member_id=0;
+        
         $mystr="select * from work_file where work_file_id='" .$mypk. "'";
         $myresult=mysqli_query($this->link,$mystr);
-        $myarr=mysqli_fetch_array($myresult,1);
+        if(mysqli_num_rows($myresult) <= 0){
+            $myarr=$this->getTableEmptyData("work_file");
+        }else{
+            $myarr=mysqli_fetch_array($myresult,1);
+        }
+        
         
         $mystr="select * from work_file_list where work_file_id='" .$mypk. "' order by sequence";
         $list_result=mysqli_query($this->link,$mystr);
         $list_num=mysqli_num_rows($list_result);
-        $list_arr=mysqli_fetch_array($list_result,1);
-        mysqli_data_seek($list_result,0);
+        if($list_num <= 0){
+            $list_arr=$this->getTableEmptyData("work_file_list");
+        }else{
+            $list_arr=mysqli_fetch_array($list_result,1);
+            mysqli_data_seek($list_result,0);
+        }
+        
         
         $member_id=$myarr["member_id"];
         $mystr="select * from member where member_id='" .$member_id. "' and member_id > 0";
         $member_result=mysqli_query($this->link,$mystr);
-        $member_arr=mysqli_fetch_array($member_result);
+        if(mysqli_num_rows($member_result) <= 0){
+            $member_arr=$this->getTableEmptyData("member");
+        }else{
+            $member_arr=mysqli_fetch_array($member_result);
+        }
+        
+        
         
         
         echo $divName;

@@ -9,6 +9,10 @@ $mystr="create table member (member_id int AUTO_INCREMENT PRIMARY KEY,".
     "dateline varchar(10) binary default '',".//結束日期
     "update_datetime varchar(20) binary default'',".
     "create_datetime varchar(20) binary default'')";
+
+mysqli_query($link,$mystr);
+echo mysqli_error($link);
+
 $mystr="alter table member add index idx_member_account(member_account)";
 mysqli_query($link,$mystr);
 $mystr="alter table member add index idx_dateline(dateline)";
