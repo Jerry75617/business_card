@@ -23,9 +23,12 @@ echo "<br>作品(電子名片、電子喜帖)完成...";
 $mystr="create table work_file_list (work_file_list_id int AUTO_INCREMENT PRIMARY KEY,".
     "work_file_id int default '0',".
     "designer_id int default '0',".
+	"btn_amount int default '0',".
     "file_name varchar(50) binary default '',".//檔案名稱
     "btn_name varchar(30) binary default '',".//按鈕名稱(line)
     "url varchar(100) binary default '',".//連結(line)
+	"btn1_name varchar(30) binary default '',".//按鈕名稱(line)
+    "url1 varchar(100) binary default '',".//連結(line)
     "dateline varchar(20) binary default '',".//名片結束日期
     "click_times int default '0',".//點擊次數
     "update_datetime varchar(20) binary default '',".

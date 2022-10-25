@@ -304,5 +304,16 @@ switch($_POST["dataFlag"]){
         
         $obj->member_showOneTR($myarr["member_id"],$_POST["showKind"]);
         break;
+	case "extend_button":		
+		$mystr="select * from work_file_list where work_file_id='" .$_POST["work_file_id"]. "'";
+        $myresult=mysqli_query($obj->link,$mystr);
+        $myarr=mysqli_fetch_array($myresult);
+		if(mysqli_num_rows($myresult) > 0){	
+			$listArr=array();
+            $listArr["btn_amount"]=$myarr["btn_amount"]+1;
+			$obj->updateDB($listArr,"btn_amount",$listArr["btn_amount"],"btn_amount","*");
+		}
+		
+		break;
 }
 ?>

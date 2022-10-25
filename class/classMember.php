@@ -5,6 +5,8 @@ class classMember extends classMain
     function __construct(){
         $this->Connect();
     }
+	
+
     function member_showOne($mypk,$divName=''){
         
         $showMsg="修改";   $titleStr=" align=right width=30%";
@@ -329,9 +331,9 @@ class classMember extends classMain
             //             echo " &emsp; <input type='file' name='file_name'>";
             echo "<tr height=5%><td colspan=2 id='showPage' valign=top style='background-color:#00b30c;color:#ffffff;padding:0'>";
             $this->showPage($mypk,$list_arr["work_file_list_id"]);
-            
             echo "<tr><td colspan=2 valign=top>";
-            
+
+			
             for($i=0;$i<$list_num;$i++){
                 $list_arr=mysqli_fetch_array($list_result,1);
                 $displayStr="display:none;";
@@ -349,6 +351,7 @@ class classMember extends classMain
         echo "<input type='hidden' name='member_id' value='" .$member_id. "'>";
         echo "<input type='hidden' name='showKind' value='".$showKind."'>";
         echo "</form>";
+
     }
     function showPage($work_file_id,$work_file_list_id,$divName=''){
         
@@ -366,25 +369,58 @@ class classMember extends classMain
             echo "<span style='float:left;height:30px;line-height:30px;padding:0% 1%;cursor:pointer;" .$styleStr. "' onclick=\"changeTitlePageClick('" .$work_file_id. "','" .$myarr["work_file_list_id"]. "')\">第&nbsp;" . ($i+1) . "&nbsp;頁</span>";
         }
     }
+	
     function showContentList($mypk,$divName=''){
      
         $mystr="select *from work_file_list where work_file_list_id='" .$mypk. "'";
         $myresult=mysqli_query($this->link,$mystr);
         $myarr=mysqli_fetch_array($myresult,1);
         
+		
         echo $divName;
         echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0>";
         echo "<tr><td width=60% align=center valign=top style='padding:0;' id='showContentImg_" .$mypk. "'>";
+
         $this->showContentImg($myarr["work_file_id"],$mypk);
+
         echo "<td valign=top>";
 //         echo "<div style='float:left;border:1px #ccc solid;background-color:#EFEFEF;padding:3px 30px;cursor:pointer;' onclick=\"addButtonClick()\">增加按鈕</div>";
 //         echo "<div style='clear:both;padding:5% 0%;'></div>";
-        echo "<div id='buttonContent'>";
-        echo "<span style='font-size:1.2em;font-weight:bold;'>按鈕</span><br>";
-//         echo "<span>圖片 : <input type='file' name='file_name' value='" .$myarr["file_name"]. "'></span><br>";
-        echo "<span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn_name"]. "'></span>";
-	    echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></span><br>";
-        echo "</div>";
+
+		//echo "<form action=\"/showContentList()\">";
+		echo "<label for=\"cards_fun\">新增按鈕:</label>";
+		echo "<select name=\"cards_fun\" id=\"cards_fun\">";
+		echo "<option value=\"0\">新增連結按鈕</option>";
+		echo "<option value=\"1\">新增導航地址按鈕</option>";
+		echo "<option value=\"2\">新增撥打電話功能</option>";
+		echo "<option value=\"3\">新增加入Line按鈕</option>";
+		echo "</select>";
+		echo "<span class='btn_pink'  onclick=\"addBtn('" .$mypk. "')\">增加</span>";
+		//echo "<input type=\"submit\" value=\"增加\"><br>";
+		echo "</form>";
+		//echo "<br>";
+
+		for($i=0;$i<$myarr["btn_amount"];$i++){ 
+			
+			if ($i == 0)
+			{
+				echo "<div id='buttonContent'>";
+				echo "<span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn_name"]. "'></span>";
+				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></span><br>";
+				echo "</div>";
+			}
+			else if (i == 1)
+			{
+				echo "<div id='buttonContent'>";
+				echo "<span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn1_name"]. "'></span>";
+				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url1"]. "'></span><br>";
+				echo "</div>";
+			}
+			
+		}
+		
+		
+		
         echo "<input type='hidden' name='work_file_list_id[]' value='" .$mypk. "'>";
         echo "<div style='margin-top:10px;text-align:center;'>";
         echo "<span class='btn_pink'  onclick=\"saveBtnClick()\">資料存檔</span>";

@@ -136,6 +136,11 @@ function addClick(work_file_id){
 	var send_str="dataFlag=addNewCard&work_file_id=" + work_file_id + "&showKind=" + showKind;
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
+//新增按鈕
+function addBtn(work_file_id){
+	var send_str="dataFlag=extend_button&work_file_id=" + work_file_id + "&showKind=" + showKind;
+	X_FORM_Str(send_str,"memberListSIM.php","");
+}
 //上傳圖片
 function uploadPicClick(mypk){
 	var aaobj=document.getElementById("uploadDiv_" + mypk);
@@ -180,7 +185,7 @@ window.onload=function(){
 </script>
 
 <?php
-echo "<div id='showPicDiv' style='position:fixed;width:700px;height:800px;border:1px #ff9807 solid;top:5%;left:30%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;z-index:998;overflow:auto;'></div>";
+echo "<div id='showPicDiv' style='position:fixed;width:900px;height:600px;border:1px #ff9807 solid;top:5%;left:20%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;z-index:998;overflow:auto;'></div>";
 echo "<div id='showOneDiv' style='position:fixed;width:500px;height:350px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;z-index:998;'></div>";
 echo "<form name='form_query' id='form_query' onsubmit='return false;'>";
 echo "<table border=0 width=100% class='f13'>";
