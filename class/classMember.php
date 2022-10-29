@@ -382,11 +382,8 @@ class classMember extends classMain
         echo "<tr><td width=60% align=center valign=top style='padding:0;' id='showContentImg_" .$mypk. "'>";
 
         $this->showContentImg($myarr["work_file_id"],$mypk);
-
+		
         echo "<td valign=top>";
-//         echo "<div style='float:left;border:1px #ccc solid;background-color:#EFEFEF;padding:3px 30px;cursor:pointer;' onclick=\"addButtonClick()\">增加按鈕</div>";
-//         echo "<div style='clear:both;padding:5% 0%;'></div>";
-
 		//echo "<form action=\"/showContentList()\">";
 		echo "<label for=\"cards_fun\">新增按鈕:</label>";
 		echo "<select name=\"cards_fun\" id=\"cards_fun\">";
@@ -409,7 +406,7 @@ class classMember extends classMain
 				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></span><br>";
 				echo "</div>";
 			}
-			else if (i == 1)
+			else if ($i == 1)
 			{
 				echo "<div id='buttonContent'>";
 				echo "<span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn1_name"]. "'></span>";
@@ -428,6 +425,8 @@ class classMember extends classMain
         echo "</div>";
         echo "</table>";
     }
+	// work_file_id : work_file_id
+	// mypk : list id
     function showContentImg($work_file_id,$mypk,$divName=''){
         
         $btnStr="";  $imgStr="";

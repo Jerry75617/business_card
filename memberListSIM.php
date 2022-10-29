@@ -172,7 +172,7 @@ switch($_POST["dataFlag"]){
         
         $obj->updateDB($updateArr,"work_file_id",$_POST["work_file_id"],"work_file","*");
         
-        
+
         for($i=0;$i<count($_POST["work_file_list_id"]);$i++){
             $listArr=array();
             $listArr["btn_name"]=$_POST["btn_name"][$i];
@@ -190,6 +190,7 @@ switch($_POST["dataFlag"]){
         }
         echo "[!@#]checkFlagSpan<input type='hidden' id='checkFlag' value='yes'>";
         $obj->showNameCardShowOne($_POST["work_file_id"],$_POST["showKind"],"[!@#]showPicDiv");
+		
         break;
     case "addNewCard"://新增卡片
         $mystr="select * from work_file_list where work_file_id='" .$_POST["work_file_id"]. "' order by sequence desc limit 1";
@@ -305,15 +306,23 @@ switch($_POST["dataFlag"]){
         $obj->member_showOneTR($myarr["member_id"],$_POST["showKind"]);
         break;
 	case "extend_button":		
-		$mystr="select * from work_file_list where work_file_id='" .$_POST["work_file_id"]. "'";
+	
+		$mystr="select * from work_file_list where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
         $myresult=mysqli_query($obj->link,$mystr);
         $myarr=mysqli_fetch_array($myresult);
 		if(mysqli_num_rows($myresult) > 0){	
+
+			
 			$listArr=array();
-            $listArr["btn_amount"]=$myarr["btn_amount"]+1;
-			$obj->updateDB($listArr,"btn_amount",$listArr["btn_amount"],"btn_amount","*");
+            $listArr["btn_name"]="test";
+            $listArr["url"]="http://test.com";
+			$listArr["btn_amount"]=(int)$myarr["btn_amount"]+1; // button amount
+            //$listArr["work_file_list_id"]=$_POST["work_file_list_id"];
+			$obj->updateDB($listArr,"work_file_list_id",$_POST["work_file_list_id"],"work_file_list","*");
+			$obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
+			//$obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
 		}
-		
+	
 		break;
 }
 ?>

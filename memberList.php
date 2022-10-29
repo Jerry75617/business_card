@@ -137,9 +137,12 @@ function addClick(work_file_id){
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
 //新增按鈕
-function addBtn(work_file_id){
-	var send_str="dataFlag=extend_button&work_file_id=" + work_file_id + "&showKind=" + showKind;
+function addBtn(work_file_list_id){
+	var send_str="dataFlag=extend_button&work_file_list_id=" + work_file_list_id + "&showKind=" + showKind;
 	X_FORM_Str(send_str,"memberListSIM.php","");
+	//var send_str="dataFlag=extend_button&work_file_id=" + work_file_id + "&showKind=" + showKind + “work_file_list_id=“ +work_file_list_id;
+	//X_FORM_Str(send_str,"memberListSIM.php","");
+
 }
 //上傳圖片
 function uploadPicClick(mypk){

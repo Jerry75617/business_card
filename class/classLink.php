@@ -125,6 +125,11 @@ class classLink{
             return $myInsertId;
 	}
 	//更新到到DB中
+	// mypost : array list
+	// mypk   : column name key to do search
+	// mypkValue : column data
+	// tableName : table name
+	// noInsertArr : *
 	function updateDB($mypost,$mypk,$mypkValue,$tableName,$noInsertArr='*'){
 	    
 	    $updateStr="";$string="";$a="";
