@@ -10,15 +10,16 @@ $obj->body($nowPage,"yes");
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
 function main() {
+	liffInit();
 	const profile =  liff.getProfile();
 	createButton(profile);
 }
 window.onload=function (){
-	 liffInit();
+	main();
 }
 </script>
 <?php 
 
-echo "<input type='button' value='分享給好友' onclick=\"main()\">";
+echo "<button>分享給好友</button>";
 $obj->body_end();
 ?>
