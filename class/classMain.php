@@ -55,7 +55,8 @@ class classMain extends classLink
         
         switch($nowPage){
             case "liff_share.php":
-                include_once("./js/liffShare.js");
+                
+                
                 echo "<div style='width:100%;height:100%;float:left;'>";
                 echo "<table width='100%' height='100%' border=0px cellpadding=0 cellspacing=0 class='main-table'>";
                 echo "<tr height=5%><td style='background-color:#dfdfdf;' valign=middle>";

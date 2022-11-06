@@ -9,11 +9,10 @@ $obj->body($nowPage,"yes");
 ?>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
-
-main();
+// main();
 </script>
 <?php 
-
-echo "<button>分享給好友</button>";
+include_once("./js/liffShare.js");
+echo "<button id='showLineBtn'>分享給好友</button>";
 $obj->body_end();
 ?>
