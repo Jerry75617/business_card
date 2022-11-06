@@ -58,6 +58,13 @@ function createButton(profile) {
 //  body.appendChild(button);
 }
 
+function main() {
+	liffInit();
+	const profile =  liff.getProfile();
+	createButton(profile);
+}
+
+
 const colorDefault = "#666666";
 const colorNetlify = "#00ad9f";
 const flexCard = (userReply) => {

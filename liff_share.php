@@ -9,14 +9,8 @@ $obj->body($nowPage,"yes");
 ?>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
-function main() {
-	liffInit();
-	const profile =  liff.getProfile();
-	createButton(profile);
-}
-window.onload=function (){
-	main();
-}
+
+main();
 </script>
 <?php 
 
