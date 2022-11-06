@@ -25,13 +25,20 @@ function createButton(profile) {
   const userImage = profile.pictureUrl;
   const userReply = [urlParams.get('name'), urlParams.get('phone'), urlParams.get('email'), userImage];
   const flexContent = flexCard(userReply);
-  var shareContent = messageContent('flex');
+  
   const handleClick = async () => {
     if (liff.isApiAvailable("shareTargetPicker")) {
       try {
         const result = await liff.shareTargetPicker([
         
-        	
+        	{
+			    "type": "text",
+			    "text": "Hello, world"
+			},{
+				"type": "flex",
+	            "altText": `${urlParams.get('name')} present name card from Netlify`,
+	            "contents": flexContent
+	        }
             
         ])
 
@@ -50,27 +57,9 @@ function createButton(profile) {
 //
 //  body.appendChild(button);
 }
-function messageContent(kind){
-	switch(kind){
-		case "text"://文字
-			return {
-			    "type": "text",
-			    "text": "Hello, world"
-			}	
-			break;
-		case "flex"://flex
-			return {
-				"type": "flex",
-	            "altText": `${urlParams.get('name')} present name card from Netlify`,
-	            "contents": flexContent
-	        }
-			break;
-	}
-}
 
-
-const colorDefault = "#666666"
-const colorNetlify = "#00ad9f"
+const colorDefault = "#666666";
+const colorNetlify = "#00ad9f";
 const flexCard = (userReply) => {
   console.log(userReply);
   const [_, name, phone, email] = userReply;

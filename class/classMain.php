@@ -9,7 +9,6 @@ class classMain extends classLink
                             "designer"=>array("memberList","memberList2"),"member"=>array("memberList01","memberList012"));
     var $pageName=array("designerList"=>"設計師管理清單","memberList"=>"會員管理清單","memberList01"=>"電子名片清單","designerList2"=>"設計師管理清單","memberList2"=>"會員管理清單","memberList012"=>"電子喜帖清單");
     function __construct(){
-        
         $this->Connect();
     }
     

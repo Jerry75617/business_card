@@ -1,6 +1,6 @@
 <?php
-include_once("class/classMain.php");
-$obj= new classMain();
+include_once("./class/classDesigner.php");
+$obj= new classDesigner();
 $obj->head();
 if(!isset($_GET["showKind"])){ $_GET["showKind"]=""; }
 $nowPage="liff_share.php";
