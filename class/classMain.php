@@ -49,19 +49,34 @@ class classMain extends classLink
         }
     }//end head
     function body($nowPage,$leftMenu=''){
-        $pageName=$this->pageName[str_replace(".php","",$nowPage)];
+        
         include_once("./js/main.js");
         include_once("./js/script.js");
-        
         echo "<body style='height:100%;background-color:#efefef;margin:0;'>";
-        echo "<div style='width:13%;height:100%;float:left;background-color:#424242' id='menuDiv'>";
-        $this->menuShow($nowPage);
-        echo "</div>";
-        echo "<div style='width:87%;height:100%;float:left;'>";
-        echo "<div id='changePwdDiv' style='position:fixed;width:500px;height:350px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;z-index:999;display:none;'></div>";
-        echo "<table width='100%' height='100%' border=0px cellpadding=0 cellspacing=0 class='main-table'>";
-        echo "<tr height=5%><td style='background-color:#dfdfdf;' valign=middle>&emsp;<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>list_alt</span>&nbsp; ".$pageName;
-        echo "<tr><td valign=top style='padding:1%;'>";
+        
+        switch($nowPage){
+            case "liff_share.php":
+                include_once("./js/liffShare.js");
+                echo "<div style='width:100%;height:100%;float:left;'>";
+                echo "<table width='100%' height='100%' border=0px cellpadding=0 cellspacing=0 class='main-table'>";
+                echo "<tr height=5%><td style='background-color:#dfdfdf;' valign=middle>";
+                echo "<tr><td valign=top style='padding:1%;'>";
+                break;
+            default:
+                $pageName=$this->pageName[str_replace(".php","",$nowPage)];
+                
+                echo "<div style='width:13%;height:100%;float:left;background-color:#424242' id='menuDiv'>";
+                $this->menuShow($nowPage);
+                echo "</div>";
+                echo "<div style='width:87%;height:100%;float:left;'>";
+                echo "<div id='changePwdDiv' style='position:fixed;width:500px;height:350px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;z-index:999;display:none;'></div>";
+                echo "<table width='100%' height='100%' border=0px cellpadding=0 cellspacing=0 class='main-table'>";
+                echo "<tr height=5%><td style='background-color:#dfdfdf;' valign=middle>&emsp;<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>list_alt</span>&nbsp; ".$pageName;
+                echo "<tr><td valign=top style='padding:1%;'>";
+                break;
+        }
+        
+        
     }//end of body function
    
     function body_end(){
