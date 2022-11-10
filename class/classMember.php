@@ -382,8 +382,15 @@ class classMember extends classMain
         echo "<tr><td width=60% align=center valign=top style='padding:0;' id='showContentImg_" .$mypk. "'>";
 
         $this->showContentImg($myarr["work_file_id"],$mypk);
-		
+	
         echo "<td valign=top>";
+		echo "<div >";
+		echo "<div style=\"height:24px;background-color:#121212;\">[名片設定]</div>";
+		echo "<br><span>名片尺寸 : <input type='text' name='card_size[]' ></span>";
+		echo "<br><span>背景顏色 : <input type='text' name='card_size[]' ></span>";
+		echo "<br></br><br></br>";
+		//value='" .$myarr["card_size"]. "'
+		echo "</div>";
 		//echo "<form action=\"/showContentList()\">";
 		echo "<label for=\"cards_fun\">新增按鈕:</label>";
 		echo "<select name=\"cards_fun\" id=\"cards_fun\">";
@@ -397,26 +404,42 @@ class classMember extends classMain
 		echo "</form>";
 		//echo "<br>";
 
+		if ($myarr["btn1_flag"] == 1 && $myarr["btn_flag"] == 0)
+		{
+			$i = 1;
+		}
+		else
+		{
+			$i = 0;
+		}
+			
 		for($i=0;$i<$myarr["btn_amount"];$i++){ 
 			
 			if ($i == 0)
 			{
 				echo "<div id='buttonContent'>";
-				echo "<span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn_name"]. "'></span>";
-				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></span><br>";
+				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
+				echo "<hr size='1px' align='center'>";
+				//echo "<span class='material-symbols-outlined'>close</span>";
+				echo "<br><span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn_name"]. "'></span>";
+				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></span>";
+				echo "<br><span>按鈕顏色 : <input type='text' name='url[]' value='" .$myarr["btn_bg_color"]. "'></span><br>";
 				echo "</div>";
+				echo "<br>";
 			}
 			else if ($i == 1)
 			{
 				echo "<div id='buttonContent'>";
-				echo "<span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn1_name"]. "'></span>";
-				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url1"]. "'></span><br>";
+				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
+				echo "<hr size='1px' align='center'>";
+				echo "<br><span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn1_name"]. "'></span>";
+				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url1"]. "'></span>";
+				echo "<br><span>按鈕顏色 : <input type='text' name='url[]' value='" .$myarr["btn1_bg_color"]. "'></span><br>";
 				echo "</div>";
+				echo "<br>";
 			}
 			
 		}
-		
-		
 		
         echo "<input type='hidden' name='work_file_list_id[]' value='" .$mypk. "'>";
         echo "<div style='margin-top:10px;text-align:center;'>";
@@ -467,6 +490,7 @@ class classMember extends classMain
             $btnStr.="</span>";
             $imgStr="<div id='uploadDiv_" .$mypk. "'></div>";
         }
+
         
         echo $divName;
         echo "<table width=100% borer=0 cellpaddin=0 cellspacing=0>";

@@ -24,11 +24,15 @@ $mystr="create table work_file_list (work_file_list_id int AUTO_INCREMENT PRIMAR
     "work_file_id int default '0',".
     "designer_id int default '0',".
 	"btn_amount int default '0',".
-    "file_name varchar(50) binary default '',".//檔案名稱
-    "btn_name varchar(30) binary default '',".//按鈕名稱(line)
-    "url varchar(100) binary default '',".//連結(line)
-	"btn1_name varchar(30) binary default '',".//按鈕名稱(line)
-    "url1 varchar(100) binary default '',".//連結(line)
+    "file_name varchar(50) binary default '',".		//檔案名稱
+	"btn_flag int default '0',".					// 按鈕功能啟動旗標
+    "btn_name varchar(30) binary default '',".		//按鈕名稱(line)
+    "url varchar(100) binary default '',".			//連結(line)
+	"btn_bg_color varchar (16) binary default '#FFFFFF',".	//按鈕背景顏色
+	"btn1_flag int default '0',".					// 按鈕1功能啟動旗標
+	"btn1_name varchar(30) binary default '',".		//按鈕名稱(line)
+    "url1 varchar(100) binary default '',".			//連結(line)
+	"btn1_bg_color varchar (16) binary default '#FFFFFF',". //按鈕背景顏色
     "dateline varchar(20) binary default '',".//名片結束日期
     "click_times int default '0',".//點擊次數
     "update_datetime varchar(20) binary default '',".

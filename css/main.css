@@ -53,6 +53,30 @@ select{
 	border: 1px #65a0cd solid;
 	background-color:rgba(255,255,255,0.4);
 }
+
+span:link {
+  color: red;
+}
+
+/* visited link */
+
+span:visited {
+  color: green;
+}
+
+/* mouse over link */
+
+span:hover {
+  color: hotpink;
+}
+
+/* selected link */
+
+span:active {
+  color: blue;
+}
+
+
 .orange{
 	color:orange;
 }
@@ -205,5 +229,28 @@ select{
 	border-bottom:1px #cccccc solid;
 	border-right:1px #cccccc solid;
 }
+
+.material-symbols-outlined {
+  cursor:pointer;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.preview {
+  background:#888888;
+  width:4000px;
+  height:auto;
+  text-align:center;
+  border:#FFFFFF 5px dotted; 
+}
+.preview img{
+  height:320px;
+  order:1;
+  vertical-align : middle;
+}
+
 /*end 表格樣式*/
 </style>

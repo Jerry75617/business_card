@@ -306,23 +306,78 @@ switch($_POST["dataFlag"]){
         $obj->member_showOneTR($myarr["member_id"],$_POST["showKind"]);
         break;
 	case "extend_button":		
-	
 		$mystr="select * from work_file_list where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
         $myresult=mysqli_query($obj->link,$mystr);
         $myarr=mysqli_fetch_array($myresult);
 		if(mysqli_num_rows($myresult) > 0){	
-
-			
+		
 			$listArr=array();
-            $listArr["btn_name"]="test";
-            $listArr["url"]="http://test.com";
-			$listArr["btn_amount"]=(int)$myarr["btn_amount"]+1; // button amount
+            //$listArr["btn_name"]="test";
+            //$listArr["url"]="http://test.com";
+			
+			$index = (int)$myarr["btn_amount"];
+			
+			if ($index == 0) // 
+			{
+				$listArr["btn_flag"]=1;
+				//$listArr["btn_name"]="test";
+				//$listArr["url"]="http://test.com";
+				$listArr["btn_bg_color"]="#FFFFFF"; // default white
+			}
+			else if ($index == 1)
+			{
+				$listArr["btn1_flag"]=1;
+				//$listArr["btn1_name"]="test";
+				//$listArr["url1"]="http://test.com";
+				$listArr["btn1_bg_color"]="#FFFFFF"; // default white
+			}
+			else
+			{
+				
+			}
+
+
+			if ((int)$myarr["btn_amount"] < 2)				
+				$listArr["btn_amount"]=(int)$myarr["btn_amount"]+1; // button amount
+			
             //$listArr["work_file_list_id"]=$_POST["work_file_list_id"];
 			$obj->updateDB($listArr,"work_file_list_id",$_POST["work_file_list_id"],"work_file_list","*");
 			$obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
 			//$obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
 		}
-	
+		break;
+	case "delete_button":
+	//delete_btn_index
+		$mystr="select * from work_file_list where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
+        $myresult=mysqli_query($obj->link,$mystr);
+        $myarr=mysqli_fetch_array($myresult);
+		if(mysqli_num_rows($myresult) > 0){	
+		
+			$listArr=array();
+			
+			if ($delete_btn_index == 0)
+			{
+				$listArr["btn_flag"]=0;
+				$listArr["btn_name"]="";
+				$listArr["url"]="";
+				$listArr["btn_bg_color"]="#FFFFFF"; // default white
+			}
+			else if ($delete_btn_index == 1)
+			{
+				$listArr["btn1_flag"]=0;
+				$listArr["btn1_name"]="";
+				$listArr["url1"]="";
+				$listArr["btn1_bg_color"]="#FFFFFF"; // default white
+			}
+			
+			if ((int)$myarr["btn_amount"] > 0)
+			$listArr["btn_amount"]=(int)$myarr["btn_amount"]-1; // button amount
+			
+            //$listArr["work_file_list_id"]=$_POST["work_file_list_id"];
+			$obj->updateDB($listArr,"work_file_list_id",$_POST["work_file_list_id"],"work_file_list","*");
+			$obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
+			//$obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
+		}
 		break;
 }
 ?>
