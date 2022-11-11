@@ -386,8 +386,8 @@ class classMember extends classMain
         echo "<td valign=top>";
 		echo "<div >";
 		echo "<div style=\"height:24px;background-color:#121212;\">[名片設定]</div>";
-		echo "<br><span>名片尺寸 : <input type='text' name='card_size[]' ></span>";
-		echo "<br><span>背景顏色 : <input type='text' name='card_size[]' ></span>";
+		echo "<br><span>名片尺寸 : <input type='text' name='card_size[]' value='" .$myarr["card_size"]. "'></span>";
+		echo "<br><span>背景顏色 : <input type='text' name='card_bg_color[]' value='" .$myarr["card_bg_color"]. "'></span>";
 		echo "<br></br><br></br>";
 		//value='" .$myarr["card_size"]. "'
 		echo "</div>";
@@ -423,7 +423,7 @@ class classMember extends classMain
 				//echo "<span class='material-symbols-outlined'>close</span>";
 				echo "<br><span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn_name"]. "'></span>";
 				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></span>";
-				echo "<br><span>按鈕顏色 : <input type='text' name='url[]' value='" .$myarr["btn_bg_color"]. "'></span><br>";
+				echo "<br><span>按鈕顏色 : <input type='text' name='btn_bg_color[]' value='" .$myarr["btn_bg_color"]. "'></span><br>";
 				echo "</div>";
 				echo "<br>";
 			}
@@ -432,9 +432,9 @@ class classMember extends classMain
 				echo "<div id='buttonContent'>";
 				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
 				echo "<hr size='1px' align='center'>";
-				echo "<br><span>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn1_name"]. "'></span>";
-				echo "<br><span>連結 : <input type='text' name='url[]' value='" .$myarr["url1"]. "'></span>";
-				echo "<br><span>按鈕顏色 : <input type='text' name='url[]' value='" .$myarr["btn1_bg_color"]. "'></span><br>";
+				echo "<br><span>文字 : <input type='text' name='btn1_name[]' value='" .$myarr["btn1_name"]. "'></span>";
+				echo "<br><span>連結 : <input type='text' name='url1[]' value='" .$myarr["url1"]. "'></span>";
+				echo "<br><span>按鈕顏色 : <input type='text' name='btn1_bg_color[]' value='" .$myarr["btn1_bg_color"]. "'></span><br>";
 				echo "</div>";
 				echo "<br>";
 			}

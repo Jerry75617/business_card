@@ -175,9 +175,20 @@ switch($_POST["dataFlag"]){
 
         for($i=0;$i<count($_POST["work_file_list_id"]);$i++){
             $listArr=array();
+			
+			$listArr["card_size"]=$_POST["card_size"][$i];
+            $listArr["card_bg_color"]=$_POST["card_bg_color"][$i];
+			
             $listArr["btn_name"]=$_POST["btn_name"][$i];
             $listArr["url"]=$_POST["url"][$i];
+			$listArr["btn_bg_color"]=$_POST["btn_bg_color"][$i];
+			
+			$listArr["btn1_name"]=$_POST["btn1_name"][$i];
+            $listArr["url1"]=$_POST["url1"][$i];
+			$listArr["btn1_bg_color"]=$_POST["btn1_bg_color"][$i];
+			
             $listArr["work_file_list_id"]=$_POST["work_file_list_id"][$i];
+			
             if($listArr["btn_name"] == "" && $listArr["url"] == ""){
                 $mystr="select * from work_file_list where work_file_list_id='" .$listArr["work_file_list_id"]. "' and file_name=''";
                 $check_result=mysqli_query($obj->link,$mystr);
