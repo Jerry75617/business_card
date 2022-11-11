@@ -94,9 +94,10 @@ class classMain extends classLink
         $checkArr=array();
         echo $divName;
         echo "<table width=100% border=0 height=100% cellpadding=5 cellspacing=0 style='color:#ffffff;'>";
-        echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#ffc107;'><span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> &nbsp;電子名片管理";
-        echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #EFEFEF solid;border-bottom:1px #EFEFEF solid;'>".$this->sessionGetValue("session_name");
-        echo "&emsp;<span style='cursor:pointer;' onclick=\"changePassword()\">修改密碼</span>";
+        echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#ffc107;'><span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> 電子名片管理";
+		echo "<tr height=5%><td valign=middle align=center style='font-size:13px;color:#ffc107;'>".$this->sessionGetValue("session_name");
+        echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #EFEFEF solid;border-bottom:1px #EFEFEF solid;'>";
+        echo "<span style='cursor:pointer;' onclick=\"changePassword()\">修改密碼</span>";
         echo "&emsp;<span style='cursor:pointer;' onclick=\"logoutClick()\">登出</span>";
         echo "<tr><td valign=top>";
         if(count($nowPageArr) > 0){
@@ -141,7 +142,7 @@ class classMain extends classLink
                 if($nowPageKind == $pageValue[$i]){ $iconStr="<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>arrow_right</span>"; $onclickStr=""; $styleStr="";}
                 echo "<table width=100% border=0 cellpadding=3 cellspacing=0>";
                 echo "<tr><td width=20% align=right>".$iconStr;
-                echo "<td><span class='material-symbols-outlined' style='vertical-align:middle'>" .$this->iconArr[$titleName][$i]. "</span> &nbsp; <span $onclickStr $styleStr>".$pageName."</span>";
+                echo "<td><span class='material-symbols-outlined' style='vertical-align:middle'>" . "</span> &nbsp; <span $onclickStr $styleStr>".$pageName."</span>";
                 echo "</table>";
             }
             
