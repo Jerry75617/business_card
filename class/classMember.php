@@ -119,7 +119,7 @@ class classMember extends classMain
                         echo " 截止日期 " .date("Y-m-d",strtotime($work_arr["dateline"]));
                         echo "</div>";
                     }
-                    echo "<input type='button' value='分享' onclick=\"main()\">";
+                    echo "<a href='https://103.148.202.39/business_card/liff_share.php?mypk=" .$work_arr["work_file_id"]. "' target='_blank'><input type='button' value='分享'></a>";
                     echo "<td id='url_".$mypk. "_".$work_arr["work_file_id"]. "'>".$work_arr["url"];
                     echo "<td id='designer_" .$mypk. "_".$work_arr["work_file_id"]. "' valign=middle>";
                     

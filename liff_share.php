@@ -13,6 +13,10 @@ $obj->body($nowPage,"yes");
 </script>
 <?php 
 include_once("./js/liffShare.js");
+
+$work_file_id=(int)$_GET["mypk"];
+if($work_file_id <=0 ){ return; }
+$mystr="select * from work_file where work_file_id='" .$work_file_id. "'";
 echo "<button id='showLineBtn'>分享給好友</button>";
 $obj->body_end();
 ?>
