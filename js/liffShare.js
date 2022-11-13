@@ -42,7 +42,7 @@ async function liffInit() {
 	  createButton(profile);
 	}
 
-	main()
+//	main()
 
 const colorDefault = "#666666";
 const colorNetlify = "#00ad9f";
