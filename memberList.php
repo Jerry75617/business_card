@@ -197,7 +197,7 @@ window.onload=function(){
 </script>
 
 <?php
-include_once("./js/liffShare.js");
+// include_once("./js/liffShare.js");
 echo "<div id='showPicDiv' style='position:fixed;width:900px;height:600px;border:1px #ff9807 solid;top:5%;left:20%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;z-index:998;overflow:auto;'></div>";
 echo "<div id='showOneDiv' style='position:fixed;width:500px;height:350px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;z-index:998;'></div>";
 echo "<form name='form_query' id='form_query' onsubmit='return false;'>";

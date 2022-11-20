@@ -25,7 +25,7 @@ class classMain extends classLink
         
         if($checkFlag!="ok"){
             echo "<script language='javascript'>";
-            echo "location.href='login.php';";
+            echo "location.href='index.php';";
             echo "</script>";
             exit;
         }else{
