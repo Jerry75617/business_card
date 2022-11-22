@@ -119,8 +119,9 @@ class classMember extends classMain
                         echo " 截止日期 " .date("Y-m-d",strtotime($work_arr["dateline"]));
                         echo "</div>";
                     }
-                    echo "<a href='https://103.148.202.39/business_card/liff_share.php?mypk=" .$work_arr["work_file_id"]. "' target='_blank'><input type='button' value='分享'></a>";
-                    echo "<td id='url_".$mypk. "_".$work_arr["work_file_id"]. "'>".$work_arr["url"];
+                    $myURL="https://liff.line.me/1657623497-DZyKpqOL?mypk=" .$work_arr["work_file_id"];
+                    echo "<a href='" .$myURL. "' target='_blank'><input type='button' value='分享'></a>";
+                    echo "<td id='url_".$mypk. "_".$work_arr["work_file_id"]. "'>".$myURL;//.$work_arr["url"];
                     echo "<td id='designer_" .$mypk. "_".$work_arr["work_file_id"]. "' valign=middle>";
                     
                     switch($this->sessionGetValue("session_login_kind")){
@@ -143,7 +144,16 @@ class classMember extends classMain
     function getWorksData($member_id,$designer_id,$category='名片'){
         
         $dataArr=array();
-        $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "' and designer_id='" .$designer_id. "'";
+        switch($this->sessionGetValue("session_login_kind")){
+            case "sysadmin":
+            case "admin":
+                $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "'";
+                break;
+            default:
+                $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "' and designer_id='" .$designer_id. "'";
+                break;
+        }
+        
         $myresult=mysqli_query($this->link,$mystr);
         $mynum=mysqli_num_rows($myresult);
         

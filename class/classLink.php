@@ -44,8 +44,8 @@ class classLink{
 // 			$this->exportDir=$dbArr["exportDir"];
 		}
 		//連接資料庫
-		$this->link=mysqli_connect($this->db_in_ip,$this->db_account,$this->db_password)or die ("無法連接".mysql_error());
-		mysqli_select_db($this->link,$this->db_in_name) or die ("無法選擇資料庫".mysql_error());
+		$this->link=mysqli_connect($this->db_in_ip,$this->db_account,$this->db_password)or die ("無法連接".mysqli_error());
+		mysqli_select_db($this->link,$this->db_in_name) or die ("無法選擇資料庫".mysqli_error());
 		mysqli_set_charset($this->link,"utf8");
 		//找後端程式,存session	
 		$mp_page=basename($_SERVER["PHP_SELF"]); 	 

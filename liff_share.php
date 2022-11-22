@@ -33,6 +33,7 @@ $nowPage="liff_share.php";
 $obj->body($nowPage,"yes");
 ?>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
 <script>
 </script>
 <?php 
@@ -48,7 +49,7 @@ $mystr="select * from work_file_list where work_file_id='" .$work_file_id. "'";
 $list_result=mysqli_query($obj->link,$mystr);
 $list_num=mysqli_num_rows($list_result);
 
-echo "<form id='frmmain' name='frmmain'>";
+
 
 //顯示樣式
 $style="width:100%;height:60px;line-height:60px;font-size:1.6em;background-color:#07B53B;color:#ffffff;border-width:0px;letter-spacing:5px;";
@@ -79,11 +80,12 @@ echo "<div style='width:96%;margin:0% 2%;'>";
     
     echo "</div>";
 
-    echo "<div style='width:100%;text-align:center;'>";
+//     echo "<div style='width:100%;text-align:center;'>";
      echo "<button id='showLineBtn' style='" .$style. "'>分享給好友</button>";
-    echo "</div>";
-echo "</div>";
-
+     
+//     echo "</div>";
+// echo "</div>";
+echo "<form id='frmmain' name='frmmain'>";
 echo "<input type='hidden' name='myDataStr' value='" .$myDataStr. "' style='width:100%'>";
 echo "<input type='hidden' name='mypk' value='" .$_GET["mypk"]. "'>";
 echo "</form>";

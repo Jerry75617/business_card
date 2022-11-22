@@ -128,7 +128,7 @@ switch($_POST["dataFlag"]){
         
         
 //         if($designer_id > 0){
-            $mystr="update member set designer_id='" .$designer_id. "' where member_id='" .$_POST["member_id"]. "'";
+            $mystr="update work_file set designer_id='" .$designer_id. "' where work_file_id='" .$_POST["work_file_id"]. "'";
             mysqli_query($obj->link,$mystr);
             
             
