@@ -63,19 +63,19 @@ function closeDivClick(){
 }
 //----end 編輯會員資料----
 //----start 指派設計師----
-function assignDesignerClick(member_id,mypk,work_file_id){
-	var aaobj=document.getElementById("designer_" + member_id + "_" + work_file_id);
+function assignDesignerClick(member_id,mypk){
+	var aaobj=document.getElementById("designer_" + member_id);// + "_" + work_file_id);
 	if(aaobj){
-		var send_str="dataFlag=show_assign&mypk=" + mypk + "&member_id=" + member_id + "&work_file_id=" + work_file_id + "&timestamp="+ new Date().getTime();
+		var send_str="dataFlag=show_assign&mypk=" + mypk + "&member_id=" + member_id + "&timestamp="+ new Date().getTime();
 		X_FORM_Str(send_str,"memberListSIM.php","");
 	}
 }
-function saveDesignerClick(myValue,member_id,work_file_id){
-	var send_str="dataFlag=save_assign&myValue=" + myValue + "&member_id=" + member_id + "&work_file_id=" + work_file_id + "&timestamp="+ new Date().getTime();
+function saveDesignerClick(myValue,member_id){
+	var send_str="dataFlag=save_assign&myValue=" + myValue + "&member_id=" + member_id + "&timestamp="+ new Date().getTime();
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
-function cancelClick(member_id,work_file_id){
-	var send_str="dataFlag=cancel_assign&member_id=" + member_id + "&work_file_id=" + work_file_id + "&timestamp="+ new Date().getTime();
+function cancelClick(member_id){
+	var send_str="dataFlag=cancel_assign&member_id=" + member_id + "&timestamp="+ new Date().getTime();
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
 //----end 指派設計師----
@@ -191,6 +191,25 @@ function updateExtendClick(){
 	X_FORM_Str(send_str,"memberListSIM.php","updateButtonClickReturn");
 }
 //-----end 展期功能 end-----
+//刪除會員
+function deleteMemberClick(mypk){
+	if(confirm("是否確定刪除此會員??") == false){ return; }
+	var send_str="dataFlag=delete_member&member_id=" + mypk;
+	X_FORM_Str(send_str,"memberListSIM.php","deleteMemberClickReturn");
+}
+function deleteMemberClickReturn(){
+	var checkFlag=document.getElementById("checkFlag");
+	if(checkFlag && checkFlag.value == "yes"){
+		var send_str="dataFlag=show_one_tr&mypk=" + document.frmmain.member_id.value + "&showKind=" + showKind;
+		X_FORM_Str(send_str,"memberListSIM.php","closeDivClick");
+	}
+}
+//刪除名片
+function deleteCardClick(mypk,member_id){
+	if(confirm("是否確定刪除此名片??") == false){ return; }
+	var send_str="dataFlag=delete_card&work_file_id=" + mypk + "&member_id=" + member_id + "&showKind=" + showKind;
+	X_FORM_Str(send_str,"memberListSIM.php","");
+}
 window.onload=function(){
 	setTimeout("queryButtonClick()",100);
 }

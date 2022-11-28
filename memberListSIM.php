@@ -118,7 +118,7 @@ switch($_POST["dataFlag"]){
         $obj->new_showPageTable($hiddenArray,$hiddenArrValue,1,1,1);
         break;
     case "show_assign":
-        $obj->assignDesigner_showOne($_POST["mypk"],$_POST["member_id"],$_POST["work_file_id"],"[!@#]designer_".$_POST["member_id"]."_".$_POST["work_file_id"]);
+        $obj->assignDesigner_showOne($_POST["mypk"],$_POST["member_id"],"[!@#]designer_".$_POST["member_id"]);
         break;
     case"save_assign":
         if(!isset($_POST["myValue"])){ $_POST["myValue"]=""; }
@@ -128,7 +128,7 @@ switch($_POST["dataFlag"]){
         
         
 //         if($designer_id > 0){
-            $mystr="update work_file set designer_id='" .$designer_id. "' where work_file_id='" .$_POST["work_file_id"]. "'";
+            $mystr="update member set designer_id='" .$designer_id. "' where member_id='" .$_POST["member_id"]. "'";
             mysqli_query($obj->link,$mystr);
             
             
@@ -139,7 +139,7 @@ switch($_POST["dataFlag"]){
                 $designer_name=$designer_arr["designer_name"];
                 $designer_account=$designer_arr["designer_account"];
             }
-            echo "[!@#]designer_".$_POST["member_id"]."_".$_POST["work_file_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$designer_id. "','" .$_POST["work_file_id"]. "')\"\">" .$designer_name. "&nbsp;(" .$designer_account. ")</a>";
+            echo "[!@#]designer_".$_POST["member_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$designer_id. "')\"\">" .$designer_name. "&nbsp;(" .$designer_account. ")</a>";
 //         }
         break;
     case "cancel_assign":
@@ -147,7 +147,7 @@ switch($_POST["dataFlag"]){
         $myresult=mysqli_query($obj->link,$mystr);
         $myarr=mysqli_fetch_array($myresult,1);
         
-        $designer_name="尚未指派";
+        $designer_name="尚未指派"; $designer_account="";
         $mystr="select * from designer where designer_id='" . $myarr["designer_id"] . "'";
         $designer_result=mysqli_query($obj->link,$mystr);
         if(mysqli_num_rows($designer_result) > 0){
@@ -156,7 +156,7 @@ switch($_POST["dataFlag"]){
             $designer_account=$designer_arr["designer_account"];
         }
         
-        echo "[!@#]designer_".$_POST["member_id"]."_".$_POST["work_file_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$myarr["designer_id"]. "','" .$_POST["work_file_id"]. "')\"\">" .$designer_name. "&nbsp;(" .$designer_account. ")</a>";
+        echo "[!@#]designer_".$_POST["member_id"]."<a href=\"javascript:assignDesignerClick('" .$_POST["member_id"]. "','" .$myarr["designer_id"]. "')\">" .$designer_name. "&nbsp;(" .$designer_account. ")</a>";
         break;
     case "show_pic"://編輯名片
         $obj->showNameCardShowOne($_POST["mypk"],$_POST["showKind"],"[!@#]showPicDiv");
@@ -174,8 +174,9 @@ switch($_POST["dataFlag"]){
         
 
         for($i=0;$i<count($_POST["work_file_list_id"]);$i++){
+            if(!isset($_POST["btn_name"][$i])){ continue; }
             $listArr=array();
-			
+            
 			$listArr["card_size"]=$_POST["card_size"][$i];
             $listArr["card_bg_color"]=$_POST["card_bg_color"][$i];
 			
@@ -238,7 +239,13 @@ switch($_POST["dataFlag"]){
         $obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
         break;
     case "select_member":
-        $mystr="select * from member where member_account = '" .$_POST["member_account"]. "'";
+        $whereStr="where member_account = '" .$_POST["member_account"]. "'";
+        switch($obj->sessionGetValue("session_login_kind")){
+            case "designer":
+                $whereStr.=" and designer_id='" .$obj->sessionGetValue("session_designer_id"). "'";
+                break;
+        }
+        $mystr="select * from member ".$whereStr;
         $myresult=mysqli_query($obj->link,$mystr);
         if(mysqli_num_rows($myresult) > 0){
             $myarr=mysqli_fetch_array($myresult,1);
@@ -390,5 +397,27 @@ switch($_POST["dataFlag"]){
 			//$obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
 		}
 		break;
+	case "delete_member":
+	    //table Name,pk Name, pk Value
+	    $obj->deleteDB("member","member_id",$_POST["member_id"]);
+	    echo "[!@#]checkFlagSpan<input type='hidden' id='checkFlag' value='yes'>";
+	    $obj->reponse_errorMsgSIM("資料成功刪除...");
+	    break;
+	case "delete_card":
+	    $obj->deleteDB("work_file","work_file_id",$_POST["work_file_id"]);
+	    
+	    $mystr="select * from work_file_list where work_file_id='" .$_POST["work_file_id"]. "'";
+	    $list_result=mysqli_query($obj->link,$mystr);
+	    if(mysqli_num_rows($list_result) > 0){
+	        $obj->deleteDB("work_file_list","work_file_id",$_POST["work_file_id"]);
+	    }
+	    
+	    echo "[!@#]fnBtn_".$_POST["member_id"]."_".$_POST["work_file_id"]."<span>已刪除</span>";
+	    echo "[!@#]file_name_".$_POST["member_id"]."_".$_POST["work_file_id"]. "<span></span>";
+	    echo "[!@#]display_name_".$_POST["member_id"]."_".$_POST["work_file_id"]. "<span></span>";
+	    echo "[!@#]url_".$_POST["member_id"]."_".$_POST["work_file_id"]. "<span></span>";
+
+	    $obj->reponse_errorMsgSIM("資料成功刪除...");
+	    break;
 }
 ?>

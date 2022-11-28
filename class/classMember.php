@@ -40,6 +40,9 @@ class classMember extends classMain
         
         echo "<tr><td align=center colspan=2>";
         echo "<span class='btn_pink' onclick=\"updateButtonClick()\">存檔並關閉</span>";
+        if((int)$mypk > 0){
+            echo "<span class='btn_red' onclick=\"deleteMemberClick('" .$mypk. "')\">刪除資料</span>";
+        }
         echo "<span class='btn_blue' onclick=\"closeDivClick()\">關閉</span>";
         echo "</table>";
         echo "<input type='hidden' name='member_id' value='" .$mypk. "'>";
@@ -61,11 +64,12 @@ class classMember extends classMain
         echo "<table width=100% border=0 cellpadding=3 cellspacing=0 class='tableShowMore f13'>";
         echo "<thead><tr><td width=3% align=center><td width=4% align=center>筆數";
         echo "<td width=12%>會員姓名";
+        echo "<td width=12%>設計師";
         echo "<td width=3%>";
         echo "<td width=12%>圖片";
-        echo "<td width=15%>" .$showKind. "標題";
-        echo "<td>" .$showKind. "超連結";
-        echo "<td width=12%>設計師";
+        echo "<td width=27%>" .$showKind. "標題";
+        echo "<td>" .$showKind. "分享超連結";
+//         echo "<td width=12%>設計師";
         echo "</thead>";
         if($mynum <= 0){
             echo "<tr height=35px><td colspan=8 align=center class='red_d'>...查無資料...";
@@ -78,14 +82,34 @@ class classMember extends classMain
             $dataArr=$this->getWorksData($myarr["member_id"],$myarr["designer_id"],$showKind);
             
             $rowSpanQty=1;
-            if(count($dataArr) > 0){
-                $rowSpanQty=count($dataArr);
-            }
+            if(count($dataArr) > 0){  $rowSpanQty=count($dataArr);  }
+
+            $mystr="select * from designer where designer_id='" .$myarr["designer_id"]. "'";
+            $designer_result=mysqli_query($this->link,$mystr);
+            $designer_arr=mysqli_fetch_array($designer_result,1);
+            
             
             echo "<tr><td align=center valign=middle id='edit_" .$mypk. "' rowspan='" .$rowSpanQty. "'><span class='material-symbols-outlined' onclick=\"openButtonClick('" .$mypk. "')\" style='cursor:pointer;font-size:20px'>edit</span>";//<input type='button' class='btn_qty_pink' value='".$button_text."' onclick=\"openButtonClick('" .$mypk. "')\">";
             echo "<td align=center id='item_" .$mypk. "' rowspan='" .$rowSpanQty. "' valign=middle>".$button_text;
             echo "<td id='member_name_" .$mypk. "' rowspan='" .$rowSpanQty. "' valign=middle>".$myarr["member_name"]."(" .$myarr["member_account"]. ")";
-            
+            echo "<td id='designer_" .$mypk. "' rowspan='" .$rowSpanQty. "' valign=middle>";
+            switch($this->sessionGetValue("session_login_kind")){
+                case "sysadmin":
+                case "admin":
+                    $designerName="尚未指派";   $designerAccount="";
+                    if($designer_arr["designer_name"] <> ""){
+                        $designerName=$designer_arr["designer_name"];
+                    }
+                    if($designer_arr["designer_account"] <> ""){
+                        $designerAccount=$designer_arr["designer_account"];
+                    }
+                    
+                    echo "<a href=\"javascript:assignDesignerClick('" .$myarr["member_id"]. "','" .$myarr["designer_id"]. "')\">".$designerName."&nbsp;(" .$designerAccount. ")</a>";
+                    break;
+                default:
+                    echo $designer_arr["designer_name"]."&nbsp;(" .$designer_arr["designer_account"]. ")";
+                    break;
+            }
             
             
             if(count($dataArr) <= 0){
@@ -93,15 +117,19 @@ class classMember extends classMain
                 echo "<td id='file_name_".$mypk. "'>";
                 echo "<td id=''>";
                 echo "<td id=''>";
-                echo "<td id='designer_" .$mypk. "' valign=middle>";
+//                 echo "<td id='designer_" .$mypk. "' valign=middle>";
             }else{
                 
                 for($j=0;$j<count($dataArr);$j++){
                     $work_arr=$dataArr[$j];
                     
                     if($j>0){ echo "<tr>"; }
-                    echo "<td align=center><span class='material-symbols-outlined' onclick=\"openPicButtonClick('" .$work_arr["work_file_id"]. "')\" style='cursor:pointer;'>edit_square</span>";
+                    echo "<td align=center id='fnBtn_".$mypk."_".$work_arr["work_file_id"]. "'><span class='material-symbols-outlined' onclick=\"openPicButtonClick('" .$work_arr["work_file_id"]. "')\" style='cursor:pointer;'>edit_square</span>";
                     echo "<br><br><a href=\"javascript:extendClick('" .$work_arr["work_file_id"]. "')\">展期</a>";
+                    if((int)$work_arr["work_file_id"] > 0){
+                        echo "<br><br><a href=\"javascript:deleteCardClick('" .$work_arr["work_file_id"]. "','" .$myarr["member_id"]. "')\">刪除名片</a>";
+                    }
+                    
                     echo "<td align=center id='file_name_".$mypk."_".$work_arr["work_file_id"]. "'>";
                     if($work_arr["file_name"] <>""){
                         echo "<img src='../businessCard_img/" .$work_arr["file_name"]. "' style='width:100px;'>";
@@ -119,20 +147,11 @@ class classMember extends classMain
                         echo " 截止日期 " .date("Y-m-d",strtotime($work_arr["dateline"]));
                         echo "</div>";
                     }
-                    $myURL="https://liff.line.me/1657623497-DZyKpqOL?mypk=" .$work_arr["work_file_id"];
-                    echo "<a href='" .$myURL. "' target='_blank'><input type='button' value='分享'></a>";
-                    echo "<td id='url_".$mypk. "_".$work_arr["work_file_id"]. "'>".$myURL;//.$work_arr["url"];
-                    echo "<td id='designer_" .$mypk. "_".$work_arr["work_file_id"]. "' valign=middle>";
+                    echo "<a href='https://103.148.202.39/business_card/liff_share.php?mypk=" .$work_arr["work_file_id"]. "' target='_blank'><input type='button' value='分享'></a>";
+                    echo "<td id='url_".$mypk. "_".$work_arr["work_file_id"]. "'>";
+                    echo "https://liff.line.me/1657623497-DZyKpqOL?mypk=".$work_arr["work_file_id"];
+                    //.$work_arr["url"];
                     
-                    switch($this->sessionGetValue("session_login_kind")){
-                        case "sysadmin":
-                        case "admin":
-                            echo "<a href=\"javascript:assignDesignerClick('" .$myarr["member_id"]. "','" .$myarr["designer_id"]. "','" .$work_arr["work_file_id"]. "')\">".$work_arr["designer_name"]."&nbsp;(" .$work_arr["designer_account"]. ")</a>";
-                            break;
-                        default:
-                            echo $work_arr["designer_name"]."&nbsp;(" .$work_arr["designer_account"]. ")";
-                            break;
-                    }
                 }
                 
             }
@@ -141,19 +160,11 @@ class classMember extends classMain
         
         echo "</table>";
     }//end member_showMore
+    
     function getWorksData($member_id,$designer_id,$category='名片'){
         
         $dataArr=array();
-        switch($this->sessionGetValue("session_login_kind")){
-            case "sysadmin":
-            case "admin":
-                $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "'";
-                break;
-            default:
-                $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "' and designer_id='" .$designer_id. "'";
-                break;
-        }
-        
+        $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "' and designer_id='" .$designer_id. "'";
         $myresult=mysqli_query($this->link,$mystr);
         $mynum=mysqli_num_rows($myresult);
         
@@ -203,15 +214,32 @@ class classMember extends classMain
             $designer_name=$designer_arr["designer_name"];
             $designer_account=$designer_arr["designer_account"];
         }
+        
         $dataArr=$this->getWorksData($myarr["member_id"],$myarr["designer_id"],$showKind);
         
         if((int)$myarr["member_id"] <= 0){
             echo "[!@#]edit_" .$mypk. "<span></span>";
             echo "[!@#]item_" .$mypk. "<span>刪除</span>";
         }
-        echo "[!@#]member_name_" .$mypk. "<span>".$myarr["member_name"]."(" .$myarr["member_account"]. ")</span>";
-        
-        
+        echo "[!@#]member_name_" .$mypk. "<span>";
+        echo $myarr["member_name"];
+        if($myarr["member_account"] <> ""){
+            echo "(" .$myarr["member_account"]. ")";
+        }
+        echo "</span>";
+        echo "[!@#]designer_".$mypk. "<span>";
+        switch($this->sessionGetValue("session_login_kind")){
+            case "sysadmin":
+            case "admin":
+                if($myarr["designer_id"] > 0){
+                    echo "<a href=\"javascript:assignDesignerClick('" .$myarr["member_id"]. "','" .$myarr["designer_id"]. "')\">".$designer_name."&nbsp;(" .$designer_account. ")</a>";
+                }
+                break;
+            default:
+                echo $designer_name."&nbsp;(" .$designer_account. ")";
+                break;
+        }
+        echo "</span>";
         for($j=0;$j<count($dataArr);$j++){
             $work_arr=$dataArr[$j];
             
@@ -234,19 +262,7 @@ class classMember extends classMain
                 echo "</div>";
             }
             echo "</span>";
-            echo "[!@#]url_".$mypk."_".$work_arr["work_file_id"]. "<span>".$work_arr["url"]."</span>";
-            echo "[!@#]designer_".$mypk."_" .$work_arr["work_file_id"]. "<span>";
-            
-            switch($this->sessionGetValue("session_login_kind")){
-                case "sysadmin":
-                case "admin":
-                    echo "<a href=\"javascript:assignDesignerClick('" .$myarr["member_id"]. "','" .$myarr["designer_id"]. "')\">".$work_arr["designer_name"]."&nbsp;(" .$work_arr["designer_account"]. ")</a>";
-                    break;
-                default:
-                    echo $work_arr["designer_name"]."&nbsp;(" .$work_arr["designer_account"]. ")";
-                    break;
-            }
-            echo "</span>";
+//             echo "[!@#]url_".$mypk."_".$work_arr["work_file_id"]. "<span>".$work_arr["url"]."</span>";
         }
         
         
@@ -264,14 +280,14 @@ class classMember extends classMain
 //         }
         
     }//ed member_showOneTR
-    function assignDesigner_showOne($mypk,$member_id,$work_file_id,$divName=''){
+    function assignDesigner_showOne($mypk,$member_id,$divName=''){
         
         $mystr="select * from designer";
         $myresult=mysqli_query($this->link,$mystr);
         $mynum=mysqli_num_rows($myresult);
         
         echo $divName;
-        echo "<select name='designer_id' onchange=\"saveDesignerClick(this.value,'" .$member_id. "','" .$work_file_id. "')\">";
+        echo "<select name='designer_id' onchange=\"saveDesignerClick(this.value,'" .$member_id. "')\">";
         echo "<option value=''>請選擇</option>";
         for($i=0;$i<$mynum;$i++){
             $myarr=mysqli_fetch_array($myresult,1);
@@ -280,7 +296,7 @@ class classMember extends classMain
             echo "<option value='" .$myarr["designer_id"]. "' $sele>" .$myarr["designer_name"]. "</option>";
         }
         echo "</select>";
-        echo "&nbsp;<a href=\"javascript:cancelClick('" .$member_id. "','" .$work_file_id. "')\">取消</a>";
+        echo "&nbsp;<a href=\"javascript:cancelClick('" .$member_id. "')\">取消</a>";
     }//end assignDesigner_showOne
     
     function showNameCardShowOne($mypk,$showKind,$divName=''){//編輯名片

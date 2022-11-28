@@ -44,8 +44,8 @@ class classLink{
 // 			$this->exportDir=$dbArr["exportDir"];
 		}
 		//連接資料庫
-		$this->link=mysqli_connect($this->db_in_ip,$this->db_account,$this->db_password)or die ("無法連接".mysqli_error());
-		mysqli_select_db($this->link,$this->db_in_name) or die ("無法選擇資料庫".mysqli_error());
+		$this->link=mysqli_connect($this->db_in_ip,$this->db_account,$this->db_password)or die ("無法連接".mysql_error());
+		mysqli_select_db($this->link,$this->db_in_name) or die ("無法選擇資料庫".mysql_error());
 		mysqli_set_charset($this->link,"utf8");
 		//找後端程式,存session	
 		$mp_page=basename($_SERVER["PHP_SELF"]); 	 
@@ -146,15 +146,15 @@ class classLink{
 	    $mystr="update ".$tableName." set ".$updateStr." where ".$mypk."='".$mypkValue."'";
 	    mysqli_query($this->link,$mystr);
 	}
-	function deleteData_table($tableName,$primaryName,$primaryValue,$dbName='')
+	function deleteDB($tableName,$mypkName,$mypkValue)
 	{
 	    
-	    $mystr="select * from ".$tableName." where ".$primaryName."='".$primaryValue."'";
+	    $mystr="select * from ".$tableName." where ".$mypkName."='".$mypkValue."'";
 	    
 	    $old_result=mysqli_query($this->link,$mystr);
 	    $old_num=mysqli_num_rows($old_result);
 	    if($old_num>0){
-	        $myUpdateStr="delete from ".$tableName." where ".$primaryName."='".$primaryValue."'";
+	        $myUpdateStr="delete from ".$tableName." where ".$mypkName."='".$mypkValue."'";
 	        mysqli_query($this->link,$myUpdateStr);
 	    }
 	    
