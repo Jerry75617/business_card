@@ -65,9 +65,9 @@ class classMember extends classMain
         echo "<thead><tr><td width=3% align=center><td width=4% align=center>筆數";
         echo "<td width=12%>會員姓名";
         echo "<td width=12%>設計師";
-        echo "<td width=3%>";
+        echo "<td width=3%>功能   ";
         echo "<td width=12%>圖片";
-        echo "<td width=27%>" .$showKind. "標題";
+        echo "<td width=15%>" .$showKind. "標題";
         echo "<td>" .$showKind. "分享超連結";
 //         echo "<td width=12%>設計師";
         echo "</thead>";
@@ -124,12 +124,14 @@ class classMember extends classMain
                     $work_arr=$dataArr[$j];
                     
                     if($j>0){ echo "<tr>"; }
-                    echo "<td align=center id='fnBtn_".$mypk."_".$work_arr["work_file_id"]. "'><span class='material-symbols-outlined' onclick=\"openPicButtonClick('" .$work_arr["work_file_id"]. "')\" style='cursor:pointer;'>edit_square</span>";
-                    echo "<br><br><a href=\"javascript:extendClick('" .$work_arr["work_file_id"]. "')\">展期</a>";
+                    echo "<td align=center id='fnBtn_".$mypk."_".$work_arr["work_file_id"]. "'>";
+                    echo "<span class='material-symbols-outlined' title='編輯' onclick=\"openPicButtonClick('" .$work_arr["work_file_id"]. "')\" style='cursor:pointer;font-size:28px;'>edit_square</span>";
+                    echo "<br><span class='material-symbols-outlined' title='展期' onclick=\"extendClick('" .$work_arr["work_file_id"]. "')\" style='cursor:pointer;font-size:28px;'>edit_calendar</span>";
                     if((int)$work_arr["work_file_id"] > 0){
-                        echo "<br><br><a href=\"javascript:deleteCardClick('" .$work_arr["work_file_id"]. "','" .$myarr["member_id"]. "')\">刪除名片</a>";
+                        echo "<br><span class='material-symbols-outlined' title='刪除名片' onclick=\"deleteCardClick('" .$work_arr["work_file_id"]. "','" .$myarr["member_id"]. "')\" style='cursor:pointer;font-size:28px;'>delete</span>";
                     }
-                    
+                    echo "<span class='material-symbols-outlined' title='分享' onclick=\"openUrl('".$work_arr["work_file_id"]."')\" style='cursor:pointer;font-size:28px;'>ios_share</span></a>";
+
                     echo "<td align=center id='file_name_".$mypk."_".$work_arr["work_file_id"]. "'>";
                     if($work_arr["file_name"] <>""){
                         echo "<img src='../businessCard_img/" .$work_arr["file_name"]. "' style='width:100px;'>";
@@ -147,9 +149,10 @@ class classMember extends classMain
                         echo " 截止日期 " .date("Y-m-d",strtotime($work_arr["dateline"]));
                         echo "</div>";
                     }
-                    echo "<a href='https://103.148.202.39/business_card/liff_share.php?mypk=" .$work_arr["work_file_id"]. "' target='_blank'><input type='button' value='分享'></a>";
+                    
                     echo "<td id='url_".$mypk. "_".$work_arr["work_file_id"]. "'>";
-                    echo "https://liff.line.me/1657623497-DZyKpqOL?mypk=".$work_arr["work_file_id"];
+                    echo "<span class='material-symbols-outlined' title='複製' onclick=\"copyEvent('copy_url_" .$mypk."')\">content_copy</span>";
+                    echo " &nbsp; <span id='copy_url_" .$mypk. "'>https://liff.line.me/1657623497-DZyKpqOL?mypk=".$work_arr["work_file_id"]."</span>";
                     //.$work_arr["url"];
                     
                 }
@@ -163,8 +166,8 @@ class classMember extends classMain
     
     function getWorksData($member_id,$designer_id,$category='名片'){
         
-        $dataArr=array();
-        $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "' and designer_id='" .$designer_id. "'";
+        $dataArr=array(); //只要看得到那位會員就看得到所有的名片內容
+        $mystr="select * from work_file where category='" .$category. "' and member_id='" .$member_id. "'";// and designer_id='" .$designer_id. "'";
         $myresult=mysqli_query($this->link,$mystr);
         $mynum=mysqli_num_rows($myresult);
         

@@ -46,6 +46,16 @@ function closePicDivlick(){
 	}
 }
 //----end 電子名片編輯畫面----
+function openUrl(mypk){
+	var url="https://rubydesign.net/business_card/liff_share.php?mypk=" + mypk;
+	window.open(url,'_blank');
+}
+function copyEvent(id)
+{
+    var str = document.getElementById(id);
+    window.getSelection().selectAllChildren(str);
+    document.execCommand("Copy")
+}
 window.onload=function(){
 	setTimeout("queryButtonClick()",100);
 }

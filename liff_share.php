@@ -81,7 +81,7 @@ echo "<div style='width:96%;margin:0% 2%;'>";
     $myDataStr="";
     for($i=0;$i<$list_num;$i++){
         $list_arr=mysqli_fetch_array($list_result,1);
-        $myDataStr.=$list_arr["card_size"].",".$list_arr["file_name"].",";
+        $myDataStr.=$list_arr["card_size"].",".$list_arr["file_name"].",".$list_arr["card_bg_color"].",";
         $btnQty=1;
         echo "<div style='float:left;margin:10px;width:20%'>";
         echo "<table border=0 width=100% cellpadding=3 cellspacing=2 class='black f13'>";

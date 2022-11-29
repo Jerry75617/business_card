@@ -20,10 +20,11 @@ class classMember01 extends classMember
         echo "<table width=100% border=0 cellpadding=3 cellspacing=0 class='tableShowMore f13'>";
         echo "<thead><tr>";
         echo "<td width=3%>";
+        echo "<td width=12%>設計師";
         echo "<td width=12%>圖片";
         echo "<td width=15%>" .$showKind. "標題";
         echo "<td>" .$showKind. "超連結";
-        echo "<td width=12%>設計師";
+        
         echo "</thead>";
         if($mynum <= 0){
             echo "<tr height=35px><td colspan=5 align=center class='red_d'>...查無資料...";
@@ -41,7 +42,13 @@ class classMember01 extends classMember
             $designer_arr=mysqli_fetch_array($designer_result,1);
             
             echo "<tr>";
-            echo "<td align=center><a href=\"javascript:openPicButtonClick('" .$myarr["work_file_id"]. "')\">預覽</a>";
+            echo "<td align=center>";//
+//             echo "<a href=\"javascript:openPicButtonClick('" .$myarr["work_file_id"]. "')\">預覽</a>";
+            echo "<span class='material-symbols-outlined' title='預覽' onclick=\"openPicButtonClick('" .$myarr["work_file_id"]. "')\" style='cursor:pointer;font-size:28px;'>pageview</span>";
+//             echo "<br><a href='https://rubydesign.net/business_card/liff_share.php?mypk=" .$myarr["work_file_id"]. "' target='_blank'>";
+            echo "<br><span class='material-symbols-outlined'  title='分享' style='cursor:pointer;font-size:28px;'>ios_share</span>";
+            echo "<td id='designer_" .$mypk."' valign=middle>";
+            echo $designer_arr["designer_name"]."&nbsp;(" .$designer_arr["designer_account"]. ")";
             echo "<td align=center id='file_name_".$mypk. "'>";
             if($list_arr["file_name"] <>""){
                 echo "<img src='../businessCard_img/" .$list_arr["file_name"]. "' style='width:100px;'>";
@@ -59,9 +66,10 @@ class classMember01 extends classMember
                 echo " 截止日期 " .date("Y-m-d",strtotime($myarr["dateline"]));
                 echo "</div>";
             }
-            echo "<td id='url_".$mypk."'>".$list_arr["url"];
-            echo "<td id='designer_" .$mypk."' valign=middle>";
-            echo $designer_arr["designer_name"]."&nbsp;(" .$designer_arr["designer_account"]. ")";
+            echo "<td id='url_".$mypk."'>";//.$list_arr["url"];
+            echo "<span class='material-symbols-outlined' title='複製' onclick=\"copyEvent('copy_url_" .$mypk."')\">content_copy</span>";
+            echo " &nbsp; <span id='copy_url_" .$mypk. "'>https://liff.line.me/1657623497-DZyKpqOL?mypk=".$myarr["work_file_id"]."</span>";
+            
             
             $button_text++;
         }

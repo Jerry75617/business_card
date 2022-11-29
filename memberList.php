@@ -210,6 +210,16 @@ function deleteCardClick(mypk,member_id){
 	var send_str="dataFlag=delete_card&work_file_id=" + mypk + "&member_id=" + member_id + "&showKind=" + showKind;
 	X_FORM_Str(send_str,"memberListSIM.php","");
 }
+function openUrl(mypk){
+	var url="https://rubydesign.net/business_card/liff_share.php?mypk=" + mypk;
+	window.open(url,'_blank');
+}
+function copyEvent(id)
+{
+    var str = document.getElementById(id);
+    window.getSelection().selectAllChildren(str);
+    document.execCommand("Copy")
+}
 window.onload=function(){
 	setTimeout("queryButtonClick()",100);
 }
