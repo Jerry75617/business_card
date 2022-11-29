@@ -90,8 +90,8 @@ echo "<div style='width:96%;margin:0% 2%;'>";
         
         for($j=0;$j<$list_arr["btn_amount"];$j++){
             if($j==0){ $btnQty=""; }
-            echo "<tr><td><div style='width:100%;background-color:#07B53B;color:#ffffff;text-align:center;padding:5px 0px ;border-radius:5px;font-size:1.2em;'>" .$list_arr["btn" .$btnQty. "_name"]. "</div>";
-            $myDataStr.=$list_arr["btn" .$btnQty. "_name"].",".$list_arr["url" .$btnQty].",";
+            echo "<tr><td><div style='width:100%;background-color:" .$list_arr["btn".$btnQty."_bg_color"]. ";color:#ffffff;text-align:center;padding:5px 0px ;border-radius:5px;font-size:1.2em;'>" .$list_arr["btn" .$btnQty. "_name"]. "</div>";
+            $myDataStr.=$list_arr["btn" .$btnQty. "_name"].",".$list_arr["url" .$btnQty].",".$list_arr["btn".$btnQty."_bg_color"].",";
             $btnQty++;
         }
         echo "</table>";
