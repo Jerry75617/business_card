@@ -324,6 +324,7 @@ switch($_POST["dataFlag"]){
         $obj->member_showOneTR($myarr["member_id"],$_POST["showKind"]);
         break;
 	case "extend_button":		
+		//option
 		$mystr="select * from work_file_list where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
         $myresult=mysqli_query($obj->link,$mystr);
         $myarr=mysqli_fetch_array($myresult);
@@ -340,6 +341,16 @@ switch($_POST["dataFlag"]){
 				$listArr["btn_flag"]=1;
 				//$listArr["btn_name"]="test";
 				//$listArr["url"]="http://test.com";
+				// Check url
+				if ($_POST["option"] == 1)
+					$listArr["url"]="";
+				else if ($_POST["option"] == 2)
+					$listArr["url"]="";
+				else if ($_POST["option"] == 3)
+					$listArr["url"]="";
+				else if ($_POST["option"] == 4)
+					$listArr["url"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
+					
 				$listArr["btn_bg_color"]="#FFFFFF"; // default white
 			}
 			else if ($index == 1)
@@ -347,6 +358,16 @@ switch($_POST["dataFlag"]){
 				$listArr["btn1_flag"]=1;
 				//$listArr["btn1_name"]="test";
 				//$listArr["url1"]="http://test.com";
+				
+				if ($_POST["option"] == 1)
+					$listArr["url"]="";
+				else if ($_POST["option"] == 2)
+					$listArr["url"]="";
+				else if ($_POST["option"] == 3)
+					$listArr["url"]="";
+				else if ($_POST["option"] == 4)
+					$listArr["url"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
+				
 				$listArr["btn1_bg_color"]="#FFFFFF"; // default white
 			}
 			else

@@ -428,10 +428,11 @@ class classMember extends classMain
 		echo "<option value=\"1\">新增導航地址按鈕</option>";
 		echo "<option value=\"2\">新增撥打電話功能</option>";
 		echo "<option value=\"3\">新增加入Line按鈕</option>";
+		echo "<option value=\"4\">活動日曆按鈕</option>";
 		echo "</select>";
 		echo "<span class='btn_pink'  onclick=\"addBtn('" .$mypk. "')\">增加</span>";
 		//echo "<input type=\"submit\" value=\"增加\"><br>";
-		echo "</form>";
+		//echo "</form>";
 		//echo "<br>";
 
 		if ($myarr["btn1_flag"] == 1 && $myarr["btn_flag"] == 0)

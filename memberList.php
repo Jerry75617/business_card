@@ -139,8 +139,14 @@ function addClick(work_file_id){
 }
 //新增按鈕
 function addBtn(work_file_list_id){
-	var send_str="dataFlag=extend_button&work_file_list_id=" + work_file_list_id + "&showKind=" + showKind;
+	var aaobj=document.getElementById("cards_fun");
+	var strUser = aaobj.options[aaobj.selectedIndex].value;
+	var send_str="dataFlag=extend_button&work_file_list_id=" + work_file_list_id + "&option=" + strUser + "&showKind=" + showKind;
+	
 	X_FORM_Str(send_str,"memberListSIM.php","");
+	//alert (strUser);
+
+	
 	//var send_str="dataFlag=extend_button&work_file_id=" + work_file_id + "&showKind=" + showKind + “work_file_list_id=“ +work_file_list_id;
 	//X_FORM_Str(send_str,"memberListSIM.php","");
 
