@@ -1,0 +1,8 @@
+db_in_ip="localhost"
+db_in_name="nameCard"
+web_name="nameCard"
+login_file="index.php"
+exportDir=""
+
+db_account="root"
+db_password="root0919171962"
