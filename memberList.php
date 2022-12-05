@@ -153,7 +153,7 @@ function addBtn(work_file_list_id){
 }
 // 刪除按鈕
 function delBtn(work_file_list_id, delete_btn_index){
-	var send_str="dataFlag=delete_button&work_file_list_id=" + work_file_list_id + "&showKind=" + showKind + "&delete_btn_index" + delete_btn_index;
+	var send_str="dataFlag=delete_button&work_file_list_id=" + work_file_list_id + "&showKind=" + showKind + "&delete_btn_index=" + delete_btn_index;
 	X_FORM_Str(send_str,"memberListSIM.php","");
 	//var send_str="dataFlag=delete_button&work_file_id=" + work_file_id + "&showKind=" + showKind + “work_file_list_id=“ +work_file_list_id;
 	//X_FORM_Str(send_str,"memberListSIM.php","");

@@ -343,7 +343,7 @@ switch($_POST["dataFlag"]){
 				//$listArr["url"]="http://test.com";
 				// Check url
 				if ($_POST["option"] == 1)
-					$listArr["url"]="";
+					$listArr["url"]="https://google.com";
 				else if ($_POST["option"] == 2)
 					$listArr["url"]="";
 				else if ($_POST["option"] == 3)
@@ -360,13 +360,14 @@ switch($_POST["dataFlag"]){
 				//$listArr["url1"]="http://test.com";
 				
 				if ($_POST["option"] == 1)
-					$listArr["url"]="";
+					$listArr["url1"]="https://google.com";
 				else if ($_POST["option"] == 2)
-					$listArr["url"]="";
+					$listArr["url1"]="";
 				else if ($_POST["option"] == 3)
-					$listArr["url"]="";
+					$listArr["url1"]="";
 				else if ($_POST["option"] == 4)
-					$listArr["url"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
+					$listArr["url1"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
+					//"https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
 				
 				$listArr["btn1_bg_color"]="#FFFFFF"; // default white
 			}
@@ -379,9 +380,11 @@ switch($_POST["dataFlag"]){
 			if ((int)$myarr["btn_amount"] < 2)				
 				$listArr["btn_amount"]=(int)$myarr["btn_amount"]+1; // button amount
 			
-            //$listArr["work_file_list_id"]=$_POST["work_file_list_id"];
+			//$listArr["work_file_list_id"]=$_POST["work_file_list_id"];
+			//
 			$obj->updateDB($listArr,"work_file_list_id",$_POST["work_file_list_id"],"work_file_list","*");
 			$obj->showContentList($_POST["work_file_list_id"],"[!@#]showContentList_".$_POST["work_file_list_id"]);
+			#
 			//$obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
 		}
 		break;

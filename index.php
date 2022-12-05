@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once("./js/main.js");
 
 ?>
 <script>
@@ -88,7 +87,9 @@ input[type=password]:focus{
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title>電子名片管理</title>
     </head>
-
+<?php 
+include_once("./js/main.js");
+?>
     <body>
     <div style="position: absolute;top:11%;left:41%;width:18%;height:50%;">
         <form name="frmmain" id="frmmain" onsubmit="">

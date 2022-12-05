@@ -44,6 +44,12 @@ echo mysqli_error($link);
 
 $mystr="alter table work_file_list add column sequence int default '0'";
 mysqli_query($link,$mystr);//順序
+//加大url欄位大小
+$mystr="alter table work_file_list modify url text binary";
+mysqli_query($link,$mystr);
+$mystr="alter table work_file_list modify url1 text binary";
+mysqli_query($link,$mystr);
+
 
 $mystr="alter table work_file_list add index idx_work_file_id(work_file_id)";
 mysqli_query($link,$mystr);

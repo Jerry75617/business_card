@@ -135,20 +135,20 @@ var preview = document.querySelector('.preview');
 
 input.style.opacity = 0;
 input.addEventListener('change', updateImageDisplay);function updateImageDisplay() {
-	alert('測試文字');
+	//alert('測試文字');
 	while(preview.firstChild) {
 		preview.removeChild(preview.firstChild);
 	}
-	alert('dd');
+	//alert('dd');
 	if(input.files.length === 0) {
-		alert('dd');
+		//alert('dd');
 		var para = document.createElement('p');
 		para.textContent = 'Not choose File';
     para.style="line-height: 300px;";
 		preview.appendChild(para);
 	} 
 	else {
-		alert('dd');
+		//alert('dd');
 		var para = document.createElement('p');
 		var image = document.createElement('img');
 		image.src = window.URL.createObjectURL(input.files[0]);
