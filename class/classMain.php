@@ -65,10 +65,12 @@ class classMain extends classLink
             default:
                 $pageName=$this->pageName[str_replace(".php","",$nowPage)];
                 
-                echo "<div style='width:13%;height:100%;float:left;background-color:#424242' id='menuDiv'>";
+                echo "<div style='width:13%;height:100%;float:left;background-color:#424242;display:block;' id='menuDiv'>";
                 $this->menuShow($nowPage);
                 echo "</div>";
-                echo "<div style='width:87%;height:100%;float:left;'>";
+                echo "<div style='width:2%;height:100%;float:left;background-color:#424242;text-align:center;color:#ffc107;display:none;' id='menuSmallDiv'>";
+                echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:middle;curspor:pointer;' onclick=\"closeMenu('open')\">arrow_right</span><br>選<br>單 </div>";
+                echo "<div style='width:87%;height:100%;float:left' id='shoeBodyContentDiv'>";
                 echo "<div id='changePwdDiv' style='position:fixed;width:500px;height:350px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;z-index:999;display:none;'></div>";
                 echo "<table width='100%' height='100%' border=0px cellpadding=0 cellspacing=0 class='main-table'>";
                 echo "<tr height=5%><td style='background-color:#dfdfdf;' valign=middle>&emsp;<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>list_alt</span>&nbsp; ".$pageName;
@@ -94,7 +96,9 @@ class classMain extends classLink
         $checkArr=array();
         echo $divName;
         echo "<table width=100% border=0 height=100% cellpadding=5 cellspacing=0 style='color:#ffffff;'>";
-        echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#ffc107;'><span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> 電子名片管理";
+        echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#ffc107;'>";
+        echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:bottom;curspor:pointer;' onclick=\"closeMenu('close')\">arrow_left</span>";
+        echo "<span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> 電子名片管理";
 		echo "<tr height=5%><td valign=middle align=center style='font-size:13px;color:#ffc107;'>".$this->sessionGetValue("session_name");
         echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #EFEFEF solid;border-bottom:1px #EFEFEF solid;'>";
         echo "<span style='cursor:pointer;' onclick=\"changePassword()\">修改密碼</span>";

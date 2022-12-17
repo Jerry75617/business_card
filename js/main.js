@@ -599,4 +599,22 @@ function savePwdClickReturn(){
 		closePwdDiv();
 	}
 }
+function closeMenu(status){
+	var aaobj=document.getElementById("menuDiv");
+	var bbobj=document.getElementById("menuSmallDiv");
+	var ccobj=document.getElementById("shoeBodyContentDiv");
+	
+	switch(status){
+		case "close":
+			aaobj.style.display="none";
+			bbobj.style.display="block";
+			ccobj.style.width="98%";
+			break;
+		case "open":
+			aaobj.style.display="block";
+			bbobj.style.display="none";
+			ccobj.style.width="87%";
+			break;
+	}
+}
 </script>
