@@ -98,21 +98,23 @@ const flexCard = (userReply) => {
   for(var i=0; i<myDataArr.length; i++){
 	  var myValueArr=myDataArr[i].split(",");
 	  var arrLength=(myValueArr.length-3)/3;
-	  var buttonArr=[]; var itemQty=4;
+	  var buttonArr=[]; var itemQty=3;
 	  if(arrLength > 0){
 		  for(var j=0; j<arrLength; j++){
-			  buttonArr[j]={
-					  "type": "button",
-			            "style": myValueArr[itemQty+3],
-			            "color":myValueArr[itemQty+2],
-			            "action": {
-			              "type": "uri",
-			              "label": myValueArr[itemQty],
-			              "uri": myValueArr[itemQty+1]
-			            },
-			            "height": "sm"
+			  if(myValueArr[itemQty]){
+				  buttonArr[j]={
+						  "type": "button",
+				            "style": myValueArr[itemQty+3],
+				            "color":myValueArr[itemQty+2],
+				            "action": {
+				              "type": "uri",
+				              "label": myValueArr[itemQty],
+				              "uri": myValueArr[itemQty+1]
+				            },
+				            "height": "sm"
+				  }
+				  itemQty+=4;
 			  }
-			  itemQty+=4;
 		  }
 		  dataArr[i]={
 				  "type": "bubble",
