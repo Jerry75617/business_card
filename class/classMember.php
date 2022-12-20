@@ -448,6 +448,14 @@ class classMember extends classMain
 			
 			if ($i == 0)
 			{
+			    $chk="checked";  $chk2="";
+			    if($myarr["btn_font_color"] == "primary"){
+			        $chk="checked";
+			        $chk2="";
+			    }else if ($myarr["btn_font_color"] == "secondary"){
+			        $chk="";
+			        $chk2="checked";
+			    }
 				echo "<div id='buttonContent'>";
 				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
 				echo "<hr size='1px' align='center'>";
@@ -455,17 +463,33 @@ class classMember extends classMain
 				echo "<div>文字 : <input type='text' name='btn_name[]' value='" .$myarr["btn_name"]. "'></div>";
 				echo "<div>連結 : <input type='text' name='url[]' value='" .$myarr["url"]. "'></div>";
 				echo "<div style='margin-top:10px;'>按鈕顏色 : <input type='color' name='btn_bg_color[]' value='" .$myarr["btn_bg_color"]. "'></div>";
+				echo "<div style='margin-top:10px'>文字顏色 :";
+				echo "<input type='radio' name='btn_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
+				echo "<input type='radio' name='btn_font_color[]' value='secondary' style='vertical-align:middle;font-size:18px;' $chk2>黑";
+				echo "</div>";
 				echo "</div>";
 				echo "<br>";
 			}
 			else if ($i == 1)
 			{
+			    
+			    $chk="checked";  $chk2="";
+			    if($myarr["btn1_font_color"] == "primary"){
+			        $chk="checked";
+			        $chk2="";
+			    }else if ($myarr["btn1_font_color"] == "secondary"){
+			        $chk="";
+			        $chk2="checked";
+			    }
 				echo "<div id='buttonContent'>";
 				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
 				echo "<hr size='1px' align='center'>";
 				echo "<div>文字 : <input type='text' name='btn1_name[]' value='" .$myarr["btn1_name"]. "'></div>";
 				echo "<div>連結 : <input type='text' name='url1[]' value='" .$myarr["url1"]. "'></div>";
 				echo "<div style='margin-top:10px'>按鈕顏色 : <input type='color' name='btn1_bg_color[]' value='" .$myarr["btn1_bg_color"]. "'></div>";
+				echo "<div style='margin-top:10px'>文字顏色 :";
+				echo "<input type='radio' name='btn1_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
+				echo "<input type='radio' name='btn1_font_color[]' value='secondary' style='vertical-align:middle;font-size:18px;' $chk2>黑";
 				echo "</div>";
 				echo "<br>";
 			}

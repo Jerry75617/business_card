@@ -91,7 +91,7 @@ const flexCard = (userReply) => {
   var myData=document.frmmain.myDataStr.value;
   
   
-  console.log(myData);
+  //console.log(myData);
   
   var dataArr=[];
   var myDataArr=myData.split(";");
@@ -103,7 +103,7 @@ const flexCard = (userReply) => {
 		  for(var j=0; j<arrLength; j++){
 			  buttonArr[j]={
 					  "type": "button",
-			            "style": "primary",
+			            "style": myValueArr[itemQty+3],
 			            "color":myValueArr[itemQty+2],
 			            "action": {
 			              "type": "uri",

@@ -50,6 +50,10 @@ mysqli_query($link,$mystr);
 $mystr="alter table work_file_list modify url1 text binary";
 mysqli_query($link,$mystr);
 
+$mystr="alter table work_file_list add column btn_font_color varchar(20) binary default ''";
+mysqli_query($link,$mystr);//文字顏色 primary secondary
+$mystr="alter table work_file_list add column btn1_font_color varchar(20) binary default ''";
+mysqli_query($link,$mystr);//文字顏色1  primary secondary
 
 $mystr="alter table work_file_list add index idx_work_file_id(work_file_id)";
 mysqli_query($link,$mystr);
