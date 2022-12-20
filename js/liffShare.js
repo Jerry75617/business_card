@@ -98,7 +98,7 @@ const flexCard = (userReply) => {
   for(var i=0; i<myDataArr.length; i++){
 	  var myValueArr=myDataArr[i].split(",");
 	  var arrLength=(myValueArr.length-3)/3;
-	  var buttonArr=[]; var itemQty=3;
+	  var buttonArr=[]; var itemQty=4;
 	  if(arrLength > 0){
 		  for(var j=0; j<arrLength; j++){
 			  buttonArr[j]={
@@ -112,7 +112,7 @@ const flexCard = (userReply) => {
 			            },
 			            "height": "sm"
 			  }
-			  itemQty+=3;
+			  itemQty+=4;
 		  }
 		  dataArr[i]={
 				  "type": "bubble",
