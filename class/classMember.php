@@ -360,8 +360,10 @@ class classMember extends classMain
         if((int)$member_id > 0){
             echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13'>";
             echo "<thead><tr height=8%><td colspan=2 align=center class='f15'>" .$member_arr["member_name"]. " &nbsp;會員電子" .$showKind. "</thead>";
-            echo "<tr height=7%><td width=20% align=right>" .$showKind. "標題 : <td><input type='text' name='display_name' value='" .$myarr["display_name"]. "' style='width:200px;' maxlength=10>";
-            echo "<tr height=7%><td width=20% align=right>修改日期 : <td><input type='text' name='update_datetime' value='" .$myarr["update_datetime"]. "' disabled style='width:200px;'>";
+            echo "<tr height=7%><td width=20% align=left>" .$showKind. "標題 : ";
+            echo "<tr><td><input type='text' name='display_name' value='" .$myarr["display_name"]. "' style='width:100%;' maxlength=10>";
+            echo "<tr height=7%><td width=20% align=left>修改日期 : ";
+            echo "<tr><td><input type='text' name='update_datetime' value='" .$myarr["update_datetime"]. "' disabled style='width:100%;'>";
             echo "<tr height=7%><td colspan=2>";
             echo "<span class='btn_blue' onclick=\"addClick('" .$mypk. "')\">建立" .$showKind. "</span>";
 //             echo "<input type='button' value='建立名片'  class='btn_blue' onclick=\"addClick('" .$mypk. "')\">";
@@ -422,25 +424,27 @@ class classMember extends classMain
 	
         echo "<td valign=top>";
 		echo "<div >";
-		echo "<div style=\"height:24px;background-color:#121212;\">[名片設定]</div>";
-		echo "<div>名片尺寸 : <input type='text' name='card_size[]' value='" .$myarr["card_size"]. "'></div>";
-		echo "<div style='margin-top:10px;'>背景顏色 : <input type='color' name='card_bg_color[]' value='" .$myarr["card_bg_color"]. "'></div>";
-		echo "<br></br><br></br>";
+		echo "<div style=\"height:24px;background-color:#121212;color:#ffffff;\">[名片設定]</div>";
+		echo "<div>名片尺寸 : </div>";
+		echo "<div><input type='text' name='card_size[]' value='" .$myarr["card_size"]. "'></div>";
+		echo "<div style='margin-top:10px;'>背景顏色 : </div>";
+		echo "<div><input type='color' name='card_bg_color[]' value='" .$myarr["card_bg_color"]. "'></div>";
+// 		echo "<br></br><br></br>";
 		//value='" .$myarr["card_size"]. "'
 		echo "</div>";
 		//echo "<form action=\"/showContentList()\">";
-		echo "<label for=\"cards_fun\">新增按鈕:</label>";
-		echo "<select name=\"cards_fun\" id=\"cards_fun\">";
+		echo "<div><label for=\"cards_fun\">新增按鈕:</label></div>";
+		echo "<div><select name=\"cards_fun\" id=\"cards_fun\">";
 		echo "<option value=\"0\">新增連結按鈕</option>";
 		echo "<option value=\"1\">新增導航地址按鈕</option>";
 		echo "<option value=\"2\">新增撥打電話功能</option>";
 		echo "<option value=\"3\">新增加入Line按鈕</option>";
 		echo "<option value=\"4\">活動日曆按鈕</option>";
 		echo "</select>";
-		echo "<span class='btn_pink'  onclick=\"addBtn('" .$mypk. "')\">增加</span>";
+		echo "<span class='btn_pink'  onclick=\"addBtn('" .$mypk. "')\">增加</span></div>";
 		//echo "<input type=\"submit\" value=\"增加\"><br>";
 		//echo "</form>";
-		//echo "<br>";
+		echo "<br>";
 
 		if ($myarr["btn1_flag"] == 1 && $myarr["btn_flag"] == 0)
 		{
@@ -467,11 +471,14 @@ class classMember extends classMain
 				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
 				echo "<hr size='1px' align='center'>";
 				//echo "<span class='material-symbols-outlined'>close</span>";
-				echo "<div>文字 : <input type='text' name='btn_name[]' class='btn_name' value='" .$myarr["btn_name"]. "'></div>";
-				echo "<div>連結 : <input type='text' name='url[]' class='url' value='" .$myarr["url"]. "'></div>";
-				echo "<div style='margin-top:10px;'>按鈕顏色 : <input type='color' name='btn_bg_color[]' class='color' value='" .$myarr["btn_bg_color"]. "'></div>";
-				echo "<div style='margin-top:10px'>文字顏色 :";
-				echo "<input type='radio' name='btn_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
+				echo "<div>文字 : </div>";
+				echo "<div><input type='text' name='btn_name[]' class='btn_name' value='" .$myarr["btn_name"]. "'></div>";
+				echo "<div>連結 : </div>";
+				echo "<div><input type='text' name='url[]' class='url' value='" .$myarr["url"]. "'></div>";
+				echo "<div style='margin-top:10px;'>按鈕顏色 : </div>";
+				echo "<div><input type='color' name='btn_bg_color[]' class='color' value='" .$myarr["btn_bg_color"]. "'></div>";
+				echo "<div style='margin-top:10px'>文字顏色 :</div>";
+				echo "<div><input type='radio' name='btn_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
 				echo "<input type='radio' name='btn_font_color[]' value='secondary'  style='vertical-align:middle;font-size:18px;' $chk2>黑";
 				echo "</div>";
 				echo "</div>";
@@ -491,11 +498,14 @@ class classMember extends classMain
 				echo "<div id='buttonContent'>";
 				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
 				echo "<hr size='1px' align='center'>";
-				echo "<div>文字 : <input type='text' name='btn1_name[]' class='btn_name' value='" .$myarr["btn1_name"]. "'></div>";
-				echo "<div>連結 : <input type='text' name='url1[]' class='url' value='" .$myarr["url1"]. "'></div>";
-				echo "<div style='margin-top:10px'>按鈕顏色 : <input type='color' name='btn1_bg_color[]' class='color' value='" .$myarr["btn1_bg_color"]. "'></div>";
-				echo "<div style='margin-top:10px'>文字顏色 :";
-				echo "<input type='radio' name='btn1_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
+				echo "<div>文字 : </div>";
+				echo "<div><input type='text' name='btn1_name[]' class='btn_name' value='" .$myarr["btn1_name"]. "'></div>";
+				echo "<div>連結 : </div>";
+				echo "<div><input type='text' name='url1[]' class='url' value='" .$myarr["url1"]. "'></div>";
+				echo "<div style='margin-top:10px'>按鈕顏色 : </div>";
+				echo "<div><input type='color' name='btn1_bg_color[]' class='color' value='" .$myarr["btn1_bg_color"]. "'></div>";
+				echo "<div style='margin-top:10px'>文字顏色 :</div>";
+				echo "<div><input type='radio' name='btn1_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
 				echo "<input type='radio' name='btn1_font_color[]' value='secondary' style='vertical-align:middle;font-size:18px;' $chk2>黑";
 				echo "</div>";
 				echo "<br>";
