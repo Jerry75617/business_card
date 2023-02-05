@@ -68,7 +68,7 @@ window.onload=function(){
 </script>
 
 <?php 
-echo "<div id='showOneDiv' style='position:fixed;width:500px;height:320px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;'></div>";
+echo "<div id='showOneDiv' style='position:fixed;width:300px;height:480px;background-color:#E9CCCD;border:1px #AAAAAA solid;top:20%;left:40%;z-index:999;border-radius:0px;box-shadow:8px 8px 10px gray;display:none;'></div>";
 echo "<form name='form_query' id='form_query' onsubmit='return false;'>";
 echo "<table border=0 width=100% class='f13'>";
 echo "<tr height=30px><td width='30%' align=left>設計師姓名 : ";

@@ -11,19 +11,22 @@ $obj = new classMain();
 if(empty($_POST["dataFlag"])){ $_POST["dataFlag"]="";}
 switch($_POST["dataFlag"]){
     case "change_pwd":
-        $titleStr="width=25% align=right";
+        $titleStr="align=left";
         echo "[!@#]changePwdDiv";
-        echo "<div style='width:98%;height:8%;text-align:right;padding:5px;'><span class='material-symbols-outlined' onclick=\"closePwdDiv()\" style='cursor:pointer;'>close</span></div>";
+        echo "<div style='width:90%;height:8%;text-align:right;padding:5px;'><span class='material-symbols-outlined' onclick=\"closePwdDiv()\" style='cursor:pointer;'>close</span></div>";
         echo "<table border=0 width=100% height=90% cellpadding=0 cellspacing=0>";
         echo "<tr><td height=10%>";
         echo "<tr><td valign=top>";
             echo "<form id='frm_pwd' name='frm_pwd' onsubmit='return false'>";
             echo "<table width=96% cellpadding=3 cellspacing=0 align=center class='tableShowOne black f13'>";
-            echo "<tr><td $titleStr>&emsp; 原 密 碼 :<td><input type='password' name='old_password'>";
-            echo "<tr><td $titleStr>&emsp; 新 密 碼 :<td><input type='password' name='new_password'>";
-            echo "<tr><td $titleStr>確 認 密 碼 :<td><input type='password' name='check_password'>";
+            echo "<tr><td $titleStr>原 密 碼 :";
+            echo "<tr><td><input type='password' name='old_password' style='width:100%'>";
+            echo "<tr><td $titleStr>新 密 碼 :";
+            echo "<tr><td><input type='password' name='new_password' style='width:100%'>";
+            echo "<tr><td $titleStr>確 認 密 碼 :";
+            echo "<tr><td><input type='password' name='check_password' style='width:100%'>";
             echo "<tr><td colspan=2 align=center>";
-            echo "<input type='button' class='btn_pink' value='資料存檔' onclick=\"savePwdClick()\" >";
+            echo "<span class='btn_pink' onclick=\"savePwdClick()\" >資料存檔</span>";
             echo "</table>";
             echo "<input type='hidden' name='mypk' value='" .$obj->sessionGetValue("session_designer_id"). "'>";
             echo "</form>";

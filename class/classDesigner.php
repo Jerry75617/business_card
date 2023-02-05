@@ -7,7 +7,7 @@ class classDesigner extends classMain
     }
     function designer_showOne($mypk,$divName=''){
         
-        $showMsg="修改";   $titleStr=" align=right width=30%";
+        $showMsg="修改";   $titleStr=" align=left";
         if((int)$mypk <= 0){ $showMsg="新增"; }
         
         $readOnlyStr="";
@@ -26,16 +26,22 @@ class classDesigner extends classMain
         
         echo $divName;
         echo "<br><form id='frmmain' name='frmmain' onsubmit='return false'>";
-        echo "<table width=96% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13' align=center>";
+        echo "<table width=90% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13' align=center>";
         echo "<thead><tr><td align=center colspan=2 class='f15'>設計師資料" . $showMsg."</thead>";
-        echo "<tr><td $titleStr>姓名 : <td>&nbsp;<input type='text' name='designer_name' value='" .$designer_name. "'>";
-        echo "<tr><td $titleStr>手機號碼 : <td>&nbsp;<input type='text' name='designer_cell_phone' value='" .$designer_cell_phone. "'>";
-        echo "<tr><td $titleStr>登入帳號 : <td>&nbsp;<input type='text' name='designer_account' value='" .$designer_account. "' $readOnlyStr>";
+        echo "<tr><td $titleStr>姓名 : ";
+        echo "<tr><td><input type='text' name='designer_name' value='" .$designer_name. "' style='width:100%'>";
+        echo "<tr><td $titleStr>手機號碼 : ";
+        echo "<tr><td><input type='text' name='designer_cell_phone' value='" .$designer_cell_phone. "' style='width:100%'>";
+        echo "<tr><td $titleStr>登入帳號 : ";
+        echo "<tr><td><input type='text' name='designer_account' value='" .$designer_account. "' $readOnlyStr style='width:100%'>";
         if((int)$mypk > 0){
-            echo "<tr><td $titleStr>登入密碼 : <td>&nbsp;<input type='password' name='designer_password' value='" .$designer_password. "'>";
-            echo "<tr><td $titleStr>確認密碼 : <td>&nbsp;<input type='password' name='designer_password' value='" .$designer_password. "'>";
+            echo "<tr><td $titleStr>登入密碼 : ";
+            echo "<tr><td><input type='password' name='designer_password' value='" .$designer_password. "' style='width:100%'>";
+            echo "<tr><td $titleStr>確認密碼 : ";
+            echo "<tr><td><input type='password' name='designer_password' value='" .$designer_password. "' style='width:100%'>";
         }
-        echo "<tr height=30px><td $titleStr>異動時間 : <td>".$update_datetime;
+        echo "<tr height=30px><td $titleStr>異動時間 : ";
+        echo "<tr><td>".$update_datetime;
         echo "<tr><td align=center colspan=2>";
         echo "<span class='btn_pink' onclick=\"updateButtonClick()\">存檔並關閉</span>";
         if((int)$mypk > 0){

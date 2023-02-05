@@ -254,8 +254,8 @@ window.onload=function(){
 
 <?php
 // include_once("./js/liffShare.js");
-echo "<div id='showPicDiv' style='position:fixed;width:900px;height:600px;border:1px #ff9807 solid;top:5%;left:20%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;z-index:998;overflow:auto;'></div>";
-echo "<div id='showOneDiv' style='position:fixed;width:500px;height:350px;border:1px #ff9807 solid;top:20%;left:40%;z-index:999;background-color:#DDDDDD;border-radius:8px;box-shadow:8px 8px 10px gray;display:none;z-index:998;'></div>";
+echo "<div id='showPicDiv' style='position:fixed;width:900px;height:600px;border:1px #AAAAAA solid;top:5%;left:20%;z-index:999;background-color:#E9CCCD;;border-radius:0px;box-shadow:8px 8px 10px gray;display:none;z-index:998;overflow:auto;'></div>";
+echo "<div id='showOneDiv' style='position:fixed;width:300px;height:520px;border:1px #AAAAAA solid;top:15%;left:40%;z-index:999;background-color:#E9CCCD;border-radius:0px;box-shadow:8px 8px 10px gray;display:none;z-index:998;'></div>";
 echo "<form name='form_query' id='form_query' onsubmit='return false;'>";
 echo "<table border=0 width=100% class='f13'>";
 echo "<tr height=30px><td width='30%' align=left>關鍵字 : ";

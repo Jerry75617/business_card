@@ -9,7 +9,7 @@ class classMember extends classMain
 
     function member_showOne($mypk,$divName=''){
         
-        $showMsg="修改";   $titleStr=" align=right width=30%";
+        $showMsg="修改";   $titleStr=" align=left";
         if((int)$mypk <= 0){ $showMsg="新增"; }
         
         $member_name="";  $member_account="";  $url="";  $dateline="";  $update_datetime="";
@@ -26,17 +26,24 @@ class classMember extends classMain
         
         echo $divName;
         echo "<br><form id='frmmain' name='frmmain' onsubmit='return false'>";
-        echo "<table width=96% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13' align=center>";
+        echo "<table width=90% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13' align=center>";
         echo "<thead><tr><td align=center colspan=2 class='f15'>會員資料" . $showMsg."</thead>";
-        echo "<tr><td $titleStr>會員姓名 : <td>&nbsp;<input type='text' name='member_name' value='" .$member_name. "'>";
-        echo "<tr><td $titleStr>登入帳號 : <td>&nbsp;<input type='text' name='member_account' value='" .$member_account. "'>";
+        echo "<tr><td $titleStr>會員姓名 : ";
+        echo "<tr><td><input type='text' name='member_name' value='" .$member_name. "' style='width:100%'>";
+        echo "<tr><td $titleStr>登入帳號 : ";
+        echo "<tr><td><input type='text' name='member_account' value='" .$member_account. "' style='width:100%'>";
         if((int)$mypk > 0){
-            echo "<tr><td $titleStr>登入密碼 : <td>&nbsp;<input type='password' name='member_password' value=''>";
-            echo "<tr><td $titleStr>確認密碼 : <td>&nbsp;<input type='password' name='check_password' value=''>";
+            echo "<tr><td $titleStr>登入密碼 : ";
+            echo "<tr><td><input type='password' name='member_password' value='' style='width:100%'>";
+            echo "<tr><td $titleStr>確認密碼 : ";
+         echo "<tr><td><input type='password' name='check_password' value='' style='width:100%'>";
         }
-        echo "<tr><td $titleStr>超連結 : <td>&nbsp;<input type='text' name='url' value='" .$url. "'>";
-        echo "<tr><td $titleStr>有效日期 : <td>&nbsp;<input type='date' name='dateline' value='" .$dateline. "'>";
-        echo "<tr><td $titleStr>異動日期 : <td>".$update_datetime;
+        echo "<tr><td $titleStr>超連結 : ";
+        echo "<tr><td><input type='text' name='url' value='" .$url. "' style='width:100%'>";
+        echo "<tr><td $titleStr>有效日期 : ";
+        echo "<tr><td><input type='date' name='dateline' value='" .$dateline. "' style='width:100%'>";
+        echo "<tr><td $titleStr>異動日期 : ";
+        echo "<tr><td>".$update_datetime;
         
         echo "<tr><td align=center colspan=2>";
         echo "<span class='btn_pink' onclick=\"updateButtonClick()\">存檔並關閉</span>";
