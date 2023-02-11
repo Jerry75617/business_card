@@ -32,14 +32,14 @@ class classMember extends classMain
         echo "<tr><td><input type='text' name='member_name' value='" .$member_name. "' style='width:100%'>";
         echo "<tr><td $titleStr>登入帳號 : ";
         echo "<tr><td><input type='text' name='member_account' value='" .$member_account. "' style='width:100%'>";
-        if((int)$mypk > 0){
-            echo "<tr><td $titleStr>登入密碼 : ";
-            echo "<tr><td><input type='password' name='member_password' value='' style='width:100%'>";
-            echo "<tr><td $titleStr>確認密碼 : ";
-         echo "<tr><td><input type='password' name='check_password' value='' style='width:100%'>";
-        }
-        echo "<tr><td $titleStr>超連結 : ";
-        echo "<tr><td><input type='text' name='url' value='" .$url. "' style='width:100%'>";
+//         if((int)$mypk > 0){
+        echo "<tr><td $titleStr>登入密碼 : ";
+        echo "<tr><td><input type='password' name='member_password' value='' style='width:100%'>";
+        echo "<tr><td $titleStr>確認密碼 : ";
+        echo "<tr><td><input type='password' name='check_password' value='' style='width:100%'>";
+//         }
+//         echo "<tr><td $titleStr>超連結 : ";
+//         echo "<tr><td><input type='text' name='url' value='" .$url. "' style='width:100%'>";
         echo "<tr><td $titleStr>有效日期 : ";
         echo "<tr><td><input type='date' name='dateline' value='" .$dateline. "' style='width:100%'>";
         echo "<tr><td $titleStr>異動日期 : ";
@@ -47,10 +47,14 @@ class classMember extends classMain
         
         echo "<tr><td align=center colspan=2>";
         echo "<span class='btn_pink' onclick=\"updateButtonClick()\">存檔並關閉</span>";
+        /*
         if((int)$mypk > 0){
             echo "<span class='btn_red' onclick=\"deleteMemberClick('" .$mypk. "')\">刪除資料</span>";
         }
-        echo "<span class='btn_blue' onclick=\"closeDivClick()\">關閉</span>";
+        */
+        if((int)$mypk <= 0){
+           echo "<span class='btn_blue' onclick=\"closeDivClick()\">關閉</span>";
+        }
         echo "</table>";
         echo "<input type='hidden' name='member_id' value='" .$mypk. "'>";
         echo "</form>";

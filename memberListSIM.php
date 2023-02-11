@@ -88,7 +88,7 @@ switch($_POST["dataFlag"]){
         $dataArr["update_datetime"]=$dateTime;
         
         if((int)$_POST["member_id"] <=0){
-            $dataArr["member_password"]=$_POST["member_account"];//建檔時登入的帳號密碼相同
+            //$dataArr["member_password"]=$_POST["member_account"];//建檔時登入的帳號密碼相同
             $dataArr["create_datetime"]=$dateTime;
             $obj->insertDB($dataArr,"member","*");
             

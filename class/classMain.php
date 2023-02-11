@@ -64,14 +64,22 @@ class classMain extends classLink
                 break;
             default:
                 $pageName=$this->pageName[str_replace(".php","",$nowPage)];
+                echo "<div style='height:100%;width:100%;'>";
+                echo "<div id='changePwdDiv' style='position:fixed;width:300px;height:400px;border:1px #E9CCCD solid;top:20%;left:40%;z-index:999;background-color:#E9CCCD;border-radius:0px;box-shadow:8px 8px 10px gray;z-index:999;display:none;'></div>";
+                echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0 class='black f13'>";
+                echo "<tr ><td height=40px colspan=2 style='font-size:20px;color:#FFFFFF;padding-left:20px;background-color:#CD939D;'>";
+                    echo "<span class='material-symbols-outlined' style='vertical-align:bottom;'>menu</span> 電子名片管理";
+                echo "<tr><td width=15% valign=top style='padding:0px;'>";
+                    echo "<div style='width:100%;height:100%;float:left;background-color:#FFFFFF;display:block;' id='menuDiv'>";
+                    $this->menuShow($nowPage);
+                    echo "</div>";
+                echo "<td style='padding:5px 15px;' valign=top>";
+                /*
                 
-                echo "<div style='width:13%;height:100%;float:left;background-color:#CD939D;display:block;' id='menuDiv'>";
-                $this->menuShow($nowPage);
-                echo "</div>";
                 echo "<div style='width:2%;height:100%;float:left;background-color:#424242;text-align:center;color:#ffc107;display:none;' id='menuSmallDiv'>";
                 echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:middle;curspor:pointer;' onclick=\"closeMenu('open')\">arrow_right</span><br>選<br>單 </div>";
                 echo "<div style='width:87%;height:100%;float:left;' id='shoeBodyContentDiv'>";
-                    echo "<div id='changePwdDiv' style='position:fixed;width:300px;height:400px;border:1px #E9CCCD solid;top:20%;left:40%;z-index:999;background-color:#E9CCCD;border-radius:0px;box-shadow:8px 8px 10px gray;z-index:999;display:none;'></div>";
+                    
                     //上標題
                     echo "<div style='height:5%;background-color:#E9CCCD;color:#CD939D;line-height:30px;'>";
                         echo "&emsp;<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle;'>list_alt</span>&nbsp; ".$pageName;
@@ -81,6 +89,7 @@ class classMain extends classLink
                         echo "<table width='100%' height='100%' border=0px cellpadding=0 cellspacing=0 class='main-table'>";
         //                 echo "<tr height=5%><td style='background-color:#E9CCCD;color:#CD939D;' valign=middle>&emsp;<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>list_alt</span>&nbsp; ".$pageName;
                         echo "<tr><td valign=top style='padding:1%;background-color:#F3E4E7;'>";
+                */
                 break;
         }
         
@@ -88,6 +97,9 @@ class classMain extends classLink
     }//end of body function
    
     function body_end(){
+        echo "</table>";
+        echo "</div>";
+        /*
                 echo "</table>";
             echo "</div>";
             //結尾
@@ -95,6 +107,7 @@ class classMain extends classLink
                 echo "<font style='color:#666666;font-size:10px;'>版權所有：電子名片管理 Copyright 2022</font>";
             echo "</div>";
         echo "</div>";
+        */
         echo "</body>";
         echo "</html>";
     }
@@ -103,16 +116,7 @@ class classMain extends classLink
         $nowPageArr=$this->pagePowerArr[$this->sessionGetValue("session_login_kind")];
         $nowPageKind=str_replace(".php","",$nowPage);
         $checkArr=array();
-        echo $divName;
-        echo "<table width=100% border=0 height=100% cellpadding=5 cellspacing=0 style='color:#E9CCCD;'>";
-        echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#E9CCCD;'>";
-//         echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:bottom;curspor:pointer;' onclick=\"closeMenu('close')\">arrow_left</span>";
-        echo "<span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> 電子名片管理";
-		echo "<tr height=5%><td valign=middle align=center style='font-size:13px;color:#E9CCCD;'>".$this->sessionGetValue("session_name");
-        echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #E9CCCD solid;border-bottom:1px #EFEFEF solid;'>";
-        echo "<span style='cursor:pointer;' onclick=\"changePassword()\">修改密碼</span>";
-        echo "&emsp;<span style='cursor:pointer;' onclick=\"logoutClick()\">登出</span>";
-        echo "<tr><td valign=top>";
+        
         if(count($nowPageArr) > 0){
             foreach($this->menuArr as $key => $valeArr){
                 $chkQty=0;
@@ -127,18 +131,54 @@ class classMain extends classLink
                 
             }
         }
+        
+        echo $divName;
+        echo "<table width=100% border=0 height=100% cellpadding=5 cellspacing=0 style='color:#666666;'>";//#E9CCCD;
+//         echo "<tr height=5%><td valign=middle align=center style='font-size:20px;color:#666666;'>";
+//         echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:bottom;curspor:pointer;' onclick=\"closeMenu('close')\">arrow_left</span>";
+//         echo "<span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> 電子名片管理";
+// 		echo "<tr height=5%><td valign=middle align=center style='font-size:13px;color:#999999;'>".$this->sessionGetValue("session_name");
+        echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #E9CCCD solid;border-bottom:1px #E9CCCD solid;'>";
+        echo "<span>" .$this->sessionGetValue("session_name"). "</span>";
+        echo "&emsp;<span style='cursor:pointer;' onclick=\"changePassword()\">修改密碼</span>";
+        echo "&emsp;<span style='cursor:pointer;' onclick=\"logoutClick()\">登出</span>";
+        echo "<tr><td valign=top style='padding:0px 5px;'>";
+        
         foreach($checkArr as $titleName => $pageValue){
-            echo "<div style='width:100%;'>";
-            echo "<table width=100%  border=0 cellpadding=3 cellspacing=0>";
-            echo "<tr><td width=10%>";
-            echo "<td><span class='material-symbols-outlined' style='vertical-align:middle'>" .$this->titleImgArr[$titleName]. "</span> &nbsp;".$titleName;
+            $url=$pageValue[0].".php";  $showKind="nameCard";  $leftIcon="<span style='font-size:20px;' class='material-symbols-outlined'>chevron_right</span>";
+            switch($pageValue[0]){
+                case "designerList2":
+                case "memberList2":
+                    $url=substr($pageValue[0],0,-1).".php";
+                    $showKind="wedding";
+                    break;
+                case "memberList012":
+                    $url=substr($pageValue[0],0,-1).".php";
+                    $showKind="wedding";
+                    break;
+            }
             
-            echo "</table>";
+            $displayStr="display:none;";
+            if (in_array( $nowPageKind, $checkArr[$titleName], true)) {
+                $displayStr="";
+                $leftIcon="<span style='font-size:20px;' class='material-symbols-outlined'>expand_more</span>";
+            }
+            
+            echo "<div style='width:100%;'>";
+            echo "<table width=100% border=0 cellpadding=3 cellspacing=0>";
+            echo "<tr onclick=\"changePageClick('" .$url. "','" .$showKind. "')\" style='cursor:pointer;'><td width=20% align=right>";
+                echo "<span class='material-symbols-outlined' style='vertical-align:middle'>" .$this->titleImgArr[$titleName]. "</span>";
+            echo "<td height=30px>".$titleName;
+            echo "<td width=20% align=center>".$leftIcon;
+            
+            
+            echo "<tr style='" .$displayStr. "'><td style='background-color:#EFEFEF;padding:0px;' colspan=3>";
+            
             for($i=0;$i<count($pageValue);$i++){
                 if(!isset($this->pageName[$pageValue[$i]])){ continue; }
                 $pageName=$this->pageName[$pageValue[$i]];
                 
-                $url=$pageValue[$i].".php";  $showKind="nameCard";  
+                $url=$pageValue[$i].".php";  $showKind="nameCard";
                 switch($pageValue[$i]){
                     case "designerList2":
                     case "memberList2":
@@ -150,14 +190,23 @@ class classMain extends classLink
                         $showKind="wedding";
                         break;
                 }
-                
-                $iconStr="";  $onclickStr="onclick=\"changePageClick('" .$url. "','" .$showKind. "')\"";  $styleStr="style='cursor:pointer;' class='menuList'";
-                if($nowPageKind == $pageValue[$i]){ $iconStr="<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>arrow_right</span>"; $onclickStr=""; $styleStr="";}
-                echo "<table width=100% border=0 cellpadding=3 cellspacing=0>";
-                echo "<tr><td width=20% align=right>".$iconStr;
-                echo "<td><span class='material-symbols-outlined' style='vertical-align:middle'>" . "</span> &nbsp; <span $onclickStr $styleStr>".$pageName."</span>";
-                echo "</table>";
+                $nowKindStr="";
+                $iconStr="";  $onclickStr="onclick=\"changePageClick('" .$url. "','" .$showKind. "')\"";  $styleStr="style='cursor:pointer;' class='menuList' ";
+                if($nowPageKind == $pageValue[$i]){ 
+                    $iconStr="<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle'>arrow_right</span>";
+                    $onclickStr="";
+                    $styleStr="";
+                    $nowKindStr="background-color:#E9CCCD;border-radius:5px;color:#222222;";
+                }
+                echo "<div style='" .$nowKindStr. ";padding:10px 0px 10px 35px;'><span $onclickStr $styleStr>".$pageName."</span>";
+//                 echo "<table width=100% border=1 cellpadding=3 cellspacing=0>";
+//                 echo "<tr><td width=20% align=right>".$iconStr;
+//                 echo "<tr><td><span class='material-symbols-outlined' style='vertical-align:middle'>" . "</span> &nbsp; <span $onclickStr $styleStr>".$pageName."</span>";
+//                 echo "</table>";
+                echo "</div>";
             }
+            echo "</table>";
+            
             
             echo "</div>";
         }

@@ -51,7 +51,8 @@ function updateButtonClickReturn(){
 		}else{
 			var send_str="dataFlag=show_one_tr&mypk=" + document.frmmain.member_id.value + "&showKind=" + showKind;
 		}
-		X_FORM_Str(send_str,"memberListSIM.php","closeDivClick");
+		X_FORM_Str(send_str,"memberListSIM.php","");
+		setTimeout("closeDivClick()",100);
 	}
 }
 function closeDivClick(){

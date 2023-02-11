@@ -3,17 +3,14 @@
 /***********************************************/
 /* HTML tag styles                             */
 /***********************************************/
-
-
 body{
 	background-color:#424242;
 	margin:0;
-	font-family: 'Noto Sans TC', sans-serif;
-	font-family: 'Noto Serif TC', serif;
+	font-family: '微軟正黑體', sans-serif,serif;
 }
 html{
-	font-family: 'Noto Sans TC', sans-serif;
-	font-family: 'Noto Serif TC', serif;
+	font-family: '微軟正黑體', sans-serif,serif;
+	font-size:14px;
 }
 input{
 	height:25px;
@@ -39,6 +36,12 @@ select{
 	height:30px;
 	border-radius:5px;
 	border:1px solid #aaaaaa;
+}
+a{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
 }
 #showLoginDiv{
 	position: absolute;
@@ -196,11 +199,11 @@ span:active {
 /*end 按鈕樣式*/
 
 .menuList{
-	color:#E9CCCD;
+	color:#666666;/*#E9CCCD;*/
 }
 .menuList:hover{
 	/*font-weight:bold;*/
-	color:#A5545C;
+	color:#E9CCCD;/*#A5545C;*/
 }
 /*start 表格樣式*/
 .tableShowMore{
