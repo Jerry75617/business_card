@@ -172,7 +172,7 @@ switch($_POST["dataFlag"]){
         
         $obj->updateDB($updateArr,"work_file_id",$_POST["work_file_id"],"work_file","*");
         
-
+        
         for($i=0;$i<count($_POST["work_file_list_id"]);$i++){
             if(!isset($_POST["btn_name"][$i])){ continue; }
             $listArr=array();
@@ -186,7 +186,7 @@ switch($_POST["dataFlag"]){
     			$listArr["btn_bg_color"]=$_POST["btn_bg_color"][$i];
     			$listArr["btn_font_color"]=$_POST["btn_font_color"][$i];
             }
-			
+            
 			if(isset($_POST["btn1_name"][$i])){
 			    $listArr["btn1_name"]=$_POST["btn1_name"][$i];
 			    $listArr["url1"]=$_POST["url1"][$i];

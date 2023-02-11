@@ -463,13 +463,13 @@ class classMember extends classMain
 			
 			if ($i == 0)
 			{
-			    $chk="checked";  $chk2="";
+			    $chk="selected";  $chk2="";
 			    if($myarr["btn_font_color"] == "primary"){
-			        $chk="checked";
+			        $chk="selected";
 			        $chk2="";
 			    }else if ($myarr["btn_font_color"] == "secondary"){
 			        $chk="";
-			        $chk2="checked";
+			        $chk2="selected";
 			    }
 				echo "<div id='buttonContent'>";
 				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
@@ -482,8 +482,12 @@ class classMember extends classMain
 				echo "<div style='margin-top:10px;'>按鈕顏色 : </div>";
 				echo "<div><input type='color' name='btn_bg_color[]' class='color' value='" .$myarr["btn_bg_color"]. "'></div>";
 				echo "<div style='margin-top:10px'>文字顏色 :</div>";
-				echo "<div><input type='radio' name='btn_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
-				echo "<input type='radio' name='btn_font_color[]' value='secondary'  style='vertical-align:middle;font-size:18px;' $chk2>黑";
+				echo "<div><select name='btn_font_color[]' style='vertical-align:middle;font-size:18px;'>";
+				echo "<option value='primary' $chk>白</option>";
+				echo "<option value='secondary' $chk2>黑</option>";
+				echo "</select>";
+// 				echo "<div><input type='radio' name='btn_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
+// 				echo "<input type='radio' name='btn_font_color[]' value='secondary'  style='vertical-align:middle;font-size:18px;' $chk2>黑";
 				echo "</div>";
 				echo "</div>";
 				echo "<br>";
@@ -491,13 +495,13 @@ class classMember extends classMain
 			else if ($i == 1)
 			{
 			    
-			    $chk="checked";  $chk2="";
+			    $chk="selected";  $chk2="";
 			    if($myarr["btn1_font_color"] == "primary"){
-			        $chk="checked";
+			        $chk="selected";
 			        $chk2="";
 			    }else if ($myarr["btn1_font_color"] == "secondary"){
 			        $chk="";
-			        $chk2="checked";
+			        $chk2="selected";
 			    }
 				echo "<div id='buttonContent'>";
 				echo "<span class='material-symbols-outlined' onclick=\"delBtn('" .$mypk. "','" .$i. "')\">close</span>";
@@ -509,8 +513,12 @@ class classMember extends classMain
 				echo "<div style='margin-top:10px'>按鈕顏色 : </div>";
 				echo "<div><input type='color' name='btn1_bg_color[]' class='color' value='" .$myarr["btn1_bg_color"]. "'></div>";
 				echo "<div style='margin-top:10px'>文字顏色 :</div>";
-				echo "<div><input type='radio' name='btn1_font_color[]' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
-				echo "<input type='radio' name='btn1_font_color[]' value='secondary' style='vertical-align:middle;font-size:18px;' $chk2>黑";
+				echo "<div><select name='btn_font_color[]' style='vertical-align:middle;font-size:18px;'>";
+				echo "<option value='primary' $chk>白</option>";
+				echo "<option value='secondary' $chk2>黑</option>";
+				echo "</select></div>";
+// 				echo "<div><input type='radio' name='btn1_font_color' value='primary' style='vertical-align:middle;font-size:18px;' $chk>白";
+// 				echo "<input type='radio' name='btn1_font_color' value='secondary' style='vertical-align:middle;font-size:18px;' $chk2>黑";
 				echo "</div>";
 				echo "<br>";
 			}
