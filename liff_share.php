@@ -24,7 +24,7 @@ echo "<meta http-equiv=\"pragma\" content=\"no-cache\">";
 echo "<meta http-equiv=\"cache-control\" content=\"max-age=0\" />";
 echo "<meta http-equiv=\"cache-control\" content=\"no-cache\" />";
 echo "<meta http-equiv=\"expires\" content=\"-1\" />";
-echo "<title></title>";
+echo "<title>" .$titleStr. "</title>";
 echo "<link rel='shortcut icon' href='./img/logo.jpg'>";
 echo "<link rel='image_src' href='' type='image/png'>";
 echo "<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0' />";
