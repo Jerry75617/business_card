@@ -163,7 +163,7 @@ class classMember extends classMain
                     
                     echo "<td id='url_".$mypk. "_".$work_arr["work_file_id"]. "'>";
                     echo "<span class='material-symbols-outlined' title='複製' onclick=\"copyEvent('copy_url_" .$work_arr["work_file_id"]."')\">content_copy</span>";
-                    echo " &nbsp; <span id='copy_url_" .$work_arr["work_file_id"]. "'>https://liff.line.me/1657623497-DZyKpqOL?mypk=".$work_arr["work_file_id"]."</span>";
+                    echo " &nbsp; <span id='copy_url_" .$work_arr["work_file_id"]. "'>https://liff.line.me/1657623497-DZyKpqOL?mypk=".$work_arr["work_file_id"]."&cardName=".$work_arr["display_name"]."</span>";
                     //.$work_arr["url"];
                     
                 }
