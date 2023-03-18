@@ -141,7 +141,7 @@ class classMember extends classMain
                     if((int)$work_arr["work_file_id"] > 0){
                         echo "<br><span class='material-symbols-outlined' title='刪除名片' onclick=\"deleteCardClick('" .$work_arr["work_file_id"]. "','" .$myarr["member_id"]. "')\" style='cursor:pointer;font-size:28px;'>delete</span>";
                     }
-                    echo "<span class='material-symbols-outlined' title='分享' onclick=\"openUrl('".$work_arr["work_file_id"]."')\" style='cursor:pointer;font-size:28px;'>ios_share</span></a>";
+                    echo "<span class='material-symbols-outlined' title='分享' onclick=\"openUrl('".$work_arr["work_file_id"]."','" .$work_arr["display_name"]. "')\" style='cursor:pointer;font-size:28px;'>ios_share</span></a>";
 
                     echo "<td align=center id='file_name_".$mypk."_".$work_arr["work_file_id"]. "'>";
                     if($work_arr["file_name"] <>""){
