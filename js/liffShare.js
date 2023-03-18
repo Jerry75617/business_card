@@ -139,7 +139,7 @@ const flexCard = (userReply) => {
  
   return {
       "type": "flex",
-      "altText": '電子名片',
+      "altText": altText,
       "contents":   {
     	  "type": "carousel",
 		  "contents": dataArr
