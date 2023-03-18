@@ -2,7 +2,7 @@
 include_once("./class/classDesigner.php");
 $obj= new classDesigner();
 
-$titleStr=$_GET["cardName"]."電子名片";
+$titleStr=$_GET["cardName"]." 電子名片";
 
 echo "<!DOCTYPE html><html style='height:100%'><head>";
 echo "<meta http-equiv=Content-Type content=\"text/html; charset=utf-8\">";
@@ -113,7 +113,7 @@ echo "</div>";
 
 echo "<input type='hidden' name='myDataStr' value='" .$myDataStr. "' style='width:100%'>";
 echo "<input type='hidden' name='mypk' value='" .$_GET["mypk"]. "'>";
-echo "<input type='hidden' name='alterMsg' value='" .$_GET["cardName"]. "'>";
+echo "<input type='hidden' name='alterMsg' value='" .$titleStr. "'>";
 echo "</form>";
 include_once("./js/liffShare.js");
 $obj->body_end();
