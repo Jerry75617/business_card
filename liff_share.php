@@ -2,14 +2,29 @@
 include_once("./class/classDesigner.php");
 $obj= new classDesigner();
 
+if(!isset($_GET["showKind"])){ $_GET["showKind"]=""; }
+if(isset($_GET["liff_state"])){
+    $work_file_id=str_replace("?mypk=","",$_GET["liff_state"]);
+}else{
+    if(!isset($_GET["mypk"])){ $_GET["mypk"]=0; }
+    $work_file_id=(int)$_GET["mypk"];
+}
+$titleStr="名片分享";
+$mystr="select * from work_file where work_file_id='" .$work_file_id. "'";
+$check_result=mysqli_query($obj->link,$mystr);
+$check_num=mysqli_num_rows($check_result);
+$check_arr=mysqli_fetch_array($check_result,1);
 
+if($check_arr["display_name"] <> ""){
+    $titleStr=$check_arr["display_name"];
+}
 echo "<!DOCTYPE html><html style='height:100%'><head>";
 echo "<meta http-equiv=Content-Type content=\"text/html; charset=utf-8\">";
 echo "<meta http-equiv=\"pragma\" content=\"no-cache\">";
 echo "<meta http-equiv=\"cache-control\" content=\"max-age=0\" />";
 echo "<meta http-equiv=\"cache-control\" content=\"no-cache\" />";
 echo "<meta http-equiv=\"expires\" content=\"-1\" />";
-echo "<title>名片分享</title>";
+echo "<title></title>";
 echo "<link rel='shortcut icon' href='./img/logo.jpg'>";
 echo "<link rel='image_src' href='' type='image/png'>";
 echo "<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0' />";
@@ -20,27 +35,18 @@ echo "<link href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100
 echo "<link href='./css/main.css?" .date("YmdHis"). "' rel='stylesheet' type='text/css' />";
 echo "</head>";
 
-if(!isset($_GET["showKind"])){ $_GET["showKind"]=""; }
+
+
 $nowPage="liff_share.php";
 
 $obj->body($nowPage,"yes");
-
-if(isset($_GET["liff_state"])){
-    $work_file_id=str_replace("?mypk=","",$_GET["liff_state"]);
-}else{
-    if(!isset($_GET["mypk"])){ $_GET["mypk"]=0; }
-    $work_file_id=(int)$_GET["mypk"];
-}
-
 
 if($work_file_id <=0 ){
     echo "<div style='font-size:1.2em;text-align:center;'>...查無資料...</div>";
     exit;
 }
 
-$mystr="select * from work_file where work_file_id='" .$work_file_id. "'";
-$check_result=mysqli_query($obj->link,$mystr);
-if(mysqli_num_rows($check_result) <= 0){
+if($check_num <= 0){
     echo "<div style='font-size:1.2em;text-align:center;'>...查無資料...</div>";
     exit;
 }
@@ -50,9 +56,6 @@ if($check_arr["dateline"] <> "" && strcmp($check_arr["dateline"],date("Y-m-d")) 
     echo "<div style='font-size:1.2em;text-align:center;'>...此名片已逾期...</div>";
     exit;
 }
-
-
-
 ?>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
