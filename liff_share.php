@@ -113,6 +113,7 @@ echo "</div>";
 
 echo "<input type='hidden' name='myDataStr' value='" .$myDataStr. "' style='width:100%'>";
 echo "<input type='hidden' name='mypk' value='" .$_GET["mypk"]. "'>";
+echo "<input type='hidden' name='alterMsg' value='" .$_GET["cardName"]. "'>";
 echo "</form>";
 include_once("./js/liffShare.js");
 $obj->body_end();

@@ -89,7 +89,7 @@ const flexCard = (userReply) => {
   //flex
   var path="https://rubydesign.net/businessCard_img/";
   var myData=document.frmmain.myDataStr.value;
-  
+  var altText=document.frmmain.alterMsg.value;
   
   //console.log(myData);
   
