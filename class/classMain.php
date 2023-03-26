@@ -52,7 +52,6 @@ class classMain extends classLink
         include_once("./js/main.js");
         include_once("./js/script.js");
         echo "<body style='height:100%;background-color:#efefef;margin:0;'>";
-        
         switch($nowPage){
             case "liff_share.php":
                 
@@ -65,21 +64,23 @@ class classMain extends classLink
             default:
                 $pageName=$this->pageName[str_replace(".php","",$nowPage)];
                 echo "<div style='height:100%;width:100%;'>";
+                
+                echo "<div style='position:fixed;top:7%;left:1px;width:30px;height:30px;float:left;background-color:#ffffff;text-align:center;color:#666666;display:none;' id='menuSmallDiv'>";
+                echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:middle;curspor:pointer;' onclick=\"closeMenu('open')\">arrow_right</span></div>";
+                
                 echo "<div id='changePwdDiv' style='position:fixed;width:300px;height:400px;border:1px #E9CCCD solid;top:20%;left:40%;z-index:999;background-color:#E9CCCD;border-radius:0px;box-shadow:8px 8px 10px gray;z-index:999;display:none;'></div>";
                 echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0 class='black f13'>";
                 echo "<tr ><td height=40px colspan=2 style='font-size:20px;color:#FFFFFF;padding-left:20px;background-color:#CD939D;'>";
                     echo "<span class='material-symbols-outlined' style='vertical-align:bottom;'>menu</span> 電子名片管理";
-                echo "<tr><td width=15% valign=top style='padding:0px;'>";
+                echo "<tr><td width=15% valign=top style='padding:0px;' id='menuTd'>";
                     echo "<div style='width:100%;height:100%;float:left;background-color:#FFFFFF;display:block;' id='menuDiv'>";
                     $this->menuShow($nowPage);
                     echo "</div>";
                 echo "<td style='padding:5px 15px;' valign=top>";
-                /*
                 
-                echo "<div style='width:2%;height:100%;float:left;background-color:#424242;text-align:center;color:#ffc107;display:none;' id='menuSmallDiv'>";
-                echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:middle;curspor:pointer;' onclick=\"closeMenu('open')\">arrow_right</span><br>選<br>單 </div>";
-                echo "<div style='width:87%;height:100%;float:left;' id='shoeBodyContentDiv'>";
-                    
+                
+                
+                   /* 
                     //上標題
                     echo "<div style='height:5%;background-color:#E9CCCD;color:#CD939D;line-height:30px;'>";
                         echo "&emsp;<span class='material-symbols-outlined' style='font-size:20px;vertical-align:middle;'>list_alt</span>&nbsp; ".$pageName;
@@ -138,7 +139,10 @@ class classMain extends classLink
 //         echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:bottom;curspor:pointer;' onclick=\"closeMenu('close')\">arrow_left</span>";
 //         echo "<span class='material-symbols-outlined' style='vertical-align:bottom;'>dataset</span> 電子名片管理";
 // 		echo "<tr height=5%><td valign=middle align=center style='font-size:13px;color:#999999;'>".$this->sessionGetValue("session_name");
-        echo "<tr height=5%><td valign=bottom align=right style='font-size:13px;border-top:1px #E9CCCD solid;border-bottom:1px #E9CCCD solid;'>";
+        echo "<tr height=3%><td valign=bottom align=right style='font-size:13px;border-top:1px #E9CCCD solid;border-bottom:1px #E9CCCD solid;'>";
+//         echo "<div style='background-color:rgba(243, 228, 231, 0.7);width:25px;height:25px;'>";
+        echo "<span class='material-symbols-outlined' style='font-size:30px;vertical-align:middle;curspor:pointer;' onclick=\"closeMenu('close')\">arrow_left</span>";
+//         echo "</div>";
         echo "<span>" .$this->sessionGetValue("session_name"). "</span>";
         echo "&emsp;<span style='cursor:pointer;' onclick=\"changePassword()\">修改密碼</span>";
         echo "&emsp;<span style='cursor:pointer;' onclick=\"logoutClick()\">登出</span>";

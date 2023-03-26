@@ -200,7 +200,7 @@ switch($_POST["dataFlag"]){
                 $mystr="select * from work_file_list where work_file_list_id='" .$listArr["work_file_list_id"]. "' and file_name=''";
                 $check_result=mysqli_query($obj->link,$mystr);
                 if(mysqli_num_rows($check_result) > 0){
-                    $obj->deleteData_table("work_file_list","work_file_list_id",$listArr["work_file_list_id"],'');
+                    $obj->deleteDB("work_file_list","work_file_list_id",$listArr["work_file_list_id"],'');
                 }
             }else{
                 $obj->updateDB($listArr,"work_file_list_id",$listArr["work_file_list_id"],"work_file_list","*");
@@ -349,21 +349,14 @@ switch($_POST["dataFlag"]){
 				//$listArr["url"]="http://test.com";
 				// Check url
 				if ($_POST["option"] == 1)
-					$listArr["url"]="https://www.google.com.tw/maps/place/243%E6%96%B0%E5%8C%97%E5%B8%82%E6%B3%B0%E5%B1%B1%E5%8D%80%E6%98%8E%E5%BF%97%E8%B7%AF%E4%B8%80%E6%AE%B5427%E8%99%9F/@25.0566132,121.4309859,17z/data=!3m1!4b1!4m6!3m5!1s0x3442a7ccdc75088b:0xb740a5f1ad56a2fb!8m2!3d25.0566132!4d121.4309859!16s%2Fg%2F11hzb27v40";
+					$listArr["url"]="https://google.com";
 				else if ($_POST["option"] == 2)
-				{
-					// 產生網頁
-					$listArr["url"]="https://www.google.com";
-				}
+					$listArr["url"]="";
 				else if ($_POST["option"] == 3)
-				{	
-					$listArr["url"]="https://liff.line.me/1657623497-DZyKpqOL?mypk=".$_POST["work_file_list_id"]."&cardName=card1";
-				}
+					$listArr["url"]="";
 				else if ($_POST["option"] == 4)
-				{
-					$listArr["url"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=&dates=&details=&location=";
-				}
-									
+					$listArr["url"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
+					
 				$listArr["btn_bg_color"]="#FFFFFF"; // default white
 			}
 			else if ($index == 1)
@@ -373,22 +366,15 @@ switch($_POST["dataFlag"]){
 				//$listArr["url1"]="http://test.com";
 				
 				if ($_POST["option"] == 1)
-				{
-					$listArr["url1"]="";
-				}
+					$listArr["url1"]="https://google.com";
 				else if ($_POST["option"] == 2)
-				{
 					$listArr["url1"]="";
-				}
 				else if ($_POST["option"] == 3)
-				{
-					$listArr["url1"]="https://liff.line.me/1657623497-DZyKpqOL?mypk=".$_POST["work_file_list_id"]."&cardName=card1";
-				}
+					$listArr["url1"]="";
 				else if ($_POST["option"] == 4)
-				{
-					$listArr["url1"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=&dates=&details=&location=";
-				}
-			
+					$listArr["url1"]="https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
+					//"https://calendar.google.com/calendar/u/0/gp?pli=1#~calendar:view=e&bm=1&text=KyleWedding&dates=20201208T100000Z/20201208T140000Z&details=&location=%E5%8F%B0%E5%8C%97%E6%9D%B1%E6%96%B9%E6%96%87%E8%8F%AF";
+				
 				$listArr["btn1_bg_color"]="#FFFFFF"; // default white
 			}
 			else
@@ -409,7 +395,7 @@ switch($_POST["dataFlag"]){
 		}
 		break;
 	case "delete_button":
-	//delete_btn_index
+	    $delete_btn_index=$_POST["delete_btn_index"];
 		$mystr="select * from work_file_list where work_file_list_id='" .$_POST["work_file_list_id"]. "'";
         $myresult=mysqli_query($obj->link,$mystr);
         $myarr=mysqli_fetch_array($myresult);

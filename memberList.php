@@ -130,27 +130,27 @@ function changeTitlePageClick(work_file_id,work_file_list_id){
 }
 //存檔按鈕/url
 function saveBtnClick(){
-	var btnName=document.getElementsByClassName("btn_name");
-	var url=document.getElementsByClassName("url");
-	var color=document.getElementsByClassName("color");
-	for(var i=0;i<btnName.length;i++){
-		if(btnName[i].value == ""){
-			alert("請輸入按鈕名稱");
-			exit;
-		}
-	}
-	for(var i=0;i<url.length;i++){
-		if(url[i].value == ""){
-			alert("請輸入超連結");
-			exit;
-		}
-	}
-	for(var i=0;i<color.length;i++){
-		if(color[i].value == ""){
-			alert("請選擇按鈕顏色");
-			exit;
-		}
-	}
+// 	var btnName=document.getElementsByClassName("btn_name");
+// 	var url=document.getElementsByClassName("url");
+// 	var color=document.getElementsByClassName("color");
+// 	for(var i=0;i<btnName.length;i++){
+// 		if(btnName[i].value == ""){
+// 			alert("請輸入按鈕名稱");
+// 			exit;
+// 		}
+// 	}
+// 	for(var i=0;i<url.length;i++){
+// 		if(url[i].value == ""){
+// 			alert("請輸入超連結");
+// 			exit;
+// 		}
+// 	}
+// 	for(var i=0;i<color.length;i++){
+// 		if(color[i].value == ""){
+// 			alert("請選擇按鈕顏色");
+// 			exit;
+// 		}
+// 	}
 	var send_str="dataFlag=save_btn&" + X_FORM("frmmain");
 	X_FORM_Str(send_str,"memberListSIM.php","updateButtonClickReturn");	
 }

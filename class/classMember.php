@@ -365,9 +365,9 @@ class classMember extends classMain
             echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0 class='tableShowOne f13'>";
             echo "<thead><tr height=8%><td colspan=2 align=center class='f15'>" .$member_arr["member_name"]. " &nbsp;會員電子" .$showKind. "</thead>";
             echo "<tr height=7%><td width=20% align=left>" .$showKind. "標題 : ";
-            echo "<tr><td><input type='text' name='display_name' value='" .$myarr["display_name"]. "' style='width:100%;' maxlength=10>";
+            echo "<tr><td><input type='text' name='display_name' value='" .$myarr["display_name"]. "' style='width:100%;' maxlength=10 onblur=\"saveBtnClick()\">";
             echo "<tr height=7%><td width=20% align=left>修改日期 : ";
-            echo "<tr><td><input type='text' name='update_datetime' value='" .$myarr["update_datetime"]. "' disabled style='width:100%;'>";
+            echo "<tr><td><input type='text' name='update_datetime' value='" .$myarr["update_datetime"]. "' disabled style='width:100%;' onblur=\"saveBtnClick()\">";
             echo "<tr height=7%><td colspan=2>";
             echo "<span class='btn_blue' onclick=\"addClick('" .$mypk. "')\">建立" .$showKind. "</span>";
 //             echo "<input type='button' value='建立名片'  class='btn_blue' onclick=\"addClick('" .$mypk. "')\">";
@@ -424,15 +424,16 @@ class classMember extends classMain
         echo "<table width=100% height=100% border=0 cellpadding=3 cellspacing=0>";
         echo "<tr><td width=60% align=center valign=top style='padding:0;' id='showContentImg_" .$mypk. "'>";
 
+//         echo "<iframe src='workFile_upload.php?mypk=" .$mypk. "' style='width:100%;height:100%'></iframe>";
         $this->showContentImg($myarr["work_file_id"],$mypk);
 	
         echo "<td valign=top>";
 		echo "<div >";
 		echo "<div style=\"height:24px;background-color:#121212;color:#ffffff;\">[名片設定]</div>";
 		echo "<div>名片尺寸 : </div>";
-		echo "<div><input type='text' name='card_size[]' value='" .$myarr["card_size"]. "'></div>";
+		echo "<div><input type='text' name='card_size[]' value='" .$myarr["card_size"]. "' onblur=\"saveBtnClick()\"></div>";
 		echo "<div style='margin-top:10px;'>背景顏色 : </div>";
-		echo "<div><input type='color' name='card_bg_color[]' value='" .$myarr["card_bg_color"]. "'></div>";
+		echo "<div><input type='color' name='card_bg_color[]' value='" .$myarr["card_bg_color"]. "' onchange=\"saveBtnClick()\"></div>";
 // 		echo "<br></br><br></br>";
 		//value='" .$myarr["card_size"]. "'
 		echo "</div>";
@@ -476,13 +477,13 @@ class classMember extends classMain
 				echo "<hr size='1px' align='center'>";
 				//echo "<span class='material-symbols-outlined'>close</span>";
 				echo "<div>文字 : </div>";
-				echo "<div><input type='text' name='btn_name[]' class='btn_name' value='" .$myarr["btn_name"]. "'></div>";
+				echo "<div><input type='text' name='btn_name[]' class='btn_name' value='" .$myarr["btn_name"]. "' onblur=\"saveBtnClick()\"></div>";
 				echo "<div>連結 : </div>";
-				echo "<div><input type='text' name='url[]' class='url' value='" .$myarr["url"]. "'></div>";
+				echo "<div><input type='text' name='url[]' class='url' value='" .$myarr["url"]. "' onblur=\"saveBtnClick()\"></div>";
 				echo "<div style='margin-top:10px;'>按鈕顏色 : </div>";
-				echo "<div><input type='color' name='btn_bg_color[]' class='color' value='" .$myarr["btn_bg_color"]. "'></div>";
+				echo "<div><input type='color' name='btn_bg_color[]' class='color' value='" .$myarr["btn_bg_color"]. "' onblur=\"saveBtnClick()\"></div>";
 				echo "<div style='margin-top:10px'>文字顏色 :</div>";
-				echo "<div><select name='btn_font_color[]' style='vertical-align:middle;font-size:18px;'>";
+				echo "<div><select name='btn_font_color[]' style='vertical-align:middle;font-size:18px;' onblur=\"saveBtnClick()\"onblur=\"saveBtnClick()\">";
 				echo "<option value='primary' $chk>白</option>";
 				echo "<option value='secondary' $chk2>黑</option>";
 				echo "</select>";
@@ -527,7 +528,7 @@ class classMember extends classMain
 		
         echo "<input type='hidden' name='work_file_list_id[]' value='" .$mypk. "'>";
         echo "<div style='margin-top:10px;text-align:center;'>";
-        echo "<span class='btn_pink'  onclick=\"saveBtnClick()\">資料存檔</span>";
+//         echo "<span class='btn_pink'  onclick=\"saveBtnClick()\">資料存檔</span>";
 //         echo "<input type='button' class='btn_pink' value='資料存檔' onclick=\"saveBtnClick()\">";
         echo "</div>";
         echo "</table>";
@@ -569,10 +570,12 @@ class classMember extends classMain
             $btnStr.="</span>";
             $imgStr="<img src='../businessCard_img/" .$myarr["file_name"]. "' style='width:85%'>";
         }else{
-            $btnStr="<span class='btn_blue' onclick=\"uploadPicClick('".$mypk. "')\">";
-            $btnStr.="<span class='material-symbols-outlined' style='vertical-align:middle;font-size:18px;padding-bottom:4px;'>add_photo_alternate</span>&nbsp;上傳圖片";
-            $btnStr.="</span>";
-            $imgStr="<div id='uploadDiv_" .$mypk. "'></div>";
+//             $btnStr="<span class='btn_blue' onclick=\"uploadPicClick('".$mypk. "')\">";
+//             $btnStr.="<span class='material-symbols-outlined' style='vertical-align:middle;font-size:18px;padding-bottom:4px;'>add_photo_alternate</span>&nbsp;上傳圖片";
+//             $btnStr.="</span>";
+            $imgStr="<div id='uploadDiv_" .$mypk. "'>";
+            $imgStr.="<iframe src='workFile_upload.php?mypk=" . $mypk . "' style='border:0px;width:100%;height:500px;'></iframe>";
+            $imgStr.="</div>";
         }
 
         

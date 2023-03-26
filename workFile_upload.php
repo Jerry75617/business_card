@@ -2,7 +2,7 @@
 session_start();
 include("class/classMain.php");
 $obj= new classMain();
-$obj->openBody("","#ffffff");
+$obj->openBody("","#E9CCCD");
 if(!isset($_GET["mypk"])){ $_GET["mypk"]=0; }
 
 ?>
@@ -84,43 +84,65 @@ if($_REQUEST["uploadFlag"] == "Y"){
     }
 }
 // echo "<div style='text-align:right;padding:2px;'><span onclick=\"closeDiv()\" style='cursor:pointer;'>X close</span></div>";
-	echo "<div style='color:#FFFFFF'>";
+	echo "<div style='color:#666666;'>";
 	
-		// Jerry add ++++
-		//echo "<form method=\"post\" enctype=\"multipart/form-data\">";
-		//echo "<div>";
-		//echo "<input type=\"file\" id=\"image_uploads\" name=\"image_uploads\" accept=\".jpg, .jpeg, .png\"   style=\"position:absolute;height:320px;width:550px;\">";
-		//echo "</div>";
-		//echo "<div class=\"preview\" style=\"float:left;background:#cccccc;height:320px;width:550px;text-align:center;z-index:1;\"><p style=\"line-height: 300px;\">未選擇任何檔案</p></div>";
-		//echo "</form>";
 	
+		//Jerry add ++++
+// 		echo "<form method=\"post\" enctype=\"multipart/form-data\">";
+// 		echo "<div>";
+// 		echo "<input type=\"file\" id=\"image_uploads\" name=\"image_uploads\" accept=\".jpg, .jpeg, .png\"   style=\"position:absolute;height:320px;width:550px;\">";
+// 		echo "</div>";
+// 		echo "<div class=\"preview\" style=\"float:left;background:#cccccc;height:320px;width:550px;text-align:center;z-index:1;\"><p style=\"line-height: 300px;\">未選擇任何檔案</p></div>";
+// 		echo "</form>";
+	
+		echo "<form name='frm_upload' method='post' enctype='multipart/form-data' action='workFile_upload.php'>";
+        echo "<table width=96% height=50px border=0 cellpadding=3 cellspacing=0 align=center style=\"float:left;background:#cccccc;height:320px;width:480px;text-align:center;z-index:1;\">";
+        //echo "<tr><td width=25% align=right style='background-color:#EFEFEF;'>照片上傳 : <td>";
+        echo "<input type='file' name='photo' id='nowFile'  accept='image/*' style='position:absolute;height:320px;width:96%;left:0;border:1px #000 solid;'></label>";
+		//echo "<input type=\"file\" id=\"nowFile\" name=\"nowFile\" accept=\".jpg, .jpeg, .png\" style=\"position:absolute;height:320px;width:480px;\">";
+        echo "<tr><td colspan=2 align=center>";
+		echo "<div class=\"preview\" style=\"float:left;background:#cccccc;height:320px;width:480px;text-align:center;z-index:1;\"><p style=\"line-height: 300px;\">將圖檔拖曳此處</p></div>";
+//         echo "<span class='btn_pink' onclick=\"frm_upload.submit()\">送出檔案</span>";
+        //echo "<span class='btn_blue' onclick=\"closeDiv()\">返回</span>";
+        echo "<input type='hidden' name='mypk' value='" .$_REQUEST["mypk"]. "'>";
+        echo "<input type='hidden' name='uploadFlag' value='Y'>";
+        echo "<input type='hidden' name='moveFlag' value='N'>";
+        echo "</table>";
+		echo "</form>";
+		// Jerry add -----
+		// Original ++++
+// 		echo "<form method=\"post\" enctype=\"multipart/form-data\">";
+// 		echo "<div>";
+// 		echo "<input type=\"file\" id=\"image_uploads\" name=\"image_uploads\" accept=\".jpg, .jpeg, .png\"   style=\"position:absolute;height:320px;width:550px;\">";
+// 		echo "</div>";
+// 		echo "<div class=\"preview\" style=\"float:left;background:#cccccc;height:320px;width:550px;text-align:center;z-index:1;\"><p style=\"line-height: 300px;\">未選擇任何檔案</p></div>";
+// 		echo "</form>";
+	
+// 		echo "<form name='frm_upload' method='post' enctype='multipart/form-data' action='workFile_upload.php'>";
+//         echo "<table width=96% height=50px border=0 cellpadding=3 cellspacing=0 align=center style=\"float:left;background:#cccccc;height:320px;width:480px;text-align:center;z-index:1;\">";
+//         echo "<tr><td width=25% align=right style='background-color:#EFEFEF;'>照片上傳 : <td>";
+//         echo "<input type='file' name='photo' id='nowFile'  accept='image/*'></label>";
+//         echo "<tr><td colspan=2 align=center>";
+// 		echo "<div class=\"preview\" style=\"float:left;background:#cccccc;height:320px;width:480px;text-align:center;z-index:1;\"><p style=\"line-height: 300px;\">將圖檔拖曳此處</p></div>";
+//         echo "<span class='btn_pink' onclick=\"frm_upload.submit()\">送出檔案</span>";
+//         echo "<input type='hidden' name='mypk' value='" .$_REQUEST["mypk"]. "'>";
+//         echo "<input type='hidden' name='uploadFlag' value='Y'>";
+//         echo "</table>";
+// 		echo "</form>";
+		// Original -----
+		
+		// Original ++++
 		//echo "<form name='frm_upload' method='post' enctype='multipart/form-data' action='workFile_upload.php'>";
-        //echo "<table width=96% height=50px border=0 cellpadding=3 cellspacing=0 align=center style=\"float:left;background:#cccccc;height:320px;width:480px;text-align:center;z-index:1;\">";
-        ////echo "<tr><td width=25% align=right style='background-color:#EFEFEF;'>照片上傳 : <td>";
-        //echo "<input type='file' name='photo' id='nowFile'  accept='image/*'></label>";
-		////echo "<input type=\"file\" id=\"nowFile\" name=\"nowFile\" accept=\".jpg, .jpeg, .png\" style=\"position:absolute;height:320px;width:480px;\">";
+        //echo "<table width=96% height=50px border=0 cellpadding=3 cellspacing=0 align=center style='background-color:#FFFFFF;font-size:13px;color:#666666;'>";
+        //echo "<tr><td width=25% align=right style='background-color:#EFEFEF;'>照片上傳 : <td>";
+        //echo "<label class='file'>選擇檔案<input type='file' name='photo' id='nowFile'  accept='image/*'></label>";
         //echo "<tr><td colspan=2 align=center>";
-		//echo "<div class=\"preview\" style=\"float:left;background:#cccccc;height:320px;width:480px;text-align:center;z-index:1;\"><p style=\"line-height: 300px;\">將圖檔拖曳此處</p></div>";
         //echo "<span class='btn_pink' onclick=\"frm_upload.submit()\">送出檔案</span>";
-        ////echo "<span class='btn_blue' onclick=\"closeDiv()\">返回</span>";
+        //echo "<span class='btn_blue' onclick=\"closeDiv()\">返回</span>";
         //echo "<input type='hidden' name='mypk' value='" .$_REQUEST["mypk"]. "'>";
         //echo "<input type='hidden' name='uploadFlag' value='Y'>";
         //echo "</table>";
 		//echo "</form>";
-		// Jerry add -----
-		
-		// Original ++++
-		echo "<form name='frm_upload' method='post' enctype='multipart/form-data' action='workFile_upload.php'>";
-        echo "<table width=96% height=50px border=0 cellpadding=3 cellspacing=0 align=center style='background-color:#FFFFFF;font-size:13px;color:#666666;'>";
-        echo "<tr><td width=25% align=right style='background-color:#EFEFEF;'>照片上傳 : <td>";
-        echo "<label class='file'>選擇檔案<input type='file' name='photo' id='nowFile'  accept='image/*'></label>";
-        echo "<tr><td colspan=2 align=center>";
-        echo "<span class='btn_pink' onclick=\"frm_upload.submit()\">送出檔案</span>";
-        echo "<span class='btn_blue' onclick=\"closeDiv()\">返回</span>";
-        echo "<input type='hidden' name='mypk' value='" .$_REQUEST["mypk"]. "'>";
-        echo "<input type='hidden' name='uploadFlag' value='Y'>";
-        echo "</table>";
-		echo "</form>";
 		// Original ----
 	echo "</div>";
 
@@ -134,17 +156,19 @@ var input = document.getElementById('nowFile');
 var preview = document.querySelector('.preview');
 
 input.style.opacity = 0;
-input.addEventListener('change', updateImageDisplay);function updateImageDisplay() {
+input.addEventListener('change', updateImageDisplay);
+function updateImageDisplay() {
 	//alert('測試文字');
 	while(preview.firstChild) {
 		preview.removeChild(preview.firstChild);
 	}
 	//alert('dd');
+	document.frm_upload.moveFlag.value="N";
 	if(input.files.length === 0) {
 		//alert('dd');
 		var para = document.createElement('p');
 		para.textContent = 'Not choose File';
-    para.style="line-height: 300px;";
+    	para.style="line-height: 300px;";
 		preview.appendChild(para);
 	} 
 	else {
@@ -154,6 +178,7 @@ input.addEventListener('change', updateImageDisplay);function updateImageDisplay
 		image.src = window.URL.createObjectURL(input.files[0]);
 		preview.appendChild(image);
 		preview.appendChild(para);
+		document.frm_upload.moveFlag.value="Y";
 	}
 }
 
@@ -163,5 +188,22 @@ function closeDiv(){
 	}else{
 		history.back();
 	}
+}
+function checkAjax(){
+	var nowFile=document.frm_upload.moveFlag;
+	if(nowFile){
+    	if(nowFile.value == "Y"){
+    		document.frm_upload.moveFlag.value="N";
+    		document.frm_upload.submit();
+    		console.log(document.frm_upload.moveFlag.value);
+    	}
+	}
+	checkAjaxReturn();
+}
+function checkAjaxReturn(){
+	setTimeout("checkAjax()",1000);
+}
+window.onload=function (){
+	setTimeout("checkAjax()",1000);
 }
 </script>

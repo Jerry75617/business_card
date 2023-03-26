@@ -600,7 +600,7 @@ function savePwdClickReturn(){
 	}
 }
 function closeMenu(status){
-	var aaobj=document.getElementById("menuDiv");
+	var aaobj=document.getElementById("menuTd");
 	var bbobj=document.getElementById("menuSmallDiv");
 	var ccobj=document.getElementById("shoeBodyContentDiv");
 	
@@ -611,7 +611,7 @@ function closeMenu(status){
 			ccobj.style.width="98%";
 			break;
 		case "open":
-			aaobj.style.display="block";
+			aaobj.style.display="";
 			bbobj.style.display="none";
 			ccobj.style.width="87%";
 			break;
