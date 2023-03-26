@@ -25,7 +25,7 @@ $mystr="create table work_file_list (work_file_list_id int AUTO_INCREMENT PRIMAR
     "designer_id int default '0',".
 	"btn_amount int default '0',".
     "file_name varchar(50) binary default '',".				//檔案名稱
-	"card_size varchar (16) binary default '20:13',".		//尺寸
+	"card_size varchar (16) binary default '20:30',".		//尺寸
 	"card_bg_color varchar (16) binary default '#FFFFFF',".	//卡片背景顏色
 	"btn_flag int default '0',".							//按鈕功能啟動旗標
     "btn_name varchar(30) binary default '',".				//按鈕名稱(line)
